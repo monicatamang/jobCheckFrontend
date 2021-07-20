@@ -20,6 +20,7 @@
 
 <script>
 import axios from "axios";
+import cookies from "vue-cookies";
 
 export default {
   name: 'App',
@@ -27,7 +28,15 @@ export default {
   data() {
     return {
       resumeFilename: "",
-      coverLetterFilename: ""
+      coverLetterFilename: "",
+      loginToken: cookies.get("loginToken")
+    }
+  },
+
+  mounted() {
+    // If the user does not have a login token, take the user to the Home page
+    if(this.loginToken === null) {
+      this.$router.push("/");
     }
   },
 
@@ -35,7 +44,7 @@ export default {
     uploadResume() {
       let formData = new FormData();
       formData.append('resumeFile', document.getElementById("resumeFile").files[0])
-      formData.append('loginToken', "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb")
+      formData.append('loginToken', "")
       formData.append('jobAppId', 1)
 
       axios.request({
@@ -58,7 +67,7 @@ export default {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+          "Login-Token": ""
         },
         params: {
           resumeId: 17
@@ -78,7 +87,7 @@ export default {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+          "Login-Token": ""
         },
         params: {
           resumeId: 17
@@ -101,7 +110,7 @@ export default {
     uploadCoverLetter() {
       let formData = new FormData();
       formData.append('coverLetterFile', document.getElementById("coverLetterFile").files[0])
-      formData.append('loginToken', "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb")
+      formData.append('loginToken', "")
       formData.append('jobAppId', 2)
 
       axios.request({
@@ -124,7 +133,7 @@ export default {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+          "Login-Token": ""
         },
         params: {
           coverLetterId: 1
@@ -144,7 +153,7 @@ export default {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+          "Login-Token": ""
         },
         params: {
           coverLetterId: 1
