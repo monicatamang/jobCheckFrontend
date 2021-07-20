@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import CreateAccount from "../views/CreateAccount.vue";
 import Login from "../views/Login.vue";
 import JobApplications from "../views/JobApplications.vue";
+import UserProfile from "../views/UserProfile.vue";
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/JobApplications',
     name: 'JobApplications',
     component: JobApplications
+  },
+  {
+    path: '/Profile',
+    name: 'Profile',
+    component: UserProfile
   },
 ]
 

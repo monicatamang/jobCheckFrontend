@@ -97,7 +97,7 @@
         display: grid;
         place-items: center;
         row-gap: 5vh;
-        margin-top: 8vh;
+        margin-top: 6vh;
     }
 
     h1 {

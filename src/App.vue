@@ -29,7 +29,10 @@ export default {
     return {
       resumeFilename: "",
       coverLetterFilename: "",
-      loginToken: cookies.get("loginToken")
+      loginToken: cookies.get("loginToken"),
+      userData: cookies.get("userData"),
+      firstInitial: "",
+      lastInitial: ""
     }
   },
 
