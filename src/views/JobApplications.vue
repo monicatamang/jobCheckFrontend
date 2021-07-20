@@ -7,14 +7,16 @@
                 <v-text-field placeholder="Search Applications" dense outlined single-line :color="primaryColor"></v-text-field>
                 <v-btn depressed dark :color="primaryColor" id="searchButton">Search</v-btn>
             </div>
-        <v-btn depressed block large fixed dark tile :color="primaryColor" id="addButton"><v-icon>mdi-plus</v-icon>Add Job Application</v-btn>
+        <add-job-application></add-job-application>
         </article>
+        <v-alert :icon="showJobAppStatus.icon" :color="showJobAppStatus.color" dismissible dark tile :class="{ showAlert: showJobAppStatus.show }">{{ showJobAppStatus.message }}</v-alert>
         <mobile-bottom-nav></mobile-bottom-nav>
     </section>
 </template>
 
 <script>
     import MobileHeader from "../components/MobileHeader.vue";
+    import AddJobApplication from "../components/JobApplications/AddJobApplication.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
     export default {
@@ -22,13 +24,20 @@
 
         components: {
             MobileHeader,
+            AddJobApplication,
             MobileBottomNav
         },
 
         data() {
             return {
-                primaryColor: "#52688F",
-                accentColor: "#7391C8" 
+                primaryColor: "#52688F"
+            }
+        },
+
+        computed: {
+            // Creating a function that gets API request status from the store when a user creates a new job application
+            showJobAppStatus() {
+                return this.$store.state.createJobAppStatus; 
             }
         },
     }
@@ -72,8 +81,13 @@
         margin-top: 7vh;
     }
 
-    #addButton {
-        font-family: var(--titleFont);
-        bottom: 7%;
+    .v-alert {
+        position: absolute;
+        bottom: 5%;
+        display: none;
+    }
+
+    .showAlert {
+        display: block;
     }
 </style>
