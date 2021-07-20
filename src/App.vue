@@ -1,32 +1,186 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <!-- <h4>Upload Resume</h4>
+    <form action="javascript:void(0)">
+      <input type="file" name="resumeFile" id="resumeFile">
+      <input type="submit" value="Upload" @click="uploadResume">
+    </form>
+    <button @click="getResumeName">Download</button>
+    <h4>Upload Cover Letter</h4>
+    <form action="javascript:void(0)">
+      <input type="file" name="coverLetterFile" id="coverLetterFile">
+      <input type="submit" value="Upload" @click="uploadCoverLetter">
+    </form>
+    <button @click="getCoverLetterName">Download</button> -->
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
+<script>
+import axios from "axios";
+
+export default {
+  name: 'App',
+
+  data() {
+    return {
+      resumeFilename: "",
+      coverLetterFilename: ""
+    }
+  },
+
+  methods: {
+    uploadResume() {
+      let formData = new FormData();
+      formData.append('resumeFile', document.getElementById("resumeFile").files[0])
+      formData.append('loginToken', "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb")
+      formData.append('jobAppId', 1)
+
+      axios.request({
+        url: `${process.env.VUE_APP_API_URL}/upload-resume`,
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        data: formData
+      }).then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        err;
+      });
+    },
+
+    getResumeName() {
+      axios.request({
+        url: `${process.env.VUE_APP_API_URL}/download-resume`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+        },
+        params: {
+          resumeId: 17
+        }
+      }).then((res) => {
+        console.log(res);
+        this.resumeFilename = res.data;
+        this.downloadResume()
+      }).catch((err) => {
+        err;
+      });
+    },
+
+    downloadResume() {
+      axios.request({
+        url: `${process.env.VUE_APP_API_URL}/download-resume/${this.resumeFileName}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+        },
+        params: {
+          resumeId: 17
+        },
+        // The response type is binary not a string
+        responseType: 'blob'
+      }).then((res) => {
+        console.log(res);
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', this.resumeFilename);
+        document.body.appendChild(link);
+        link.click();
+      }).catch((err) => {
+        err;
+      });
+    },
+
+    uploadCoverLetter() {
+      let formData = new FormData();
+      formData.append('coverLetterFile', document.getElementById("coverLetterFile").files[0])
+      formData.append('loginToken', "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb")
+      formData.append('jobAppId', 2)
+
+      axios.request({
+        url: `${process.env.VUE_APP_API_URL}/upload-cover-letter`,
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        data: formData
+      }).then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        err;
+      });
+    },
+
+    getCoverLetterName() {
+      axios.request({
+        url: `${process.env.VUE_APP_API_URL}/download-cover-letter`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+        },
+        params: {
+          coverLetterId: 1
+        }
+      }).then((res) => {
+        console.log(res);
+        this.coverLetterFilename = res.data;
+        this.downloadCoverLetter()
+      }).catch((err) => {
+        err;
+      });
+    },
+
+    downloadCoverLetter() {
+      axios.request({
+        url: `${process.env.VUE_APP_API_URL}/download-cover-letter/${this.coverLetterFilename}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Login-Token": "sxD-iuTC7DckT4TubUDbFck6xFX_nErnVe3hLBYFVf-jYd-bb6HExwa1gaGEZCFk5zfxueZl8Q83yuTb"
+        },
+        params: {
+          coverLetterId: 1
+        },
+        responseType: 'blob'
+      }).then((res) => {
+        console.log(res);
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', this.coverLetterFilename);
+        document.body.appendChild(link);
+        link.click();
+      }).catch((err) => {
+        err;
+      });
+    },
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Open+Sans:wght@300;400;600;700;800&display=swap');
 
-#nav {
-  padding: 30px;
-}
+  :root {
+    --titleFont: 'Lato', sans-serif;
+    --bodyFont: 'Open Sans', sans-serif;
+    --primaryColor: #52688F;
+    --secondaryColor: #E3E7F1;
+    --accentColor: #7391C8;
+    --backgroundColorOne: #FCFDFD;
+    --backgroundColorTwo: #FAFBFC; 
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .v-main__wrap {
+    background: var(--backgroundColorTwo);
+    font-family: var(--bodyFont);
+  }
 </style>
