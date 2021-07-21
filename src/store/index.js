@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import cookies from 'vue-cookies';
 
 Vue.use(Vuex)
 
@@ -12,8 +11,8 @@ export default new Vuex.Store({
     jobAppStatus: {
       show: false,
       message: "",
-      icon: "mdi-information",
-      color: "#52688F"
+      icon: "",
+      color: ""
     },
 
     logoutStatus: {
@@ -62,7 +61,7 @@ export default new Vuex.Store({
 
   actions: {
     // Creating a GET request to get all the user's job applications
-    getJobApps(context) {
+    getJobApps(context, data) {
       // Configuring the request with the url, type and data
       axios.request({
       url: `${process.env.VUE_APP_API_URL}/job-applications`,
@@ -71,7 +70,7 @@ export default new Vuex.Store({
         "Content-Type": "application/json"
       },
       params: {
-        userId: cookies.get("userData").userId
+        userId: data
       }
       }).then((res) => {
         // If the network is done and there are no errors, store the user's job applications

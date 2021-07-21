@@ -87,7 +87,7 @@
         display: grid;
         place-items: center;
         row-gap: 2vh;
-        margin: 20vh 0vw 6vh 0vw;
+        margin: 20vh 0vw 15vh 0vw;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         width: 90%;
     }

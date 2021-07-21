@@ -1,21 +1,24 @@
 <template>
     <section>
-        <v-alert :icon="showLogoutStatus.icon" :color="showLogoutStatus.color" dismissible dark tile :class="{ showAlert: showLogoutStatus.show }">{{ showLogoutStatus.message }}</v-alert>
+        <status-alert :showStatus="showLogoutStatus"></status-alert>
         <logout-user></logout-user>
     </section>
 </template>
 
 <script>
     import LogoutUser from "../components/LogoutUser.vue";
+    import StatusAlert from "../components/StatusAlert.vue";
 
     export default {
         name: "User-Profile",
 
         components: {
             LogoutUser,
+            StatusAlert
         },
 
         computed: {
+            // Getting the API request status from the status when a user logs out
             showLogoutStatus() {
                 return this.$store.state.logoutStatus; 
             }

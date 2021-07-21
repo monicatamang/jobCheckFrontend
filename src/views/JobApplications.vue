@@ -10,7 +10,7 @@
         </div>
         <job-application-card :jobApps="userJobApps"></job-application-card>
         <add-job-application></add-job-application>
-        <v-alert v-if="showJobAppStatus.show = true" :icon="showJobAppStatus.icon" :color="showJobAppStatus.color" dismissible dark tile :class="{ showAlert: showJobAppStatus.show }">{{ showJobAppStatus.message }}</v-alert>
+        <status-alert :showStatus="showJobAppStatus"></status-alert>
         <mobile-bottom-nav></mobile-bottom-nav>
     </section>
 </template>
@@ -19,6 +19,7 @@
     import MobileHeader from "../components/MobileHeader.vue";
     import AddJobApplication from "../components/JobApplications/AddJobApplication.vue";
     import JobApplicationCard from "../components/JobApplications/JobApplicationCard.vue";
+    import StatusAlert from "../components/StatusAlert.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
     export default {
@@ -28,6 +29,7 @@
             MobileHeader,
             JobApplicationCard,
             AddJobApplication,
+            StatusAlert,
             MobileBottomNav
         },
 
@@ -39,7 +41,7 @@
         },
 
         computed: {
-            // Creating a function that gets API request status from the store when a user creates a new job application
+            // Getting the API request status from the store when a user creates a new job application
             showJobAppStatus() {
                 return this.$store.state.jobAppStatus; 
             },
