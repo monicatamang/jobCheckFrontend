@@ -63,9 +63,12 @@
         letter-spacing: 1px;
     }
 
-    #searchBarContainer, #searchBar {
+    section, #searchBarContainer, #searchBar {
         display: grid;
         place-items: center;
+    }
+
+    #searchBarContainer, #searchBar {
         row-gap: 3vh;
     }
 
@@ -90,8 +93,6 @@
     }
 
     section {
-        display: grid;
-        place-items: center;
         margin-top: 7vh;
     }
 

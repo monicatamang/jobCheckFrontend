@@ -69,8 +69,8 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn large color="grey" text @click="dialog = false">Cancel</v-btn>
-                <v-btn large :color="primaryColor" text @click="createJobApplication(); dialog = false">Add</v-btn>
+                <v-btn class="formButtons" large color="grey" text @click="dialog = false">Cancel</v-btn>
+                <v-btn class="formButtons" large :color="primaryColor" text @click="createJobApplication(); dialog = false">Add</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -122,7 +122,7 @@
         },
 
         methods: {
-            // Creating a POST request that creates a new job application
+            // Creating a POST request to create a new job application
             createJobApplication() {
                 // Configuring the request with the url, type and data
                 axios.request({
@@ -177,4 +177,10 @@
     .v-text-field, .v-menu {
         font-family: var(--bodyFont);
     }
+
+    .formButtons {
+        text-transform: capitalize;
+        font-family: var(--titleFont);
+        font-size: 1rem;
+    }    
 </style>

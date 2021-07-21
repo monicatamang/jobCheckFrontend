@@ -24,7 +24,7 @@
                             </template>
                             <v-list>
                                 <v-list-item>
-                                    <v-list-item-title>Edit</v-list-item-title>
+                                    <edit-job-application :jobAppId="jobApp.jobAppId"></edit-job-application>
                                 </v-list-item>
                                 <v-list-item>
                                     <delete-job-application :jobAppId="jobApp.jobAppId"></delete-job-application>
@@ -35,8 +35,8 @@
                 </v-row>
             </v-container>
             <h4 class="company ml-3">{{ jobApp.company }}</h4>
-            <h4 class="ml-3">{{ jobApp.position }}</h4>
-            <h4 class="ml-3" v-if="jobApp.location !== '' && jobApp.location !== null">{{ jobApp.location }}</h4>
+            <h4 class="ml-3">{{ jobApp.jobPosition }}</h4>
+            <h4 class="ml-3" v-if="jobApp.jobLocation !== '' && jobApp.jobLocation !== null">{{ jobApp.jobLocation }}</h4>
             <h4 class="ml-3" v-if="jobApp.dueDate !== '' && jobApp.dueDate !== null">Due Date: {{ jobApp.dueDate }}</h4>
             <router-link to="" class="ml-3">View Details <v-icon small>mdi-arrow-right</v-icon></router-link>
         </div>
@@ -44,13 +44,15 @@
 </template>
 
 <script>
+    import EditJobApplication from "./EditJobApplication.vue";
     import DeleteJobApplication from "./DeleteJobApplication.vue";
 
     export default {
         name: "job-application-card",
 
         components: {
-            DeleteJobApplication,
+            EditJobApplication,
+            DeleteJobApplication
         },
 
         props: {

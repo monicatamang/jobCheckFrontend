@@ -38,6 +38,10 @@ export default new Vuex.Store({
     // Deleting a job application
     deleteJobApp(state, data) {
       state.allJobApps.splice(data, 1);
+    },
+
+    editJobApp(state, data) {
+      state.allJobApps.splice(data.index, 0, data.jobApp)
     }
   },
 
