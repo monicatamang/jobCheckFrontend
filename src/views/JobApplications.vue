@@ -8,10 +8,9 @@
                 <v-btn depressed dark :color="primaryColor" id="searchButton">Search</v-btn>
             </div>
         </div>
-        <job-application-card></job-application-card>
+        <job-application-card :jobApps="userJobApps"></job-application-card>
         <add-job-application></add-job-application>
-        <v-alert :icon="showCreateJobAppStatus.icon" :color="showCreateJobAppStatus.color" dismissible dark tile :class="{ showAlert: showCreateJobAppStatus.show }">{{ showCreateJobAppStatus.message }}</v-alert>
-        <v-alert :icon="showGetJobAppStatus.icon" :color="showCreateJobAppStatus.color" dismissible dark tile :class="{ showAlert: showGetJobAppStatus.show }">{{ showGetJobAppStatus.message }}</v-alert>
+        <v-alert :icon="showJobAppStatus.icon" :color="showJobAppStatus.color" dismissible dark tile :class="{ showAlert: showJobAppStatus.show }">{{ showJobAppStatus.message }}</v-alert>
         <mobile-bottom-nav></mobile-bottom-nav>
     </section>
 </template>
@@ -35,21 +34,19 @@
         data() {
             return {
                 primaryColor: "#52688F",
-                accentColor: "#7391C8",
-                secondaryColor: "#E3E7F1",
                 tertiaryColor: "#BDC6D9"
             }
         },
 
         computed: {
             // Creating a function that gets API request status from the store when a user creates a new job application
-            showCreateJobAppStatus() {
-                return this.$store.state.createJobAppStatus; 
+            showJobAppStatus() {
+                return this.$store.state.jobAppStatus; 
             },
 
-            // Creating a function that gets the API request status from the store when a getting all the user's job applications
-            showGetJobAppStatus() {
-                return this.$store.state.getJobAppStatus;
+            // Getting all the user's job application from the store
+            userJobApps() {
+                return this.$store.state.allJobApps;
             }
         }
     }
@@ -99,9 +96,10 @@
     }
 
     .v-alert {
-        position: absolute;
-        bottom: 5%;
+        position: fixed;
+        top: 0;
         display: none;
+        z-index: 5;
     }
 
     .showAlert {

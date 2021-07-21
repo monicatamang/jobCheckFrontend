@@ -8,13 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     allJobApps: [],
-    createJobAppStatus: {
-      show: false,
-      message: "",
-      icon: "mdi-information",
-      color: "#52688F"
-    },
-    getJobAppStatus: {
+    jobAppStatus: {
       show: false,
       message: "",
       icon: "mdi-information",
@@ -23,31 +17,34 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    // Storing all the user's job application in reverse chronological order
     updateAllJobApps(state, data) {
       state.allJobApps = data.reverse();
     },
 
-    updateCreateJobAppStatus(state, data) {
-      state.createJobAppStatus.show = data.show;
-      state.createJobAppStatus.message = data.message;
-      state.createJobAppStatus.icon = data.icon;
-      state.createJobAppStatus.color = data.color;
+    // Updating the status when the user gets, creates, edits or deletes a new job application
+    updateJobAppStatus(state, data) {
+      state.jobAppStatus.show = data.show;
+      state.jobAppStatus.message = data.message;
+      state.jobAppStatus.icon = data.icon;
+      state.jobAppStatus.color = data.color;
     },
 
-    updateGetJobAppStatus(state, data) {
-      state.getJobAppStatus.show = data.show;
-      state.getJobAppStatus.message = data.message;
-      state.getJobAppStatus.icon = data.icon;
-      state.getJobAppStatus.color = data.color;
-    },
-
+    // Adding a new job application to the page
     addNewJobApp(state, data) {
       state.allJobApps.unshift(data);
+    },
+
+    // Deleting a job application
+    deleteJobApp(state, data) {
+      state.allJobApps.splice(data, 1);
     }
   },
 
   actions: {
+    // Creating a GET request to get all the user's job applications
     getJobApps(context) {
+      // Configuring the request with the url, type and data
       axios.request({
       url: `${process.env.VUE_APP_API_URL}/job-applications`,
       method: "GET",
@@ -58,9 +55,11 @@ export default new Vuex.Store({
         userId: cookies.get("userData").userId
       }
       }).then((res) => {
+        // If the network is done and there are no errors, store the user's job applications
         console.log(res);
         context.commit('updateAllJobApps', res.data);
       }).catch((err) => {
+        // If the network is done but the page errors, show a error message to the user
         console.log(err);
         let errorStatus = {
           show: true,
@@ -68,7 +67,7 @@ export default new Vuex.Store({
           icon: "mdi-alert-circle",
           color: "#B34C59"
         }
-        this.$store.commit('updateGetJobAppStatus', errorStatus);
+        this.$store.commit('updateJobAppStatus', errorStatus);
       });
     }
   },

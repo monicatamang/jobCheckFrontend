@@ -27,7 +27,7 @@
                                     <v-list-item-title>Edit</v-list-item-title>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-title>Delete</v-list-item-title>
+                                    <delete-job-application :jobAppId="jobApp.jobAppId"></delete-job-application>
                                 </v-list-item>
                             </v-list>
                         </v-menu>
@@ -44,8 +44,18 @@
 </template>
 
 <script>
+    import DeleteJobApplication from "./DeleteJobApplication.vue";
+
     export default {
         name: "job-application-card",
+
+        components: {
+            DeleteJobApplication,
+        },
+
+        props: {
+            jobApps: Array
+        },
 
         data() {
             return {
@@ -53,13 +63,7 @@
                 secondaryColor: "#E3E7F1",
                 tertiaryColor: "#BDC6D9"
             }
-        },
-
-        computed: {
-            jobApps() {
-                return this.$store.state.allJobApps;
-            }
-        },
+        }
     }
 </script>
 
@@ -92,7 +96,7 @@
         align-items: center;
         row-gap: 10px;
         background: white;
-        box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.25);
+        box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
         border-radius: 3px;
         padding: 5% 5% 7% 5%;
         width: 100%;
@@ -112,5 +116,9 @@
 
     .v-list-item__title {
         font-family: var(--bodyFont);
+    }
+
+    .v-list {
+        z-index: -1;
     }
 </style>

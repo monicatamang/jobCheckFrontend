@@ -1,10 +1,10 @@
 <template>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed block dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Job Application</v-btn>
+            <v-btn text v-bind="attrs" v-on="on">Edit</v-btn>
         </template>
         <v-card>
-            <v-card-title>Create Job Application</v-card-title>
+            <v-card-title>Edit Job Application</v-card-title>
             <v-card-subtitle class="mb-n5 mt-3">* Indicates required field</v-card-subtitle>
             <v-card-text>
                 <v-container>
@@ -70,7 +70,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn large color="grey" text @click="dialog = false">Cancel</v-btn>
-                <v-btn large :color="primaryColor" text @click="createJobApplication(); dialog = false">Add</v-btn>
+                <v-btn large :color="primaryColor" text @click="editJobApplication(); dialog = false">Add</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -81,12 +81,13 @@
     import cookies from "vue-cookies";
 
     export default {
-        name: "add-job-application",
+        name: "edit-job-application",
 
         data() {
             return {
                 dialog: false,
                 primaryColor: "#52688F",
+                secondaryColor: "#E3E7F1",
                 salaryRates: ['Hourly', 'Weekly', 'Monthly', 'Yearly'],
                 statusOptions: ['Not Applied', 'Applied', 'Closed'],
                 startDateMenu: false,
@@ -104,7 +105,7 @@
                     icon: "mdi-check-circle",
                     color: "#53AC84"
                 },
-                createJobApp: {
+                editJobApp: {
                     jobPostingUrl: "",
                     company: "",
                     position: "",
@@ -122,9 +123,7 @@
         },
 
         methods: {
-            // Creating a POST request that creates a new job application
-            createJobApplication() {
-                // Configuring the request with the url, type and data
+            editJobApplication() {
                 axios.request({
                 url: `${process.env.VUE_APP_API_URL}/job-applications`,
                 method: "POST",
@@ -133,48 +132,35 @@
                 },
                 data: {
                     loginToken: cookies.get("loginToken"),
-                    company: this.createJobApp.company,
-                    jobPostingUrl: this.createJobApp.jobPostingUrl,
-                    jobPosition: this.createJobApp.position,
-                    jobLocation: this.createJobApp.location,
-                    employmentType: this.createJobApp.employmentType,
-                    salaryType: this.createJobApp.salaryRate,
-                    salaryAmount: this.createJobApp.salaryAmount,
-                    jobStartDate: this.createJobApp.startDate,
-                    dueDate: this.createJobApp.dueDate,
-                    status: this.createJobApp.status,
-                    appliedDate: this.createJobApp.appliedDate,
-                    notes: this.createJobApp.notes
+                    company: this.editJobApp.company,
+                    jobPostingUrl: this.editJobApp.jobPostingUrl,
+                    jobPosition: this.editJobApp.position,
+                    jobLocation: this.editJobApp.location,
+                    employmentType: this.editJobApp.employmentType,
+                    salaryType: this.editJobApp.salaryRate,
+                    salaryAmount: this.editJobApp.salaryAmount,
+                    jobStartDate: this.editJobApp.startDate,
+                    dueDate: this.editJobApp.dueDate,
+                    status: this.editJobApp.status,
+                    appliedDate: this.editJobApp.appliedDate,
+                    notes: this.editJobApp.notes
                 }
                 }).then((res) => {
-                    // If the network is done and there are no errors, add the new job application to the store
                     console.log(res);
-                    this.$store.commit('addNewJobApp', res.data);
-                    // Notifying the store to show a success message on the Job Application page
-                    this.successStatus.message = "You have successfully added a job application";
-                    this.$store.commit('updateJobAppStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done and the page errors, notify the store to show an error message on the Job Application page
                     console.log(err);
-                    this.errorStatus.message = "Failed to add job application. Please refresh the page and try again.";
-                    this.$store.commit('updateJobAppStatus', this.errorStatus);
                 });
             }
-        }
+        },
     }
 </script>
 
 <style scoped>
-    #addButton {
-        font-family: var(--titleFont);
-        bottom: 6.9%;
+    .v-btn {
+        text-transform: capitalize;
     }
 
     .v-card__title {
         font-family: var(--titleFont);
-    }
-
-    .v-text-field, .v-menu {
-        font-family: var(--bodyFont);
     }
 </style>
