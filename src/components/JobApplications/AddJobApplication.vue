@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed block large fixed dark tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Job Application</v-btn>
+            <v-btn depressed block large fixed tile dark :color="accentColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Job Application</v-btn>
         </template>
         <v-card>
             <v-card-title>Create Job Application</v-card-title>
@@ -87,6 +87,8 @@
             return {
                 dialog: false,
                 primaryColor: "#52688F",
+                tertiaryColor: "#BDC6D9",
+                accentColor: "#7391C8",
                 salaryRates: ['Hourly', 'Weekly', 'Monthly', 'Yearly'],
                 statusOptions: ['Not Applied', 'Applied', 'Closed'],
                 startDateMenu: false,
@@ -147,8 +149,10 @@
                     notes: this.createJobApp.notes
                 }
                 }).then((res) => {
-                    // If the network is done and there are no errors, notify the store to show a success message on the Job Application page
+                    // If the network is done and there are no errors, add the new job application to the store
                     console.log(res);
+                    this.$store.commit('addNewJobApp', res.data);
+                    // Notifying the store to show a success message on the Job Application page
                     this.successStatus.show = true;
                     this.successStatus.message = "You have successfully added a job application";
                     this.$store.commit('updateCreateJobAppStatus', this.successStatus);

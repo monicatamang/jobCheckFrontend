@@ -38,6 +38,9 @@ export default {
     if(this.loginToken === null) {
       this.$router.push("/");
     }
+
+    // Getting all the user's job applications from the store
+    this.$store.dispatch('getJobApps');
   },
 
   methods: {
@@ -183,6 +186,7 @@ export default {
     --bodyFont: 'Open Sans', sans-serif;
     --primaryColor: #52688F;
     --secondaryColor: #E3E7F1;
+    --tertiaryColor: #BDC6D9;
     --accentColor: #7391C8;
     --backgroundColorOne: #FCFDFD;
     --backgroundColorTwo: #FAFBFC; 

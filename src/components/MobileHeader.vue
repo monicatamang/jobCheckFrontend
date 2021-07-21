@@ -1,6 +1,6 @@
 <template>
-    <v-app-bar color="white" elevate-on-scroll fixed>
-        <img src="../assets/jobCheckLogoIcon.jpg" alt="">
+    <v-app-bar color="white" flat fixed>
+        <img src="../assets/jobCheckLogoIcon.jpg" alt="Job Check's official logo icon which is a cornflower blue coloured checkmark.">
         <v-spacer></v-spacer>
         <router-link to="/Profile">
             <v-avatar :color="avatarColor" size="35">
