@@ -30,7 +30,7 @@ export default {
       resumeFilename: "",
       coverLetterFilename: "",
       loginToken: cookies.get("loginToken"),
-      userData: cookies.get("userData").userId
+      userData: cookies.get("userData")
     }
   },
 
@@ -41,8 +41,8 @@ export default {
     }
 
     // Getting all the user's job applications from the store
-    if(this.loginToken !== '' && this.loginToken !== null) {
-      this.$store.dispatch('getJobApps', this.userData);
+    if(this.userData !== '' && this.userData !== null) {
+      this.$store.dispatch('getJobApps', this.userData.userId);
     }
   },
 

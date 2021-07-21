@@ -91,6 +91,19 @@ export default new Vuex.Store({
   },
 
   getters: {
+    // Filtering all job applications that are not applied
+    notAppliedJobApps(state) {
+      return state.allJobApps.filter((jobApp) => jobApp.status === 'Not Applied');
+    },
 
+    // Filtering all job applications that are applied
+    appliedJobApps(state) {
+      return state.allJobApps.filter((jobApp) => jobApp.status === 'Applied');
+    },
+
+    // Filtering all job applications that are closed
+    closedJobApps(state) {
+      return state.allJobApps.filter((jobApp) => jobApp.status === 'Closed');
+    }
   }
 })

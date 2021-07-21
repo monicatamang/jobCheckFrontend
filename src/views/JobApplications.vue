@@ -3,11 +3,14 @@
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Job Applications</h1>
-            <div id="searchBar">
-                <v-text-field placeholder="Search Applications" dense outlined single-line :color="tertiaryColor"></v-text-field>
-                <v-btn depressed dark :color="primaryColor" id="searchButton">Search</v-btn>
-            </div>
+            <v-text-field placeholder="Search Applications" dense outlined single-line :color="tertiaryColor" prepend-inner-icon="mdi-magnify"></v-text-field>
         </div>
+        <v-chip-group mandatory active-class="black--text">
+            <v-chip outlined @click="all = true; notApplied = false; applied = false; closed = false">All</v-chip>
+            <v-chip outlined @click="notApplied = true; all = false; applied = false; closed = false">Not Applied</v-chip>
+            <v-chip outlined @click="applied = true; all = false; notApplied = false; closed = false">Applied</v-chip>
+            <v-chip outlined @click="closed = true; all = false; notApplied = false; applied = false">Closed</v-chip>
+        </v-chip-group>
         <job-application-card :jobApps="userJobApps"></job-application-card>
         <add-job-application></add-job-application>
         <status-alert :showStatus="showJobAppStatus"></status-alert>
@@ -36,7 +39,11 @@
         data() {
             return {
                 primaryColor: "#52688F",
-                tertiaryColor: "#BDC6D9"
+                tertiaryColor: "#BDC6D9",
+                all: false,
+                notApplied: false,
+                applied: false,
+                closed: false
             }
         },
 
@@ -46,8 +53,24 @@
                 return this.$store.state.jobAppStatus; 
             },
 
-            // Getting all the user's job application from the store
+            // Filtering the user's job applications
             userJobApps() {
+                // Getting all the user's 'Not Applied' job applications from the store
+                if(this.notApplied) {
+                    return this.$store.getters.notAppliedJobApps;
+                } 
+                
+                // Getting all the user's 'Applied' job applications from the store
+                if(this.applied) {
+                    return this.$store.getters.appliedJobApps;
+                }
+                
+                // Getting all the user's 'Closed' job applications from the store
+                if(this.closed) {
+                    return this.$store.getters.closedJobApps;
+                } 
+
+                // Getting all job applications from the store
                 return this.$store.state.allJobApps;
             }
         }
@@ -88,13 +111,12 @@
         column-gap: 1vw;
     }
 
-    #searchButton {
-        align-self: start;
-        text-transform: capitalize;
-        margin-top: 2px;
-    }
-
     section {
         margin-top: 7vh;
+    }
+
+    .v-chip-group {
+        position: relative;
+        top: 19vh;
     }
 </style>

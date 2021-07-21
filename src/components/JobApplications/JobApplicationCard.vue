@@ -4,7 +4,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="9" v-if="jobApp.status === 'Not Applied'">
-                        <v-chip label dark :color="primaryColor">{{ jobApp.status.toUpperCase() }}</v-chip>
+                        <v-chip label dark :color="secondaryColor" :text-color="primaryColor">{{ jobApp.status.toUpperCase() }}</v-chip>
                     </v-col>
                     <v-col cols="9" v-if="jobApp.status === 'Applied' && jobApp.appliedDate !== '' & jobApp.appliedDate !== null">
                         <v-chip label :color="secondaryColor" :text-color="primaryColor">{{ jobApp.status.toUpperCase() }} ON {{ jobApp.appliedDate }}</v-chip>
@@ -13,13 +13,13 @@
                         <v-chip label :color="secondaryColor" :text-color="primaryColor">{{ jobApp.status.toUpperCase() }}</v-chip>
                     </v-col>
                     <v-col cols="9" v-if="jobApp.status === 'Closed'">
-                        <v-chip label :color="tertiaryColor" text-color="white">{{ jobApp.status.toUpperCase() }}</v-chip>
+                        <v-chip label :color="secondaryColor" :text-color="primaryColor">{{ jobApp.status.toUpperCase() }}</v-chip>
                     </v-col>
                     <v-col cols="3">
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text :color="primaryColor" v-bind="attrs" v-on="on">
-                                    <v-icon>mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -99,7 +99,6 @@
         row-gap: 10px;
         background: white;
         box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
-        border-radius: 3px;
         padding: 5% 5% 7% 5%;
         width: 100%;
     }
@@ -113,7 +112,7 @@
     }
 
     .v-application a {
-        color: var(--primaryColor);
+        color: black;
     }
 
     .v-list-item__title {
