@@ -8,7 +8,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     allJobApps: [],
+
     jobAppStatus: {
+      show: false,
+      message: "",
+      icon: "mdi-information",
+      color: "#52688F"
+    },
+
+    logoutStatus: {
       show: false,
       message: "",
       icon: "mdi-information",
@@ -42,6 +50,13 @@ export default new Vuex.Store({
 
     editJobApp(state, data) {
       state.allJobApps.splice(data.index, 0, data.jobApp)
+    },
+
+    updateLogoutStatus(state, data) {
+      state.logoutStatus.show = data.show;
+      state.logoutStatus.message = data.message;
+      state.logoutStatus.icon = data.icon;
+      state.logoutStatus.color = data.color;
     }
   },
 

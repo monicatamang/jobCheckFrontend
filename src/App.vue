@@ -40,7 +40,9 @@ export default {
     }
 
     // Getting all the user's job applications from the store
-    this.$store.dispatch('getJobApps');
+    if(this.loginToken !== '' && this.loginToken !== null) {
+      this.$store.dispatch('getJobApps');
+    }
   },
 
   methods: {

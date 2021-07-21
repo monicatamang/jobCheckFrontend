@@ -10,7 +10,7 @@
         </div>
         <job-application-card :jobApps="userJobApps"></job-application-card>
         <add-job-application></add-job-application>
-        <v-alert :icon="showJobAppStatus.icon" :color="showJobAppStatus.color" dismissible dark tile :class="{ showAlert: showJobAppStatus.show }">{{ showJobAppStatus.message }}</v-alert>
+        <v-alert v-if="showJobAppStatus.show = true" :icon="showJobAppStatus.icon" :color="showJobAppStatus.color" dismissible dark tile :class="{ showAlert: showJobAppStatus.show }">{{ showJobAppStatus.message }}</v-alert>
         <mobile-bottom-nav></mobile-bottom-nav>
     </section>
 </template>
@@ -94,16 +94,5 @@
 
     section {
         margin-top: 7vh;
-    }
-
-    .v-alert {
-        position: fixed;
-        top: 0;
-        display: none;
-        z-index: 5;
-    }
-
-    .showAlert {
-        display: block;
     }
 </style>
