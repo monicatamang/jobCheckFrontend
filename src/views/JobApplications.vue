@@ -3,7 +3,7 @@
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Job Applications</h1>
-            <v-text-field placeholder="Search Applications" dense outlined single-line :color="tertiaryColor" prepend-inner-icon="mdi-magnify"></v-text-field>
+            <search-job-application></search-job-application>
         </div>
         <v-chip-group mandatory active-class="black--text">
             <v-chip outlined @click="all = true; notApplied = false; applied = false; closed = false">All</v-chip>
@@ -11,6 +11,7 @@
             <v-chip outlined @click="applied = true; all = false; notApplied = false; closed = false">Applied</v-chip>
             <v-chip outlined @click="closed = true; all = false; notApplied = false; applied = false">Closed</v-chip>
         </v-chip-group>
+        <h4>{{ showSearchJobAppStatus }}</h4>
         <job-application-card :jobApps="userJobApps"></job-application-card>
         <add-job-application></add-job-application>
         <status-alert :showStatus="showJobAppStatus"></status-alert>
@@ -20,6 +21,7 @@
 
 <script>
     import MobileHeader from "../components/MobileHeader.vue";
+    import SearchJobApplication from "../components/JobApplications/SearchJobApplication.vue";
     import AddJobApplication from "../components/JobApplications/AddJobApplication.vue";
     import JobApplicationCard from "../components/JobApplications/JobApplicationCard.vue";
     import StatusAlert from "../components/StatusAlert.vue";
@@ -30,6 +32,7 @@
 
         components: {
             MobileHeader,
+            SearchJobApplication,
             JobApplicationCard,
             AddJobApplication,
             StatusAlert,
@@ -72,6 +75,10 @@
 
                 // Getting all job applications from the store
                 return this.$store.state.allJobApps;
+            },
+
+            showSearchJobAppStatus() {
+                return this.$store.state.searchJobAppStatus;
             }
         }
     }
@@ -115,8 +122,17 @@
         margin-top: 7vh;
     }
 
-    .v-chip-group {
+    h4, .v-chip-group {
         position: relative;
+    }
+
+    .v-chip-group {
         top: 19vh;
+    }
+
+    h4 {
+        top: 22vh;
+        font-family: var(--titleFont);
+        font-weight: 400;
     }
 </style>

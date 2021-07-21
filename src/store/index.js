@@ -20,7 +20,9 @@ export default new Vuex.Store({
       message: "",
       icon: "mdi-information",
       color: "#52688F"
-    }
+    },
+
+    searchJobAppStatus: ""
   },
 
   mutations: {
@@ -47,15 +49,22 @@ export default new Vuex.Store({
       state.allJobApps.splice(data, 1);
     },
 
+    // Replacing the old job application with the updated job application
     editJobApp(state, data) {
       state.allJobApps.splice(data.index, 0, data.jobApp)
     },
 
+    // Updating the status when the user logs out
     updateLogoutStatus(state, data) {
       state.logoutStatus.show = data.show;
       state.logoutStatus.message = data.message;
       state.logoutStatus.icon = data.icon;
       state.logoutStatus.color = data.color;
+    },
+
+    // Updating the status when the user is searching for specific job applications
+    updateSearchJobAppStatus(state, data) {
+      state.searchJobAppStatus = data;
     }
   },
 
@@ -85,6 +94,7 @@ export default new Vuex.Store({
           icon: "mdi-alert-circle",
           color: "#B34C59"
         }
+        // Updating the error message
         this.$store.commit('updateJobAppStatus', errorStatus);
       });
     }
