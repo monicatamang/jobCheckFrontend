@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="px-6 py-5">
+        <h4 class="pb-3">Resume</h4>
         <h5 v-if="resumeId !== undefined">Please delete your current resume before uploading a new resume.</h5>
         <v-form>
             <input type="file" name="resumeFile" id="resumeFile">
@@ -85,7 +86,16 @@
         text-transform: capitalize;
     }
 
-    h4, h5 {
+    h5 {
         font-weight: 400;
+    }
+
+    div {
+        background: var(--backgroundColorTwo);
+    }
+
+    h4 {
+        font-size: 1rem;
+        font-weight: 600;
     }
 </style>

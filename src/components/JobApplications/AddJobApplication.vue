@@ -22,7 +22,7 @@
                             <v-text-field v-model="createJobApp.location" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="createJobApp.employmentType" label="Employment Type" hint="Full-Time, Part-Time, Contract, etc." :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="createJobApp.employmentType" label="Type of Employment" hint="Full-Time, Part-Time, Contract, etc." :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-row>

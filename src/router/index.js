@@ -5,6 +5,9 @@ import CreateAccount from "../views/CreateAccount.vue";
 import Login from "../views/Login.vue";
 import JobApplications from "../views/JobApplications.vue";
 import JobApplicationDetails from "../views/JobApplicationDetails.vue";
+import Interviews from "../views/Interviews.vue";
+import JobReferences from "../views/JobReferences.vue";
+import NetworkingEvents from "../views/NetworkingEvents.vue";
 import UserProfile from "../views/UserProfile.vue";
 
 Vue.use(VueRouter)
@@ -34,6 +37,21 @@ const routes = [
     path: '/JobApplications/:jobAppId',
     name: 'JobApplicationDetails',
     component: JobApplicationDetails
+  },
+  {
+    path: '/Interviews',
+    name: 'Interviews',
+    component: Interviews
+  },
+  {
+    path: '/JobReferences',
+    name: 'JobReferences',
+    component: JobReferences
+  },
+  {
+    path: '/NetworkingEvents',
+    name: 'NetworkingEvents',
+    component: NetworkingEvents
   },
   {
     path: '/Profile',

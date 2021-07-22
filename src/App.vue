@@ -14,7 +14,6 @@ export default {
 
   data() {
     return {
-      coverLetterFilename: "",
       loginToken: cookies.get("loginToken"),
       userData: cookies.get("userData")
     }
@@ -22,14 +21,14 @@ export default {
 
   mounted() {
     // If the user does not have a login token, take the user to the Home page
-    if(this.loginToken === null) {
-      this.$router.push("/");
+    if(this.loginToken !== '' && this.loginToken !== null) {
+      this.$router.push("/JobApplications");
     }
 
     // Getting all the user's job applications from the store
-    if(this.userData !== '' && this.userData !== null) {
-      this.$store.dispatch('getJobApps', this.userData.userId);
-    }
+    // if(this.userData !== '' && this.userData !== null) {
+    //   this.$store.dispatch('getJobApps', this.userData.userId);
+    // }
   }
 };
 </script>

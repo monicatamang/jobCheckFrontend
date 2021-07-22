@@ -6,6 +6,7 @@
 </template>
 
 <script>
+    import cookies from "vue-cookies";
     import LogoutUser from "../components/LogoutUser.vue";
     import StatusAlert from "../components/StatusAlert.vue";
 
@@ -17,10 +18,23 @@
             StatusAlert
         },
 
+        data() {
+            return {
+                loginToken: cookies.get("loginToken")
+            }
+        },
+
         computed: {
             // Getting the API request status from the status when a user logs out
             showLogoutStatus() {
                 return this.$store.state.logoutStatus; 
+            }
+        },
+
+        mounted() {
+            // If the user does not have a login token, take the user back to the Home page
+            if(this.loginToken === null || this.loginToken === '') {
+                this.$router.push("/");
             }
         },
     }

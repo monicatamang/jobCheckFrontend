@@ -8,9 +8,18 @@ export default new Vuex.Store({
   state: {
     allJobApps: [],
 
+    allInterviews: [],
+
     searchJobAppStatus: "",
 
     jobAppStatus: {
+      show: false,
+      message: "",
+      icon: "",
+      color: ""
+    },
+
+    interviewStatus: {
       show: false,
       message: "",
       icon: "",
@@ -42,7 +51,7 @@ export default new Vuex.Store({
   mutations: {
     // Storing all the user's job application in reverse chronological order
     updateAllJobApps(state, data) {
-      state.allJobApps = data.reverse();
+      state.allJobApps = data;
     },
 
     // Updating the status when the user gets, creates, edits or deletes a new job application
@@ -51,6 +60,19 @@ export default new Vuex.Store({
       state.jobAppStatus.message = data.message;
       state.jobAppStatus.icon = data.icon;
       state.jobAppStatus.color = data.color;
+    },
+
+    // Updating the status when the user gets, creates, edits or deletes a new interview
+    updateInterviewStatus(state, data) {
+      state.interviewStatus.show = data.show;
+      state.interviewStatus.message = data.message;
+      state.interviewStatus.icon = data.icon;
+      state.interviewStatus.color = data.color;
+    },
+
+    // Adding a new interview to the page
+    addNewInterview(state, data) {
+      state.allInterviews.unshift(data);
     },
 
     // Adding a new job application to the page
@@ -95,7 +117,7 @@ export default new Vuex.Store({
       state.coverLetterStatus.message = data.message;
       state.coverLetterStatus.icon = data.icon;
       state.coverLetterStatus.color = data.color;
-    },
+    }
   },
 
   actions: {

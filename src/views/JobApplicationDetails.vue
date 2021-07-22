@@ -1,8 +1,10 @@
 <template>
     <section>
         <status-alert :showStatus="showResumeStatus"></status-alert>
+        <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
         <view-job-application-details :details="jobAppDetails"></view-job-application-details>
+        <add-interview :jobAppId="jobAppDetails[0].jobAppId"></add-interview>
     </section>
 </template>
 
@@ -12,6 +14,7 @@
     import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
     import ViewJobApplicationDetails from "../components/JobApplicationDetails/ViewJobApplicationDetails.vue";
+    import AddInterview from "../components/Interviews/AddInterview.vue";
 
     export default {
         name: "Job-Application-Details",
@@ -19,11 +22,13 @@
         components: {
             StatusAlert,
             MobileHeader,
-            ViewJobApplicationDetails
+            ViewJobApplicationDetails,
+            AddInterview
         },
 
         data() {
             return {
+                loginToken: cookies.get("loginToken"),
                 jobAppDetails: [
                     {
                         jobAppId: Number(this.$route.params.jobAppId),
@@ -40,7 +45,13 @@
                         appliedDate: this.$route.params.appliedDate,
                         notes: this.$route.params.notes
                     }
-                ]
+                ],
+                clearInterviewStatus: {
+                    show: false,
+                    message: "",
+                    icon: "",
+                    color: ""
+                }
             }
         },
 
@@ -80,6 +91,10 @@
         computed: {
             showResumeStatus() {
                 return this.$store.state.resumeStatus;
+            },
+
+            showInterviewStatus() {
+                return this.$store.state.interviewStatus;
             }
         },
 
@@ -88,6 +103,14 @@
             if(this.$route.params.jobAppId !== undefined && this.$route.params.company === undefined && this.$route.params.jobPostingUrl === undefined && this.$route.params.jobPosition === undefined && this.$route.params.jobLocation === undefined && this.$route.params.employmentType === undefined && this.$route.params.salaryType === undefined && this.$route.params.salaryAmount === undefined && this.$route.params.jobStartDate === undefined && this.$route.params.dueDate === undefined && this.$route.params.status === undefined && this.$route.params.appliedDate === undefined && this.$route.params.notes === undefined) {
                 this.getSingleJobApp();
             }
+
+            // If the user does not have a login token, take the user back to the Home page
+            if(this.loginToken === null || this.loginToken === '') {
+                this.$router.push("/");
+            }
+
+            // Clearing any messages printed to the user
+            this.$store.commit('updateInterviewStatus', this.clearInterviewStatus);
         }
     }
 </script>

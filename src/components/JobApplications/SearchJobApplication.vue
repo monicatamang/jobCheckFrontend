@@ -1,6 +1,6 @@
 <template>
     <div id="searchBar">
-        <v-text-field placeholder="Search by Company" dense outlined single-line :color="accentColor" prepend-inner-icon="mdi-magnify" v-model="searchJobAppInput" :append-icon="sendIcon" @click:append="getCurrentJobApps" append-outer-icon="mdi-send" @click:append-outer="searchJobApp"></v-text-field>
+        <v-text-field placeholder="Search by Company" dense outlined single-line :color="accentColor" prepend-inner-icon="mdi-magnify" v-model="searchJobAppInput" append-icon="mdi-close" @click:append="getCurrentJobApps" append-outer-icon="mdi-send" @click:append-outer="searchJobApp"></v-text-field>
     </div>
 </template>
 
@@ -14,8 +14,7 @@
         data() {
             return {
                 accentColor: "#7391C8",
-                searchJobAppInput: "",
-                sendIcon: ""
+                searchJobAppInput: ""
             }
         },
 
@@ -41,8 +40,6 @@
                         // If the network is done and there are no errors, send the search results to the store
                         console.log(res);
                         this.$store.commit('updateAllJobApps', res.data);
-                        // Allowing the user to clear their search results
-                        this.sendIcon = "mdi-close";
                         // If there are no results returned, print a message to the user
                         if(res.data.length === 0) {
                             this.$store.commit('updateSearchJobAppStatus', "0 Job Applications Found");

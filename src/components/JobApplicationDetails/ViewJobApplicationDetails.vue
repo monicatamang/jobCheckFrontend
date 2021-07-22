@@ -47,38 +47,45 @@
                     <h4 v-else-if="(detail.appliedDate === '' || detail.appliedDate === null) || (detail.status === 'Not Applied')">N/A</h4>
                 </div>
             </div>
-            <div id="otherDetails">
-                <div>
-                    <h4 class="heading">Job Posting</h4>
-                    <a v-if="detail.jobPostingUrl !== '' && detail.jobPostingUrl !== null" target="_blank" :href="detail.jobPostingUrl">View Original Job Post</a>
-                    <h4 v-else-if="detail.jobPostingUrl === '' || detail.jobPostingUrl === null">N/A</h4>
-                </div>
-                <div>
-                    <h4 class="heading">Salary</h4>
-                    <h4 v-if="detail.salaryAmount !== '' && detail.salaryAmount !== null && detail.salaryType !== '' && detail.salaryType !== null">${{ detail.salaryAmount }}/{{ detail.salaryType }}</h4>
-                    <h4 v-else-if="(detail.salaryAmount !== '' && detail.salaryAmount !== null) && (detail.salaryType === '' || detail.salaryType === null)">${{ detail.salaryAmount }}</h4>
-                    <h4 v-else-if="(detail.salaryAmount === '' || detail.salaryAmount === null) && (detail.salaryType !== '' && detail.salaryType !== null)">{{ detail.salaryType }}</h4>
-                    <h4 v-else-if="(detail.salaryAmount === '' || detail.salaryAmount === null) && (detail.salaryType === '' || detail.salaryType === null)">N/A</h4>
-                </div>
-                <div>
-                    <h4 class="heading">Start Date</h4>
-                    <h4 v-if="detail.jobStartDate !== '' && detail.jobStartDate !== null">{{ detail.jobStartDate }}</h4>
-                    <h4 v-else-if="detail.jobStartDate === '' || detail.jobStartDate === null">N/A</h4>
-                </div>
-                <div>
-                    <h4 class="heading">Resume</h4>
-                    <upload-resume :jobAppId="detail.jobAppId"></upload-resume>
-                </div>
-                <div>
-                    <h4 class="heading">Cover Letter</h4>
-                    <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
-                </div>
-                <div>
-                    <h4 class="heading">Notes</h4>
-                    <h4 v-if="detail.notes !== '' && detail.notes !== null">{{ detail.notes }}</h4>
-                    <h4 v-else-if="detail.notes === '' || detail.notes === null">N/A</h4>
-                </div>
-            </div>
+            <v-tabs centered background-color="transparent" :color="primaryColor" class="mt-3">
+                <v-tab>Details</v-tab>
+                <v-tab>Documents</v-tab>
+                <v-tab v-if="interviewId !== undefined">Interviews</v-tab>
+                <v-tab-item>
+                    <div id="otherDetails" class="px-8 pt-5">
+                        <div>
+                            <h4 class="heading">Job Posting</h4>
+                            <a v-if="detail.jobPostingUrl !== '' && detail.jobPostingUrl !== null" target="_blank" :href="detail.jobPostingUrl">View Original Job Post</a>
+                            <h4 v-else-if="detail.jobPostingUrl === '' || detail.jobPostingUrl === null">N/A</h4>
+                        </div>
+                        <div>
+                            <h4 class="heading">Salary</h4>
+                            <h4 v-if="detail.salaryAmount !== '' && detail.salaryAmount !== null && detail.salaryType !== '' && detail.salaryType !== null">${{ detail.salaryAmount }}/{{ detail.salaryType }}</h4>
+                            <h4 v-else-if="(detail.salaryAmount !== '' && detail.salaryAmount !== null) && (detail.salaryType === '' || detail.salaryType === null)">${{ detail.salaryAmount }}</h4>
+                            <h4 v-else-if="(detail.salaryAmount === '' || detail.salaryAmount === null) && (detail.salaryType !== '' && detail.salaryType !== null)">{{ detail.salaryType }}</h4>
+                            <h4 v-else-if="(detail.salaryAmount === '' || detail.salaryAmount === null) && (detail.salaryType === '' || detail.salaryType === null)">N/A</h4>
+                        </div>
+                        <div>
+                            <h4 class="heading">Start Date</h4>
+                            <h4 v-if="detail.jobStartDate !== '' && detail.jobStartDate !== null">{{ detail.jobStartDate }}</h4>
+                            <h4 v-else-if="detail.jobStartDate === '' || detail.jobStartDate === null">N/A</h4>
+                        </div>
+                        <div>
+                            <h4 class="heading">Notes</h4>
+                            <h4 v-if="detail.notes !== '' && detail.notes !== null">{{ detail.notes }}</h4>
+                            <h4 v-else-if="detail.notes === '' || detail.notes === null">N/A</h4>
+                        </div>
+                    </div>
+                </v-tab-item>
+                <v-tab-item>
+                    <div>
+                        <upload-resume :jobAppId="detail.jobAppId"></upload-resume>
+                    </div>
+                    <div>
+                        <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
+                    </div>
+                </v-tab-item>
+            </v-tabs>
         </div>
     </article>
 </template>
@@ -106,7 +113,8 @@
         data() {
             return {
                 primaryColor: "#52688F",
-                secondaryColor: "#E3E7F1"
+                secondaryColor: "#E3E7F1",
+                interviewId: undefined
             }
         },
 
@@ -120,6 +128,10 @@
 </script>
 
 <style scoped>
+    article {
+        background: var(--backgroundColorTwo);
+    }
+
     article > div {
         row-gap: 10px;
         margin-bottom: 3vh;
@@ -145,13 +157,18 @@
         font-size: 1.3rem;
     }
 
+    #otherDetails {
+        justify-items: start;
+        row-gap: 20px;
+        background: var(--backgroundColorTwo);
+    }
+
     #importantDetailsContainer {
         grid-template-columns: repeat(3, 1fr);
         text-align: center;
         background: white;
         width: 100%;
-        padding: 5%;
-        margin: 2vh 0vw;
+        padding: 5% 3%;
     }
 
     #importantDetailsContainer div, #otherDetails div {
@@ -170,12 +187,6 @@
     h3 {
         font-weight: 400;
         font-size: 1.1rem;
-    }
-
-    #otherDetails {
-        justify-items: start;
-        row-gap: 20px;
-        width: 82%;
     }
 
     #editAndDeleteContainer {

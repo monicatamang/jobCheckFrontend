@@ -181,7 +181,7 @@
             currentJobApps() {
                 return this.$store.state.allJobApps; 
             }
-        },
+        }
     }
 </script>
 

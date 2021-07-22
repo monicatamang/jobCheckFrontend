@@ -15,11 +15,12 @@
         <job-application-card :jobApps="userJobApps"></job-application-card>
         <add-job-application></add-job-application>
         <status-alert :showStatus="showJobAppStatus"></status-alert>
-        <mobile-bottom-nav></mobile-bottom-nav>
+        <mobile-bottom-nav :value="0"></mobile-bottom-nav>
     </section>
 </template>
 
 <script>
+    import cookies from "vue-cookies";
     import MobileHeader from "../components/MobileHeader.vue";
     import SearchJobApplication from "../components/JobApplications/SearchJobApplication.vue";
     import AddJobApplication from "../components/JobApplications/AddJobApplication.vue";
@@ -41,12 +42,19 @@
 
         data() {
             return {
+                loginToken: cookies.get("loginToken"),
                 primaryColor: "#52688F",
                 tertiaryColor: "#BDC6D9",
                 all: false,
                 notApplied: false,
                 applied: false,
-                closed: false
+                closed: false,
+                clearJobAppStatus: {
+                    show: false,
+                    message: "",
+                    icon: "",
+                    color: ""
+                }
             }
         },
 
@@ -80,7 +88,22 @@
             showSearchJobAppStatus() {
                 return this.$store.state.searchJobAppStatus;
             }
-        }
+        },
+
+        mounted() {
+            // If the user does not have a login token, take the user back to the Home page
+            if(this.loginToken === null || this.loginToken === '') {
+                this.$router.push("/");
+            }
+
+            // If the user's job applications are not shown on the Job Applications page, get all the user's job applications from the store
+            if(this.userJobApps.length <= 0) {
+                this.$store.dispatch('getJobApps', cookies.get("userData").userId);
+            }
+
+            // Clearing any messages printed to the user
+            this.$store.commit('updateJobAppStatus', this.clearJobAppStatus);
+        },
     }
 </script>
 
@@ -95,12 +118,12 @@
         letter-spacing: 1px;
     }
 
-    section, #searchBarContainer, #searchBar {
+    section, #searchBarContainer {
         display: grid;
         place-items: center;
     }
 
-    #searchBarContainer, #searchBar {
+    #searchBarContainer {
         row-gap: 3vh;
     }
 
@@ -111,11 +134,6 @@
         top: 6%;
         z-index: 1;
         border-bottom: 1px solid whitesmoke;
-    }
-
-    #searchBar {
-        grid-template-columns: 1fr auto;
-        column-gap: 1vw;
     }
 
     section {
