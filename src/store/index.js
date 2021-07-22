@@ -78,6 +78,16 @@ export default new Vuex.Store({
       state.allInterviews.unshift(data);
     },
 
+    // Deleting a interview
+    deleteInterview(state, data) {
+      state.allInterview.splice(data, 1);
+    },
+
+    // Replacing the old interview with the updated interview
+    editInterview(state, data) {
+      state.allInterviews.splice(data.index, 0, data.interview)
+    },
+
     // Updating the status when the user is searching for specific job applications
     updateSearchJobAppStatus(state, data) {
       state.searchJobAppStatus = data;

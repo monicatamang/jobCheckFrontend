@@ -5,10 +5,10 @@
         </template>
         <v-card>
             <v-card-title>Confirm Deletion</v-card-title>
-            <v-card-subtitle class="mt-5">Are you sure you want to permanently delete this job application and all of its contents?</v-card-subtitle>
+            <v-card-subtitle class="mt-5">Are you sure you want to permanently delete this interview and all of its contents?</v-card-subtitle>
             <v-card-actions>
                 <v-btn text color="grey" @click="dialog = false">Cancel</v-btn>
-                <v-btn text color="#B34C59" @click="deleteJobApplication(); dialog = false">Delete</v-btn>
+                <v-btn text color="#B34C59" @click="deleteInterview(); dialog = false">Delete</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -19,10 +19,10 @@
     import cookies from "vue-cookies";
 
     export default {
-        name: "delete-job-application",
+        name: "delete-interview",
 
         props: {
-            jobAppId: Number
+            interviewId: Number
         },
 
         data() {
@@ -45,45 +45,43 @@
 
         methods: {
             // Creating a DELETE request to delete a user's job application
-            deleteJobApplication() {
+            deleteInterivew() {
                 // Configuring the request with the url, type and data
                 axios.request({
-                url: `${process.env.VUE_APP_API_URL}/job-applications`,
+                url: `${process.env.VUE_APP_API_URL}/interviews`,
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 data: {
                     loginToken: cookies.get("loginToken"),
-                    jobAppId: this.jobAppId
+                    interviewId: this.interviewId
                 }
                 }).then((res) => {
-                    // If the network is done and there are not errors, find the index of the deleted job application and send it to the store
+                    // If the network is done and there are not errors, find the index of the deleted interview and send it to the store
                     console.log(res);
-                    for(let i = 0; i < this.currentJobApps.length; i++) {
-                        if(this.currentJobApps[i].jobAppId === this.jobAppId) {
+                    for(let i = 0; i < this.currentInterviews.length; i++) {
+                        if(this.currentInterviews[i].interviewId === this.interviewId) {
                             let index = i;
-                            this.$store.commit('deleteJobApp', index);
+                            this.$store.commit('deleteInterview', index);
                         }
                     }
-                    // Notifying the store that the user's job application is deleted and showing a success message to the user
-                    this.successStatus.message = "Your job application was successfully deleted";
-                    this.$store.commit('updateJobAppStatus', this.successStatus);
-                    // Taking the user to the Job Applications page
-                    this.$router.push('/JobApplications');
+                    // Notifying the store that the user's interview is deleted and showing a success message to the user
+                    this.successStatus.message = "Your interview was successfully deleted";
+                    this.$store.commit('updateInterviewStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, notify the store and show an error message to the user
                     console.log(err);
-                    this.errorStatus.message = "Failed to delete job application. Please refresh the page and try again.";
-                    this.$store.commit('updateJobAppStatus', this.errorStatus);
+                    this.errorStatus.message = "Failed to delete interview. Please refresh the page and try again.";
+                    this.$store.commit('updateInterviewStatus', this.errorStatus);
                 });
             }
         },
 
         computed: {
-            // Getting all the user's job application from the store
-            currentJobApps() {
-                return this.$store.state.allJobApps; 
+            // Getting all the user's interviews from the store
+            currentInterivews() {
+                return this.$store.state.allInterviews; 
             }
         },
     }
