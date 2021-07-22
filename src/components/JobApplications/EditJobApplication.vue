@@ -190,10 +190,12 @@
         text-transform: capitalize;
         font-weight: 400;
         font-family: var(--titleFont);
+        letter-spacing: 0px;
+        font-size: 1rem;
     }
 
     .formButtons {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .v-card__title {

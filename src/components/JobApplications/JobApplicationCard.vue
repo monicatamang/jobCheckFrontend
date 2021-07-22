@@ -38,7 +38,24 @@
             <h4 class="ml-3">{{ jobApp.jobPosition }}</h4>
             <h4 class="ml-3" v-if="jobApp.jobLocation !== '' && jobApp.jobLocation !== null">{{ jobApp.jobLocation }}</h4>
             <h4 class="ml-3" v-if="jobApp.dueDate !== '' && jobApp.dueDate !== null">Due Date: {{ jobApp.dueDate }}</h4>
-            <router-link to="" class="ml-3">View Details <v-icon small>mdi-arrow-right</v-icon></router-link>
+            <router-link :to="{ 
+                name: 'JobApplicationDetails',
+                params: {
+                    jobAppId: jobApp.jobAppId,
+                    company: jobApp.company,
+                    jobPostingUrl: jobApp.jobPostingUrl,
+                    jobPosition: jobApp.jobPosition,
+                    jobLocation: jobApp.jobLocation,
+                    employmentType: jobApp.employmentType,
+                    salaryType: jobApp.salaryType,
+                    salaryAmount: jobApp.salaryAmount,
+                    jobStartDate: jobApp.jobStartDate,
+                    dueDate: jobApp.dueDate,
+                    status: jobApp.status,
+                    appliedDate: jobApp.appliedDate,
+                    notes: jobApp.notes
+                } 
+            }" class="ml-3">View Details <v-icon small>mdi-arrow-right</v-icon></router-link>
         </div>
     </article>
 </template>
@@ -62,8 +79,7 @@
         data() {
             return {
                 primaryColor: "#52688F",
-                secondaryColor: "#E3E7F1",
-                tertiaryColor: "#BDC6D9"
+                secondaryColor: "#E3E7F1"
             }
         }
     }

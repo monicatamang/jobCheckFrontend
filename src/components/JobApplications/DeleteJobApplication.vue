@@ -69,6 +69,8 @@
                     // Notifying the store that the user's job application is deleted and showing a success message to the user
                     this.successStatus.message = "Your job application was successfully deleted";
                     this.$store.commit('updateJobAppStatus', this.successStatus);
+                    // Taking the user to the Job Applications page
+                    this.$router.push('/JobApplications');
                 }).catch((err) => {
                     // If the network is done but the page errors, notify the store and show an error message to the user
                     console.log(err);
@@ -91,6 +93,9 @@
     .v-btn {
         text-transform: capitalize;
         font-weight: 400;
+        font-family: var(--titleFont);
+        letter-spacing: 0px;
+        font-size: 1rem;
     }
     
     .v-card__title {

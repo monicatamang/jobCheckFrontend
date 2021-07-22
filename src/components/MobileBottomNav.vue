@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation :color="navColor" fixed>
+    <v-bottom-navigation :color="navColor" :value="value" fixed>
         <v-btn>
             <span>Applications</span>
             <v-icon>mdi-file</v-icon>
@@ -25,7 +25,8 @@
 
         data() {
             return {
-                navColor: "#7391C8"
+                navColor: "#7391C8",
+                value: 0
             }
         },
     }
