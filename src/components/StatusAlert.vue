@@ -17,7 +17,7 @@
         position: fixed;
         top: 0;
         display: none;
-        z-index: 5;
+        z-index: 10;
     }
 
     .showAlert {

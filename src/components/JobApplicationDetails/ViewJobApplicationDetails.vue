@@ -67,11 +67,11 @@
                 </div>
                 <div>
                     <h4 class="heading">Resume</h4>
-                    <v-btn outlined :color="primaryColor">Upload</v-btn>
+                    <upload-resume :jobAppId="detail.jobAppId"></upload-resume>
                 </div>
                 <div>
                     <h4 class="heading">Cover Letter</h4>
-                    <v-btn outlined :color="primaryColor">Upload</v-btn>
+                    <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
                 </div>
                 <div>
                     <h4 class="heading">Notes</h4>
@@ -84,15 +84,19 @@
 </template>
 
 <script>
-    import EditJobApplication from "./EditJobApplication.vue";
-    import DeleteJobApplication from "./DeleteJobApplication.vue";
+    import EditJobApplication from "../JobApplications/EditJobApplication.vue";
+    import DeleteJobApplication from "../JobApplications/DeleteJobApplication.vue";
+    import UploadResume from "../JobApplicationDetails/Resumes/UploadResume.vue";
+    import UploadCoverLetter from "../JobApplicationDetails/CoverLetters/UploadCoverLetter.vue";
 
     export default {
         name: "view-job-application-details",
 
         components: {
             EditJobApplication,
-            DeleteJobApplication
+            DeleteJobApplication,
+            UploadResume,
+            UploadCoverLetter
         },
 
         props: {

@@ -18,7 +18,7 @@
                     <v-col cols="3">
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn dark text :color="primaryColor" v-bind="attrs" v-on="on">
+                                <v-btn dark text color="black" v-bind="attrs" v-on="on">
                                     <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>

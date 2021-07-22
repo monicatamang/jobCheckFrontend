@@ -8,7 +8,23 @@ export default new Vuex.Store({
   state: {
     allJobApps: [],
 
+    searchJobAppStatus: "",
+
     jobAppStatus: {
+      show: false,
+      message: "",
+      icon: "",
+      color: ""
+    },
+
+    resumeStatus: {
+      show: false,
+      message: "",
+      icon: "",
+      color: ""
+    },
+
+    coverLetterStatus: {
       show: false,
       message: "",
       icon: "",
@@ -20,9 +36,7 @@ export default new Vuex.Store({
       message: "",
       icon: "mdi-information",
       color: "#52688F"
-    },
-
-    searchJobAppStatus: ""
+    }
   },
 
   mutations: {
@@ -65,7 +79,23 @@ export default new Vuex.Store({
     // Updating the status when the user is searching for specific job applications
     updateSearchJobAppStatus(state, data) {
       state.searchJobAppStatus = data;
-    }
+    },
+
+    // Updating the status when the user uploads, downloads, or deletes their resume
+    updateResumeStatus(state, data) {
+      state.resumeStatus.show = data.show;
+      state.resumeStatus.message = data.message;
+      state.resumeStatus.icon = data.icon;
+      state.resumeStatus.color = data.color;
+    },
+
+    // Updating the status when the user uploads, downloads, or deletes their cover letter
+    updateCoverLetterStatus(state, data) {
+      state.coverLetterStatus.show = data.show;
+      state.coverLetterStatus.message = data.message;
+      state.coverLetterStatus.icon = data.icon;
+      state.coverLetterStatus.color = data.color;
+    },
   },
 
   actions: {
