@@ -54,25 +54,8 @@ export default new Vuex.Store({
       state.allJobApps = data;
     },
 
-    // Updating the status when the user gets, creates, edits or deletes a new job application
-    updateJobAppStatus(state, data) {
-      state.jobAppStatus.show = data.show;
-      state.jobAppStatus.message = data.message;
-      state.jobAppStatus.icon = data.icon;
-      state.jobAppStatus.color = data.color;
-    },
-
-    // Updating the status when the user gets, creates, edits or deletes a new interview
-    updateInterviewStatus(state, data) {
-      state.interviewStatus.show = data.show;
-      state.interviewStatus.message = data.message;
-      state.interviewStatus.icon = data.icon;
-      state.interviewStatus.color = data.color;
-    },
-
-    // Adding a new interview to the page
-    addNewInterview(state, data) {
-      state.allInterviews.unshift(data);
+    updateAllInterviews(state, data) {
+      state.allInterviews = data;
     },
 
     // Adding a new job application to the page
@@ -90,17 +73,30 @@ export default new Vuex.Store({
       state.allJobApps.splice(data.index, 0, data.jobApp)
     },
 
-    // Updating the status when the user logs out
-    updateLogoutStatus(state, data) {
-      state.logoutStatus.show = data.show;
-      state.logoutStatus.message = data.message;
-      state.logoutStatus.icon = data.icon;
-      state.logoutStatus.color = data.color;
+    // Adding a new interview to the page
+    addNewInterview(state, data) {
+      state.allInterviews.unshift(data);
     },
 
     // Updating the status when the user is searching for specific job applications
     updateSearchJobAppStatus(state, data) {
       state.searchJobAppStatus = data;
+    },
+
+    // Updating the status when the user gets, creates, edits or deletes a new job application
+    updateJobAppStatus(state, data) {
+      state.jobAppStatus.show = data.show;
+      state.jobAppStatus.message = data.message;
+      state.jobAppStatus.icon = data.icon;
+      state.jobAppStatus.color = data.color;
+    },
+
+    // Updating the status when the user gets, creates, edits or deletes a new interview
+    updateInterviewStatus(state, data) {
+      state.interviewStatus.show = data.show;
+      state.interviewStatus.message = data.message;
+      state.interviewStatus.icon = data.icon;
+      state.interviewStatus.color = data.color;
     },
 
     // Updating the status when the user uploads, downloads, or deletes their resume
@@ -117,7 +113,15 @@ export default new Vuex.Store({
       state.coverLetterStatus.message = data.message;
       state.coverLetterStatus.icon = data.icon;
       state.coverLetterStatus.color = data.color;
-    }
+    },
+
+    // Updating the status when the user logs out
+    updateLogoutStatus(state, data) {
+      state.logoutStatus.show = data.show;
+      state.logoutStatus.message = data.message;
+      state.logoutStatus.icon = data.icon;
+      state.logoutStatus.color = data.color;
+    },
   },
 
   actions: {
@@ -148,6 +152,36 @@ export default new Vuex.Store({
         }
         // Updating the error message
         this.$store.commit('updateJobAppStatus', errorStatus);
+      });
+    },
+
+    // Creating a GET request to get all the user's interviews
+    getInterviews(context, data) {
+      // Configuring the request with the url, type and data
+      axios.request({
+      url: `${process.env.VUE_APP_API_URL}/interviews`,
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      params: {
+          userId: data.userId
+      }
+      }).then((res) => {
+          // If the network is done and there are no errors, store the user's interviews
+          console.log(res);
+          context.commit('updateAllJobApps', res.data);
+      }).catch((err) => {
+          // If the network is done but the page errors, show a error message to the user
+          console.log(err);
+          let errorStatus = {
+          show: true,
+          message: "Failed to get interviews. Please refresh the page and try again.",
+          icon: "mdi-alert-circle",
+          color: "#B34C59"
+          }
+          // Updating the error message
+          this.$store.commit('updateInterviewStatus', errorStatus);
       });
     }
   },

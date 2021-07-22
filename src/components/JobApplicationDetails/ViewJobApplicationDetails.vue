@@ -50,7 +50,7 @@
             <v-tabs centered background-color="transparent" :color="primaryColor" class="mt-3">
                 <v-tab>Details</v-tab>
                 <v-tab>Documents</v-tab>
-                <v-tab v-if="interviewId !== undefined">Interviews</v-tab>
+                <v-tab>Interviews</v-tab>
                 <v-tab-item>
                     <div id="otherDetails" class="px-8 pt-5">
                         <div>
@@ -85,6 +85,9 @@
                         <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
                     </div>
                 </v-tab-item>
+                <v-tab-item>
+                    <add-interview :jobAppId="detail.jobAppId"></add-interview>
+                </v-tab-item>
             </v-tabs>
         </div>
     </article>
@@ -95,6 +98,7 @@
     import DeleteJobApplication from "../JobApplications/DeleteJobApplication.vue";
     import UploadResume from "../JobApplicationDetails/Resumes/UploadResume.vue";
     import UploadCoverLetter from "../JobApplicationDetails/CoverLetters/UploadCoverLetter.vue";
+    import AddInterview from "../Interviews/AddInterview.vue";
 
     export default {
         name: "view-job-application-details",
@@ -103,7 +107,8 @@
             EditJobApplication,
             DeleteJobApplication,
             UploadResume,
-            UploadCoverLetter
+            UploadCoverLetter,
+            AddInterview
         },
 
         props: {
@@ -113,8 +118,7 @@
         data() {
             return {
                 primaryColor: "#52688F",
-                secondaryColor: "#E3E7F1",
-                interviewId: undefined
+                secondaryColor: "#E3E7F1"
             }
         },
 

@@ -4,7 +4,7 @@
         <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
         <view-job-application-details :details="jobAppDetails"></view-job-application-details>
-        <add-interview :jobAppId="jobAppDetails[0].jobAppId"></add-interview>
+        <!-- <add-interview :jobAppId="jobAppDetails[0].jobAppId"></add-interview> -->
     </section>
 </template>
 
@@ -14,7 +14,7 @@
     import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
     import ViewJobApplicationDetails from "../components/JobApplicationDetails/ViewJobApplicationDetails.vue";
-    import AddInterview from "../components/Interviews/AddInterview.vue";
+    // import AddInterview from "../components/Interviews/AddInterview.vue";
 
     export default {
         name: "Job-Application-Details",
@@ -23,7 +23,7 @@
             StatusAlert,
             MobileHeader,
             ViewJobApplicationDetails,
-            AddInterview
+            // AddInterview
         },
 
         data() {

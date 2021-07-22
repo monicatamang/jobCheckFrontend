@@ -1,30 +1,29 @@
 <template>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed block dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Interview</v-btn>
+            <v-btn text v-bind="attrs" v-on="on" id="editButton">Edit</v-btn>
         </template>
         <v-card>
-            <v-card-title>Create Interview</v-card-title>
-            <v-card-subtitle class="mb-n5 mt-3">* Indicates required field</v-card-subtitle>
+            <v-card-title>Edit Interview</v-card-title>
             <v-card-text>
                 <v-container>
                     <v-row>
                         <v-col cols="12">
                             <v-menu ref="menu" v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="addInterviewData.interviewDate" :color="primaryColor" label="Date*" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle" required></v-text-field>
+                                    <v-text-field v-model="addInterviewData.interviewDate" :color="primaryColor" label="Date*" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
                                 </template>
                                 <v-date-picker v-model="addInterviewData.interviewDate" :color="primaryColor" no-title scrollable @input="dateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="addInterviewData.interviewTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="addInterviewData.interviewTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="addInterviewData.interviewTimePeriod" label="Period*" :items="timePeriod" :color="primaryColor" required></v-select>
+                            <v-select v-model="addInterviewData.interviewTimePeriod" label="Period" :items="timePeriod" :color="primaryColor"></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="addInterviewData.interviewTimeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="addInterviewData.interviewTimeZone" label="Time Zone" hint="MST, EST, PST, etc." :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="addInterviewData.interviewType" label="Type of Interview" hint="In-Person, Phone, Video Conference, etc." :color="primaryColor"></v-text-field>
@@ -41,7 +40,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn class="formButtons" large color="grey" text @click="dialog = false">Cancel</v-btn>
-                <v-btn class="formButtons" large :color="primaryColor" text @click="createInterview(); dialog = false">Add</v-btn>
+                <v-btn class="formButtons" large :color="primaryColor" text @click="editedInterview(); dialog = false">Save</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -52,10 +51,10 @@
     import cookies from "vue-cookies";
 
     export default {
-        name: "add-interview",
+        name: "edit-job-application",
 
         props: {
-            jobAppId: Number
+            interviewId: Number
         },
 
         data() {
@@ -89,18 +88,18 @@
         },
 
         methods: {
-            // Creating a POST request to create a new interview
-            createInterview() {
+            // Creating a PATCH request to update a user's interview
+            editInterview() {
                 // Configuring the request with the url, type and data
                 axios.request({
                 url: `${process.env.VUE_APP_API_URL}/interviews`,
-                method: "POST",
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 data: {
                     loginToken: cookies.get("loginToken"),
-                    jobAppId: this.jobAppId,
+                    interviewId: this.interviewId,
                     interviewDate: this.addInterviewData.interviewDate,
                     interviewTime: this.addInterviewData.interviewTime,
                     interviewTimePeriod: this.addInterviewData.interviewTimePeriod,
@@ -109,27 +108,50 @@
                     notes: this.addInterviewData.notes
                 }
                 }).then((res) => {
-                    // If the network is done and there are no errors, add the new interview to the store
+                    // If the network is done and there are no errors, delete the old interview and insert the updated interview in the store
                     console.log(res);
-                    this.$store.commit('addNewInterview', res.data);
-                    // Notifying the store to show a success message on the Job Application Details page
-                    this.successStatus.message = "You have successfully added an interview";
+                    for(let i = 0; i < this.currentInterview.length; i++) {
+                        if(this.currentInterview[i].interviewId === this.interviewId) {
+                            let editedInterview = {
+                                index: i,
+                                interview: res.data
+                            }
+                            this.$store.commit('deleteInterview', editedInterview.index)
+                            this.$store.commit('editedInterview', editedInterview);
+                        }
+                    }
+                    // Notifying the store and show a success message to the user
+                    this.successStatus.message = "Your interview was successfully updated";
                     this.$store.commit('updateInterviewStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done and the page errors, notify the store to show an error message on the Job Application Details page
+                    // If the network is done but the page errors, notify the store and show an error message to the user
                     console.log(err);
-                    this.errorStatus.message = "Failed to add interview. Please refresh the page and try again.";
+                    this.errorStatus.message = "Failed to update interview. Please refresh the page and try again.";
                     this.$store.commit('updateInterviewStatus', this.errorStatus);
                 });
+            }
+        },
+
+        computed: {
+            // Getting all the user's interviews from the store
+            currentInterviews() {
+                return this.$store.state.allInterviews; 
             }
         }
     }
 </script>
 
 <style scoped>
-    #addButton {
+    .v-btn {
+        text-transform: capitalize;
+        font-weight: 400;
         font-family: var(--titleFont);
-        bottom: 0;
+        letter-spacing: 0px;
+        font-size: 1rem;
+    }
+
+    .formButtons {
+        font-size: 1.1rem;
     }
 
     .v-card__title {
@@ -139,10 +161,4 @@
     .v-text-field, .v-menu {
         font-family: var(--bodyFont);
     }
-
-    .formButtons {
-        text-transform: capitalize;
-        font-family: var(--titleFont);
-        font-size: 1rem;
-    }    
 </style>

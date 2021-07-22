@@ -177,7 +177,7 @@
         },
 
         computed: {
-            // Getting all the user's job application from the store
+            // Getting all the user's job applications from the store
             currentJobApps() {
                 return this.$store.state.allJobApps; 
             }
