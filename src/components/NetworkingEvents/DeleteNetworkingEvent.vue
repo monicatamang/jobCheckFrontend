@@ -90,5 +90,15 @@
 </script>
 
 <style scoped>
-
+    .v-btn {
+        text-transform: capitalize;
+        font-weight: 400;
+        font-family: var(--titleFont);
+        letter-spacing: 0px;
+        font-size: 1rem;
+    }
+    
+    .v-card__title, .v-card__subtitle {
+        font-family: var(--titleFont);
+    }
 </style>
