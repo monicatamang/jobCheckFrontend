@@ -4,7 +4,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="9" v-if="jobApp.status === 'Not Applied'">
-                        <v-chip label dark :color="secondaryColor" :text-color="primaryColor">{{ jobApp.status.toUpperCase() }}</v-chip>
+                        <v-chip label :color="secondaryColor" :text-color="primaryColor">{{ jobApp.status.toUpperCase() }}</v-chip>
                     </v-col>
                     <v-col cols="9" v-if="jobApp.status === 'Applied' && jobApp.appliedDate !== '' & jobApp.appliedDate !== null">
                         <v-chip label :color="secondaryColor" :text-color="primaryColor">{{ jobApp.status.toUpperCase() }} ON {{ jobApp.appliedDate }}</v-chip>

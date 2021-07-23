@@ -27,19 +27,22 @@
                             <v-select v-model="newNetworkingEvent.startTimePeriod" label="Start Time Period*" :items="timePeriods" :color="primaryColor" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newNetworkingEvent.endTime" label="End Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="newNetworkingEvent.endTime" label="End Time" hint="HH:MM" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newNetworkingEvent.endTimePeriod" label="End Time Period*" :items="timePeriods" :color="primaryColor" required></v-select>
+                            <v-select v-model="newNetworkingEvent.endTimePeriod" label="End Time Period" :items="timePeriods" :color="primaryColor"></v-select>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="newNetworkingEvent.timeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newNetworkingEvent.location" label="Location" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="newNetworkingEvent.eventType" label="Type of Event" hint="In-Person, Virtual, etc." :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newNetworkingEvent.status" label="Networking Event Status*" :items="statusOptions" :color="primaryColor" required></v-select>
+                            <v-text-field v-model="newNetworkingEvent.eventLocation" label="Location" :color="primaryColor"></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-select v-model="newNetworkingEvent.eventStatus" label="Networking Event Status*" :items="statusOptions" :color="primaryColor" required></v-select>
                         </v-col>
                         <v-col cols="12">
                             <v-textarea v-model="newNetworkingEvent.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
@@ -90,9 +93,9 @@
                     endTime: undefined,
                     endTimePeriod: "",
                     timeZone: "",
-                    location: "",
+                    eventLocation: "",
                     eventType: "",
-                    status: "",
+                    eventStatus: "",
                     notes: ""
                 }
             }
@@ -117,9 +120,9 @@
                     endTime: this.newNetworkingEvent.endTime,
                     endTimePeriod: this.newNetworkingEvent.endTimePeriod,
                     timeZone: this.newNetworkingEvent.timeZone,
-                    eventType: this.newNetworkingEvent.location,
-                    location: this.newNetworkingEvent.location,
-                    status: this.newNetworkingEvent.status,
+                    eventType: this.newNetworkingEvent.eventType,
+                    eventLocation: this.newNetworkingEvent.eventLocation,
+                    eventStatus: this.newNetworkingEvent.eventStatus,
                     notes: this.newNetworkingEvent.notes
                 }
                 }).then((res) => {
@@ -127,7 +130,7 @@
                     console.log(res);
                     this.$store.commit('addNewNetworkingEvent', res.data);
                     // Notifying the store to show a success message on the Networking Events page
-                    this.successStatus.message = "You have successfully added a networking events";
+                    this.successStatus.message = "You have successfully added a networking event";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done and the page errors, notify the store to show an error message on the Networking Events page

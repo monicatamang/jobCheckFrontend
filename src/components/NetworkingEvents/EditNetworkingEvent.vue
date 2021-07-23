@@ -9,39 +9,42 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="newNetworkingEvent.eventName" label="Event Name" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="addNetworkingEventData.eventName" label="Event Name" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-menu ref="menu" v-model="eventDateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="newNetworkingEvent.eventDate" :color="primaryColor" label="Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
+                                    <v-text-field v-model="addNetworkingEventData.eventDate" :color="primaryColor" label="Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
                                 </template>
-                                <v-date-picker v-model="newNetworkingEvent.eventDate" :color="primaryColor" no-title scrollable @input="eventDateMenu = false"></v-date-picker>
+                                <v-date-picker v-model="addNetworkingEventData.eventDate" :color="primaryColor" no-title scrollable @input="eventDateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newNetworkingEvent.startTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="addNetworkingEventData.startTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newNetworkingEvent.startTimePeriod" label="Start Time Period" :items="timePeriods" :color="primaryColor"></v-select>
+                            <v-select v-model="addNetworkingEventData.startTimePeriod" label="Start Time Period" :items="timePeriods" :color="primaryColor"></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newNetworkingEvent.endTime" label="End Time" hint="HH:MM" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="addNetworkingEventData.endTime" label="End Time" hint="HH:MM" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newNetworkingEvent.endTimePeriod" label="End Time Period" :items="timePeriods" :color="primaryColor"></v-select>
+                            <v-select v-model="addNetworkingEventData.endTimePeriod" label="End Time Period" :items="timePeriods" :color="primaryColor"></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newNetworkingEvent.timeZone" label="Time Zone" hint="MST, EST, PST, etc." :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="addNetworkingEventData.timeZone" label="Time Zone" hint="MST, EST, PST, etc." :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newNetworkingEvent.location" label="Location" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="addNetworkingEventData.eventType" label="Type of Event" hint="In-Person, Virtual, etc." :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newNetworkingEvent.status" label="Networking Event Status" :items="statusOptions" :color="primaryColor"></v-select>
+                            <v-text-field v-model="addNetworkingEventData.eventLocation" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea v-model="newNetworkingEvent.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
+                            <v-select v-model="addNetworkingEventData.eventStatus" label="Networking Event Status" :items="statusOptions" :color="primaryColor"></v-select>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-textarea v-model="addNetworkingEventData.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -70,12 +73,9 @@
             return {
                 dialog: false,
                 primaryColor: "#52688F",
-                secondaryColor: "#E3E7F1",
-                salaryRates: ['Hourly', 'Weekly', 'Monthly', 'Yearly'],
-                statusOptions: ['Not Applied', 'Applied', 'Closed'],
-                startDateMenu: false,
-                dueDateMenu: false,
-                appliedDateMenu: false,
+                timePeriods: ['AM', 'PM'],
+                statusOptions: ['Upcoming', 'Attended'],
+                eventDateMenu: false,
                 errorStatus: {
                     show: true,
                     message: "",
@@ -88,18 +88,17 @@
                     icon: "mdi-check-circle",
                     color: "#53AC84"
                 },
-                editJobApp: {
-                    jobPostingUrl: "",
-                    company: "",
-                    position: "",
-                    location: "",
-                    employmentType: "",
-                    salaryAmount: undefined,
-                    salaryRate: "",
-                    startDate: undefined,
-                    dueDate: undefined,
-                    status: "",
-                    appliedDate: undefined,
+                addNetworkingEventData: {
+                    eventName: "",
+                    eventDate: undefined,
+                    startTime: undefined,
+                    startTimePeriod: "",
+                    endTime: undefined,
+                    endTimePeriod: "",
+                    timeZone: "",
+                    eventLocation: "",
+                    eventType: "",
+                    eventStatus: "",
                     notes: ""
                 }
             }
@@ -118,17 +117,17 @@
                 data: {
                     loginToken: cookies.get("loginToken"),
                     networkingEventId: this.networkingEventId,
-                    eventName: this.newNetworkingEvent.eventName,
-                    eventDate: this.newNetworkingEvent.eventDate,
-                    startTime: this.newNetworkingEvent.startTime,
-                    startTimePeriod: this.newNetworkingEvent.startTimePeriod,
-                    endTime: this.newNetworkingEvent.endTime,
-                    endTimePeriod: this.newNetworkingEvent.endTimePeriod,
-                    timeZone: this.newNetworkingEvent.timeZone,
-                    eventType: this.newNetworkingEvent.location,
-                    location: this.newNetworkingEvent.location,
-                    status: this.newNetworkingEvent.status,
-                    notes: this.newNetworkingEvent.notes
+                    eventName: this.addNetworkingEventData.eventName,
+                    eventDate: this.addNetworkingEventData.eventDate,
+                    startTime: this.addNetworkingEventData.startTime,
+                    startTimePeriod: this.addNetworkingEventData.startTimePeriod,
+                    endTime: this.addNetworkingEventData.endTime,
+                    endTimePeriod: this.addNetworkingEventData.endTimePeriod,
+                    timeZone: this.addNetworkingEventData.timeZone,
+                    eventType: this.addNetworkingEventData.eventType,
+                    eventLocation: this.addNetworkingEventData.eventLocation,
+                    eventStatus: this.addNetworkingEventData.eventStatus,
+                    notes: this.addNetworkingEventData.notes
                 }
                 }).then((res) => {
                     // If the network is done and there are no errors, delete the old networking event and insert the updated networking event in the store

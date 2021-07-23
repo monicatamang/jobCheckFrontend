@@ -9,6 +9,7 @@ import Interviews from "../views/Interviews.vue";
 import InterviewDetails from "../views/InterviewDetails.vue";
 import JobReferences from "../views/JobReferences.vue";
 import NetworkingEvents from "../views/NetworkingEvents.vue";
+import NetworkingEventDetails from "../views/NetworkingEventDetails.vue";
 import UserProfile from "../views/UserProfile.vue";
 
 Vue.use(VueRouter)
@@ -58,6 +59,11 @@ const routes = [
     path: '/NetworkingEvents',
     name: 'NetworkingEvents',
     component: NetworkingEvents
+  },
+  {
+    path: '/NetworkingEvents/:networkingEventId',
+    name: 'NetworkingEventDetails',
+    component: NetworkingEventDetails
   },
   {
     path: '/Profile',

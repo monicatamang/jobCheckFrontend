@@ -5,6 +5,7 @@
         <div id="searchBarContainer">
             <h1>Networking Events</h1>
         </div>
+        <networking-event-card :networkingEvents="userNetworkingEvents"></networking-event-card>
         <add-networking-event></add-networking-event>
         <mobile-bottom-nav :value="2"></mobile-bottom-nav>
     </section>
@@ -15,6 +16,7 @@
     import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
     import AddNetworkingEvent from "../components/NetworkingEvents/AddNetworkingEvent.vue";
+    import NetworkingEventCard from "../components/NetworkingEvents/NetworkingEventCard.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
     export default {
@@ -24,6 +26,7 @@
             StatusAlert,
             MobileHeader,
             AddNetworkingEvent,
+            NetworkingEventCard,
             MobileBottomNav
         },
 

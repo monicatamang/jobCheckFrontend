@@ -70,7 +70,7 @@ export default new Vuex.Store({
 
     // Storing all the user's networking events
     updateAllNetworkingEvents(state, data) {
-      state.allNetworkingEvents = data;
+      state.allNetworkingEvents = data.reverse();
     },
 
     // Adding a new job application to the page
@@ -258,7 +258,7 @@ export default new Vuex.Store({
           color: "#B34C59"
           }
           // Updating the error message
-          this.$store.commit('updateNetworkinEventStatus', errorStatus);
+          this.$store.commit('updateNetworkingEventStatus', errorStatus);
       });
     }
   },
