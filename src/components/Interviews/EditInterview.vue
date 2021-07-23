@@ -11,7 +11,7 @@
                         <v-col cols="12">
                             <v-menu ref="menu" v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="addInterviewData.interviewDate" :color="primaryColor" label="Date*" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
+                                    <v-text-field v-model="addInterviewData.interviewDate" :color="primaryColor" label="Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
                                 </template>
                                 <v-date-picker v-model="addInterviewData.interviewDate" :color="primaryColor" no-title scrollable @input="dateMenu = false"></v-date-picker>
                             </v-menu>
@@ -20,7 +20,7 @@
                             <v-text-field v-model="addInterviewData.interviewTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="addInterviewData.interviewTimePeriod" label="Period" :items="timePeriod" :color="primaryColor"></v-select>
+                            <v-select v-model="addInterviewData.interviewTimePeriod" label="Time Period" :items="timePeriod" :color="primaryColor"></v-select>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="addInterviewData.interviewTimeZone" label="Time Zone" hint="MST, EST, PST, etc." :color="primaryColor"></v-text-field>
@@ -32,7 +32,7 @@
                             <v-text-field v-model="addInterviewData.interviewLocation" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea v-model="createInterview.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
+                            <v-textarea v-model="addInterviewData.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -40,7 +40,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn class="formButtons" large color="grey" text @click="dialog = false">Cancel</v-btn>
-                <v-btn class="formButtons" large :color="primaryColor" text @click="editedInterview(); dialog = false">Save</v-btn>
+                <v-btn class="formButtons" large :color="primaryColor" text @click="editInterview(); dialog = false">Save</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -110,14 +110,14 @@
                 }).then((res) => {
                     // If the network is done and there are no errors, delete the old interview and insert the updated interview in the store
                     console.log(res);
-                    for(let i = 0; i < this.currentInterview.length; i++) {
-                        if(this.currentInterview[i].interviewId === this.interviewId) {
+                    for(let i = 0; i < this.currentInterviews.length; i++) {
+                        if(this.currentInterviews[i].interviewId === this.interviewId) {
                             let editedInterview = {
                                 index: i,
                                 interview: res.data
                             }
-                            this.$store.commit('deleteInterview', editedInterview.index)
-                            this.$store.commit('editedInterview', editedInterview);
+                            this.$store.commit('deleteInterview', editedInterview.index);
+                            this.$store.commit('editInterview', editedInterview);
                         }
                     }
                     // Notifying the store and show a success message to the user
@@ -133,11 +133,10 @@
         },
 
         computed: {
-            // Getting all the user's interviews from the store
             currentInterviews() {
-                return this.$store.state.allInterviews; 
+                return this.$store.state.allInterviews;
             }
-        }
+        },
     }
 </script>
 

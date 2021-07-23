@@ -3,7 +3,7 @@
         <status-alert :showStatus="showResumeStatus"></status-alert>
         <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
-        <view-job-application-details :userInterviews="filteredInterviews" :details="jobAppDetails"></view-job-application-details>
+        <view-job-application-details :userInterviews="filteredInterviews" :details="jobAppDetails" @printInterview="appendInterview"></view-job-application-details>
     </section>
 </template>
 
@@ -53,7 +53,7 @@
                     userId: cookies.get("userData").userId,
                     jobAppId: this.jobAppId
                 },
-                filteredInterviews: []
+                filteredInterviews: [],
             }
         },
 
@@ -89,8 +89,40 @@
                 });
             },
 
-            getAllInterviews() {
-                this.$store.dispatch('getInterviews', this.userData);
+            // Creating a GET request to get the user's interviews from specific job applications
+            getFilteredInterviews() {
+                // Configuring the request with the url, type and data
+                axios.request({
+                url: `${process.env.VUE_APP_API_URL}/interviews`,
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                params: {
+                    userId: cookies.get("userData").userId,
+                    jobAppId: this.$route.params.jobAppId
+                }
+                }).then((res) => {
+                    // If the network is done and there are no errors, store the user's interviews
+                    console.log(res);
+                    this.filteredInterviews = res.data;
+                }).catch((err) => {
+                    // If the network is done but the page errors, show a error message to the user
+                    console.log(err);
+                    let errorStatus = {
+                    show: true,
+                    message: "Failed to get interviews. Please refresh the page and try again.",
+                    icon: "mdi-alert-circle",
+                    color: "#B34C59"
+                    }
+                    // Updating the error message
+                    this.$store.commit('updateInterviewStatus', errorStatus);
+                });
+            },
+
+            appendInterview(data) {
+                this.filteredInterviews.unshift(data);
+                this.getFilteredInterviews();
             }
         },
 
@@ -101,24 +133,15 @@
 
             showInterviewStatus() {
                 return this.$store.state.interviewStatus;
-            },
-
-            userInterviews() {
-                return this.$store.state.allInterviews; 
-            }
-        },
-
-        created() {
-            if(this.$route.params.jobAppId) {
-                this.filteredInterviews = this.userInterviews.filter((interview) => interview.jobAppId === this.$route.params.jobAppId);
-            }
-
-            if(this.userInterviews.length <= 0) {
-                this.getAllInterviews();
             }
         },
 
         mounted() {
+            // If the user's filtered interview are not shown on the page, send an API request to get the user's filtered interviews
+            if(this.filteredInterviews.length <= 0) {
+                this.getFilteredInterviews();
+            }
+
             // If the user's job application data is undefined, send a GET request to get one of the user's job applications
             if(this.$route.params.jobAppId !== undefined && this.$route.params.company === undefined && this.$route.params.jobPostingUrl === undefined && this.$route.params.jobPosition === undefined && this.$route.params.jobLocation === undefined && this.$route.params.employmentType === undefined && this.$route.params.salaryType === undefined && this.$route.params.salaryAmount === undefined && this.$route.params.jobStartDate === undefined && this.$route.params.dueDate === undefined && this.$route.params.status === undefined && this.$route.params.appliedDate === undefined && this.$route.params.notes === undefined) {
                 this.getSingleJobApp();
@@ -136,5 +159,5 @@
 </script>
 
 <style scoped>
-
+    
 </style>

@@ -83,7 +83,7 @@
                 </v-tab-item>
                 <v-tab-item>
                     <interview-card :interviews="userInterviews" :jobAppId="Number(detail.jobAppId)"></interview-card>
-                    <add-interview :jobAppId="Number(detail.jobAppId)"></add-interview>
+                    <add-interview :jobAppId="Number(detail.jobAppId)" @newInterviewCreated="passInterviewToDetailsPage"></add-interview>
                 </v-tab-item>
             </v-tabs>
         </div>
@@ -118,7 +118,8 @@
         data() {
             return {
                 primaryColor: "#52688F",
-                secondaryColor: "#E3E7F1"
+                secondaryColor: "#E3E7F1",
+                newInterview: {}
             }
         },
 
@@ -128,22 +129,10 @@
                 this.$router.push('/JobApplications');
             },
 
-            // getAllInterviews() {
-            //     this.$store.dispatch('getInterviews', this.userData);
-            // }
-        },
-
-        // computed: {
-        //     userInterviews() {
-        //         return this.$store.state.allInterviews; 
-        //     }
-        // },
-
-        // mounted() {
-        //     if(this.userInterviews.length <= 0) {
-        //         this.getAllInterviews();
-        //     }
-        // },
+            passInterviewToDetailsPage(data) {
+                this.$emit("printInterview", data);
+            }
+        }
     }
 </script>
 

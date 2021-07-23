@@ -95,7 +95,7 @@ export default new Vuex.Store({
 
     // Deleting a interview
     deleteInterview(state, data) {
-      state.allInterview.splice(data, 1);
+      state.allInterviews.splice(data, 1);
     },
 
     // Replacing the old interview with the updated interview
@@ -212,7 +212,7 @@ export default new Vuex.Store({
           "Content-Type": "application/json"
       },
       params: {
-          userId: data.userId
+          userId: data
       }
       }).then((res) => {
           // If the network is done and there are no errors, store the user's interviews

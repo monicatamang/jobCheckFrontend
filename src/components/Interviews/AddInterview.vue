@@ -112,6 +112,9 @@
                     // If the network is done and there are no errors, add the new interview to the store
                     console.log(res);
                     this.$store.commit('addNewInterview', res.data);
+
+                    this.$emit("newInterviewCreated", res.data);
+
                     // Notifying the store to show a success message on the Job Application Details page
                     this.successStatus.message = "You have successfully added an interview";
                     this.$store.commit('updateInterviewStatus', this.successStatus);

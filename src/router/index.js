@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import JobApplications from "../views/JobApplications.vue";
 import JobApplicationDetails from "../views/JobApplicationDetails.vue";
 import Interviews from "../views/Interviews.vue";
+import InterviewDetails from "../views/InterviewDetails.vue";
 import JobReferences from "../views/JobReferences.vue";
 import NetworkingEvents from "../views/NetworkingEvents.vue";
 import UserProfile from "../views/UserProfile.vue";
@@ -37,6 +38,11 @@ const routes = [
     path: '/JobApplications/:jobAppId',
     name: 'JobApplicationDetails',
     component: JobApplicationDetails
+  },
+  {
+    path: '/JobApplications/Interviews/:interviewId',
+    name: 'InterviewDetails',
+    component: InterviewDetails
   },
   {
     path: '/Interviews',

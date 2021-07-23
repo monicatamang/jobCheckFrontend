@@ -3,8 +3,8 @@
         <div v-for="interview in interviews" :key="interview.interviewId" class="interviewCard">
             <v-container>
                 <v-row>
-                    <v-col cols="9">
-                        <h4>{{ interview.date }}</h4>
+                    <v-col cols="9" class="align-self-center">
+                        <h4 class="interviewNum">Interview #{{ interviews.indexOf(interview) + 1 }}</h4>
                     </v-col>
                     <v-col cols="3">
                         <v-menu offset-y>
@@ -25,27 +25,26 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <h4 class="ml-3">{{ interview.interviewTime }}</h4>
-            <h4 class="ml-3">{{ interview.interviewTimePeriod }}</h4>
-            <h4 class="ml-3">{{ interview.interviewTimeZone }}</h4>
-            <!-- <router-link :to="{ 
-                name: 'JobApplicationDetails',
+            <h4 class="company ml-3">{{ interview.company }}</h4>
+            <h4 class="ml-3">{{ interview.jobPosition }}</h4>
+            <h4 class="ml-3">Date: {{ interview.interviewDate }}</h4>
+            <h4 class="ml-3">Time: {{ interview.interviewTime }} {{ interview.interviewTimePeriod }} ({{ interview.interviewTimeZone }})</h4>
+            <h4 class="ml-3">{{ interview.interviewLocation }}</h4>
+            <router-link :to="{ 
+                name: 'InterviewDetails',
                 params: {
-                    jobAppId: jobApp.jobAppId,
-                    company: jobApp.company,
-                    jobPostingUrl: jobApp.jobPostingUrl,
-                    jobPosition: jobApp.jobPosition,
-                    jobLocation: jobApp.jobLocation,
-                    employmentType: jobApp.employmentType,
-                    salaryType: jobApp.salaryType,
-                    salaryAmount: jobApp.salaryAmount,
-                    jobStartDate: jobApp.jobStartDate,
-                    dueDate: jobApp.dueDate,
-                    status: jobApp.status,
-                    appliedDate: jobApp.appliedDate,
-                    notes: jobApp.notes
+                    interviewId: interview.interviewId,
+                    jobAppId: interview.interviewId,
+                    company: interview.company,
+                    jobPosition: interview.jobPosition,
+                    interviewDate: interview.interviewDate,
+                    interviewTime: interview.interviewTime,
+                    interviewTimePeriod: interview.interviewTimePeriod,
+                    interviewTimeZone: interview.interviewTimeZone,
+                    interviewLocation: interview.interviewLocation,
+                    notes: interview.notes
                 } 
-            }" class="ml-3">View Details <v-icon small>mdi-arrow-right</v-icon></router-link> -->
+            }" class="ml-3">View Details <v-icon small>mdi-arrow-right</v-icon></router-link>
         </div>
     </article>
 </template>
@@ -72,22 +71,32 @@
                 primaryColor: "#52688F",
                 secondaryColor: "#E3E7F1"
             }
-        }
+        },
     }
 </script>
 
 <style scoped>
+    .interviewTime {
+        display: grid;
+        place-items: center;
+    }
+
     h4 {
         font-weight: 400;
+    }
+
+    .interviewNum {
+        color: var(--primaryColor);
+        font-weight: 700;
     }
 
     #interviewCardsContainer {
         display: grid;
         place-items: center;
         row-gap: 2vh;
-        margin: 20vh 0vw 15vh 0vw;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        width: 90%;
+        width: 100%;
+        padding: 6% 0% 10% 0%;
         background: var(--backgroundColorTwo);
     }
 
@@ -98,7 +107,7 @@
         row-gap: 10px;
         background: white;
         box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
-        padding: 5% 5% 7% 5%;
+        padding: 4% 4% 6% 4%;
         width: 90%;
     }
 

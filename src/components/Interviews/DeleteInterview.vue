@@ -45,7 +45,7 @@
 
         methods: {
             // Creating a DELETE request to delete a user's job application
-            deleteInterivew() {
+            deleteInterview() {
                 // Configuring the request with the url, type and data
                 axios.request({
                 url: `${process.env.VUE_APP_API_URL}/interviews`,
@@ -80,7 +80,7 @@
 
         computed: {
             // Getting all the user's interviews from the store
-            currentInterivews() {
+            currentInterviews() {
                 return this.$store.state.allInterviews; 
             }
         },

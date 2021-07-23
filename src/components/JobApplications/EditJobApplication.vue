@@ -121,6 +121,10 @@
                     status: "",
                     appliedDate: undefined,
                     notes: ""
+                },
+                editedJobApp: {
+                    index: undefined,
+                    jobApp: {}
                 }
             }
         },
@@ -156,12 +160,10 @@
                     console.log(res);
                     for(let i = 0; i < this.currentJobApps.length; i++) {
                         if(this.currentJobApps[i].jobAppId === this.jobAppId) {
-                            let editedJobApp = {
-                                index: i,
-                                jobApp: res.data
-                            }
-                            this.$store.commit('deleteJobApp', editedJobApp.index)
-                            this.$store.commit('editJobApp', editedJobApp);
+                            this.editedJobApp.index = i;
+                            this.editedJobApp.jobApp = res.data;
+                            this.$store.commit('deleteJobApp', this.editedJobApp.index)
+                            this.$store.commit('editJobApp', this.editedJobApp);
                         }
                     }
                     // Notifying the store and show a success message to the user

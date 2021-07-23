@@ -25,10 +25,7 @@ export default {
       this.$router.push("/JobApplications");
     }
 
-    // Getting all the user's job applications from the store
-    // if(this.userData !== '' && this.userData !== null) {
-    //   this.$store.dispatch('getJobApps', this.userData.userId);
-    // }
+    this.$store.dispatch("getInterviews", cookies.get("userData").userId);
   }
 };
 </script>

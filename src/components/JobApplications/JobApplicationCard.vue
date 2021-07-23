@@ -115,7 +115,7 @@
         row-gap: 10px;
         background: white;
         box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
-        padding: 5% 5% 7% 5%;
+        padding: 4% 4% 6% 4%;
         width: 90%;
     }
 
