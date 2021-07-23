@@ -14,6 +14,8 @@ export default new Vuex.Store({
 
     searchJobAppStatus: "",
 
+    searchNetworkingEventStatus: "",
+
     jobAppStatus: {
       show: false,
       message: "",
@@ -120,6 +122,11 @@ export default new Vuex.Store({
     // Updating the status when the user is searching for specific job applications
     updateSearchJobAppStatus(state, data) {
       state.searchJobAppStatus = data;
+    },
+
+    // Updating the status when the user is searching for specific networking events
+    updateSearchNetworkingEventStatus(state, data) {
+      state.searchNetworkingEventStatus = data;
     },
 
     // Updating the status when the user gets, creates, edits or deletes a new job application
@@ -277,6 +284,16 @@ export default new Vuex.Store({
     // Filtering all job applications that are closed
     closedJobApps(state) {
       return state.allJobApps.filter((jobApp) => jobApp.status === 'Closed');
+    },
+
+    // Filtering upcoming networking events from all networking events
+    upcomingNetworkingEvents(state) {
+      return state.allNetworkingEvents.filter((networkingEvent) => networkingEvent.eventStatus === 'Upcoming');
+    },
+
+    // Filtering attended networking events from all networking events
+    attendedNetworkingEvents(state) {
+      return state.allNetworkingEvents.filter((networkingEvent) => networkingEvent.eventStatus === 'Attended');
     }
   }
 })

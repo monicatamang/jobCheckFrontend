@@ -4,7 +4,14 @@
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Networking Events</h1>
+            <search-networking-event></search-networking-event>
         </div>
+        <v-chip-group mandatory active-class="black--text">
+            <v-chip outlined @click="all = true; upcoming = false; attended = false">All</v-chip>
+            <v-chip outlined @click="upcoming = true; all = false; attended = false">Upcoming</v-chip>
+            <v-chip outlined @click="attended = true; all = false; upcoming = false">Attended</v-chip>
+        </v-chip-group>
+        <h4>{{ showSearchNetworkingEventStatus }}</h4>
         <networking-event-card :networkingEvents="userNetworkingEvents"></networking-event-card>
         <add-networking-event></add-networking-event>
         <mobile-bottom-nav :value="2"></mobile-bottom-nav>
@@ -16,6 +23,7 @@
     import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
     import AddNetworkingEvent from "../components/NetworkingEvents/AddNetworkingEvent.vue";
+    import SearchNetworkingEvent from "../components/NetworkingEvents/SearchNetworkingEvent.vue";
     import NetworkingEventCard from "../components/NetworkingEvents/NetworkingEventCard.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
@@ -26,6 +34,7 @@
             StatusAlert,
             MobileHeader,
             AddNetworkingEvent,
+            SearchNetworkingEvent,
             NetworkingEventCard,
             MobileBottomNav
         },
@@ -33,6 +42,9 @@
         data() {
             return {
                 loginToken: cookies.get("loginToken"),
+                all: false,
+                upcoming: false,
+                attended: false,
                 clearNetworkingEventStatus: {
                     show: false,
                     message: "",
@@ -43,12 +55,29 @@
         },
 
         computed: {
+            // Getting the API request status from the store when a user gets, creates, edits or deletes a networking event
             showNetworkingEventStatus() {
                 return this.$store.state.networkingEventStatus; 
             },
 
             userNetworkingEvents() {
+                // Getting the user's 'Upcoming' networking events from the store
+                if(this.upcoming) {
+                    return this.$store.getters.upcomingNetworkingEvents;
+                }
+
+                // Getting the user's 'Attended' networking events from the store
+                if(this.attended) {
+                    return this.$store.getters.attendedNetworkingEvents;
+                }
+
+                // Getting all the user's networking events from the store
                 return this.$store.state.allNetworkingEvents;
+            },
+
+            // Getting the API request status from the store when a user searches for a networking event
+            showSearchNetworkingEventStatus() {
+                return this.$store.state.searchNetworkingEventStatus;
             }
         },
 
@@ -61,6 +90,7 @@
             // Clearing any messages printed to the user
             this.$store.commit('updateNetworkingEventStatus', this.clearNetworkingEventStatus);
 
+            // If the networking events are not shown on the page, get all the user's networking events from the store
             if(this.userNetworkingEvents.length <= 0) {
                 this.$store.dispatch('getNetworkingEvents', cookies.get("userData").userId);
             }
@@ -99,5 +129,19 @@
 
     section {
         margin-top: 7vh;
+    }
+
+    h4, .v-chip-group {
+        position: relative;
+    }
+
+    .v-chip-group {
+        top: 19vh;
+    }
+
+    h4 {
+        top: 22vh;
+        font-family: var(--titleFont);
+        font-weight: 400;
     }
 </style>

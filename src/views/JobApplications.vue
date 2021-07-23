@@ -59,7 +59,7 @@
         },
 
         computed: {
-            // Getting the API request status from the store when a user creates a new job application
+            // Getting the API request status from the store when a user gets, creates, edits or deletes a new job application
             showJobAppStatus() {
                 return this.$store.state.jobAppStatus; 
             },
@@ -85,6 +85,7 @@
                 return this.$store.state.allJobApps;
             },
 
+             // Getting the API request status from the store when a user searches for a job application
             showSearchJobAppStatus() {
                 return this.$store.state.searchJobAppStatus;
             }
