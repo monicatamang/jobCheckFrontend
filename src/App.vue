@@ -25,7 +25,9 @@ export default {
     //   this.$router.push("/JobApplications");
     // }
 
-    this.$store.dispatch("getInterviews", cookies.get("userData").userId);
+    if(this.userData !== null && this.userData !== '') {
+      this.$store.dispatch("getInterviews", cookies.get("userData").userId);
+    }
   }
 };
 </script>

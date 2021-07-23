@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import cookies from 'vue-cookies';
 
 Vue.use(Vuex)
 
@@ -11,6 +12,10 @@ export default new Vuex.Store({
     allInterviews: [],
 
     allNetworkingEvents: [],
+
+    allConnections: [],
+
+    filteredConnections: [],
 
     searchJobAppStatus: "",
 
@@ -75,6 +80,16 @@ export default new Vuex.Store({
       state.allNetworkingEvents = data.reverse();
     },
 
+    // Storing all the user's connections
+    updateAllConnections(state, data) {
+      state.allConnections = data.reverse();
+    },
+
+    // Storing all the user's connections
+    updateFilteredConnections(state, data) {
+      state.filteredConnections = data.reverse();
+    },
+
     // Adding a new job application to the page
     addNewJobApp(state, data) {
       state.allJobApps.unshift(data);
@@ -117,6 +132,16 @@ export default new Vuex.Store({
 
     editNetworkingEvent(state, data) {
       state.allNetworkingEvents.splice(data.index, 0, data.networkingEvent);
+    },
+
+    // Adding a new connection to the 'allConnections' array
+    addNewConnectionToAllConnections(state, data) {
+      state.allConnections.unshift(data);
+    },
+
+    // Adding a new connection to the 'filteredConnections' array
+    addNewConnectionToFilteredConnections(state, data) {
+      state.filteredConnections.unshift(data);
     },
 
     // Updating the status when the user is searching for specific job applications
@@ -261,6 +286,67 @@ export default new Vuex.Store({
           let errorStatus = {
           show: true,
           message: "Failed to get networking events. Please refresh the page and try again.",
+          icon: "mdi-alert-circle",
+          color: "#B34C59"
+          }
+          // Updating the error message
+          this.$store.commit('updateNetworkingEventStatus', errorStatus);
+      });
+    },
+
+    // Creating a GET request to get all the user's connections
+    getConnections(context, data) {
+      // Configuring the request with the url, type and data
+      axios.request({
+      url: `${process.env.VUE_APP_API_URL}/networking-connections`,
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      params: {
+          userId: data
+      }
+      }).then((res) => {
+          // If the network is done and there are no errors, store the user's networking events
+          console.log(res);
+          context.commit('updateAllConnections', res.data);
+      }).catch((err) => {
+          // If the network is done but the page errors, show a error message to the user
+          console.log(err);
+          let errorStatus = {
+          show: true,
+          message: "Failed to get connections. Please refresh the page and try again.",
+          icon: "mdi-alert-circle",
+          color: "#B34C59"
+          }
+          // Updating the error message
+          this.$store.commit('updateNetworkingEventStatus', errorStatus);
+      });
+    },
+
+    // Creating a GET request to get the user's connections based on the networking event
+    getFilteredConnections(context, data) {
+      // Configuring the request with the url, type and data
+      axios.request({
+      url: `${process.env.VUE_APP_API_URL}/networking-connections`,
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      params: {
+          userId: cookies.get("userData").userId,
+          networkingEventId: data
+      }
+      }).then((res) => {
+          // If the network is done and there are no errors, store the user's networking events
+          console.log(res);
+          context.commit('updateFilteredConnections', res.data);
+      }).catch((err) => {
+          // If the network is done but the page errors, show an error message to the user
+          console.log(err);
+          let errorStatus = {
+          show: true,
+          message: "Failed to get connections. Please refresh the page and try again.",
           icon: "mdi-alert-circle",
           color: "#B34C59"
           }

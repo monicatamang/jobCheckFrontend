@@ -53,7 +53,7 @@
                     </div>
                 </v-tab-item>
                 <v-tab-item>
-                    
+                    <add-connection :networkingEventId="detail.networkingEventId"></add-connection>
                 </v-tab-item>
             </v-tabs>
         </div>
@@ -63,13 +63,15 @@
 <script>
     import EditNetworkingEvent from "../NetworkingEvents/EditNetworkingEvent.vue";
     import DeleteNetworkingEvent from "../NetworkingEvents/DeleteNetworkingEvent.vue";
+    import AddConnection from "../NetworkingEventDetails/Connections/AddConnection.vue";
 
     export default {
         name: "view-networking-event-details",
 
         components: {
             EditNetworkingEvent,
-            DeleteNetworkingEvent
+            DeleteNetworkingEvent,
+            AddConnection
         },
 
         props: {
