@@ -2,7 +2,7 @@
     <section>
         <status-alert :showStatus="showNetworkingEventStatus"></status-alert>
         <mobile-header></mobile-header>
-        <view-networking-event-details :details="networkingEventDetails" :connections="userConnections" @notifyNetworkingEventDetailsPage="appendConnectionToPage"></view-networking-event-details>
+        <view-networking-event-details :details="networkingEventDetails" :connections="userConnections" @notifyNetworkingEventDetailsPage="appendConnectionToPage" @notifyParentUpdatedDetails="replaceWithUpdatedDetails"></view-networking-event-details>
     </section>
 </template>
 
@@ -89,6 +89,13 @@
             updateConnectionOnPage(data) {
                 this.userConnections.splice(data.index, 1);
                 this.userConnections.splice(data.index, 0, data.connection);
+            },
+
+            replaceWithUpdatedDetails(data) {
+                // If the networking event has been updated, get the updated networking event from the API
+                if(data) {
+                    this.getSingleNetworkingEvent();
+                }
             }
         },
 
@@ -99,6 +106,10 @@
 
             userConnections() {
                 return this.$store.state.allConnections;
+            },
+
+            allCurrentNetworkingEvents() {
+                return this.$store.state.allNetworkingEvents;
             }
         },
 
@@ -123,5 +134,5 @@
 </script>
 
 <style scoped>
-
+    
 </style>

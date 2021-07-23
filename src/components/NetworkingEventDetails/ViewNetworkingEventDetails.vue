@@ -15,7 +15,7 @@
                             </template>
                             <v-list>
                                 <v-list-item>
-                                    <edit-networking-event :networkingEventId="Number(detail.networkingEventId)"></edit-networking-event>
+                                    <edit-networking-event :networkingEventId="Number(detail.networkingEventId)" @networkingEventDetailsUpdated="handleUpdatedNetworkEventDetails"></edit-networking-event>
                                 </v-list-item>
                                 <v-list-item>
                                     <delete-networking-event :networkingEventId="Number(detail.networkingEventId)"></delete-networking-event>
@@ -53,7 +53,45 @@
                     </div>
                 </v-tab-item>
                 <v-tab-item>
-                    <connection-card :connections="connections"></connection-card>
+                    <article class="connectionsContainer">
+                        <div v-for="connection in connections" :key="connection.connectionId">
+                            <div v-if="detail.networkingEventId === connection.networkingEventId" class="connectionCard">
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="10" class="align-self-center">
+                                            <h4 id="name">{{ connection.name }}</h4>
+                                        </v-col>
+                                        <v-col cols="2">
+                                            <v-menu offset-y>
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-btn dark text color="black" v-bind="attrs" v-on="on">
+                                                        <v-icon class="ml-n6">mdi-dots-horizontal</v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <v-list>
+                                                    <v-list-item>
+                                                        <edit-connection :connectionId="connection.connectionId"></edit-connection>
+                                                    </v-list-item>
+                                                    <v-list-item>
+                                                        <delete-connection :connectionId="connection.connectionId"></delete-connection>
+                                                    </v-list-item>
+                                                </v-list>
+                                            </v-menu>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                                <h4 v-if="connection.company !== '' && connection.company !== null">{{ connection.company }}</h4>
+                                <h4 v-if="connection.role !== '' && connection.role !== null">{{ connection.role }}</h4>
+                                <a :href="`mailto:${connection.email}`" v-if="connection.email !== '' && connection.email !== null">{{ connection.email }}</a>
+                                <h4 v-if="connection.phoneNumber !== '' && connection.phoneNumber !== null">{{ connection.phoneNumber }}</h4>
+                                <a v-if="connection.linkedIn !== '' && connection.linkedIn !== null" :href="connection.LinkedIn">{{ connection.linkedIn }}</a>
+                                <a :href="connection.website" v-if="connection.website !== '' || connection.website !== null">{{ connection.website }}</a>
+                                <h4 v-if="connection.other !== '' && connection.other !== null">{{ connection.other }}</h4>
+                                <h4 v-if="connection.notes !== '' && connection.notes !== null" class="heading mt-5">Notes:</h4>
+                                <h4 v-if="connection.notes !== '' && connection.notes !== null">{{ connection.notes }}</h4>
+                            </div>
+                        </div>
+                    </article>
                     <add-connection :networkingEventId="detail.networkingEventId" @connectionAdded="handleConnectionAdded"></add-connection>
                 </v-tab-item>
             </v-tabs>
@@ -65,7 +103,6 @@
     import EditNetworkingEvent from "../NetworkingEvents/EditNetworkingEvent.vue";
     import DeleteNetworkingEvent from "../NetworkingEvents/DeleteNetworkingEvent.vue";
     import AddConnection from "../NetworkingEventDetails/Connections/AddConnection.vue";
-    import ConnectionCard from "../NetworkingEventDetails/Connections/ConnectionCard.vue";
 
     export default {
         name: "view-networking-event-details",
@@ -73,8 +110,7 @@
         components: {
             EditNetworkingEvent,
             DeleteNetworkingEvent,
-            AddConnection,
-            ConnectionCard
+            AddConnection
         },
 
         props: {
@@ -96,6 +132,10 @@
 
             handleConnectionAdded(data) {
                 this.$emit('notifyNetworkingEventDetailsPage', data);
+            },
+
+            handleUpdatedNetworkEventDetails(data) {
+                this.$emit('notifyParentUpdatedDetails', data);
             }
         }
     }
@@ -153,5 +193,39 @@
     h3 {
         font-weight: 400;
         font-size: 1.1rem;
+    }
+
+    .connectionsContainer {
+        display: grid;
+        place-items: center;
+        padding: 3vh 0vw 2vh 0vw;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        width: 100%;
+        background: var(--backgroundColorTwo);
+    }
+
+    .connectionCard {
+        display: grid;
+        justify-items: start;
+        align-items: center;
+        row-gap: 5px;
+        background: white;
+        box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
+        padding: 2% 3% 5% 3%;
+        width: 90%;
+    }
+
+    .connectionCard > h4, .connectionCard a {
+        margin-left: 12px;
+    }
+
+    .v-application a {
+        text-decoration: none;
+        color: black;
+    }
+
+    #name {
+        color: var(--primaryColor);
+        font-weight: 700;
     }
 </style>

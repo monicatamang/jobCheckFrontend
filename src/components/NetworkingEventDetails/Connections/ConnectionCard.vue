@@ -1,39 +1,41 @@
 <template>
     <div class="connectionsContainer">
         <div v-for="connection in connections" :key="connection.connectionId" class="connectionCard">
-            <v-container>
-            <v-row>
-                <v-col cols="10" class="align-self-center">
-                    <h4 id="name">{{ connection.name }}</h4>
-                </v-col>
-                <v-col cols="2">
-                    <v-menu offset-y>
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                <v-icon class="ml-n6">mdi-dots-horizontal</v-icon>
-                            </v-btn>
-                        </template>
-                        <v-list>
-                            <v-list-item>
-                                <edit-connection :connectionId="connection.connectionId"></edit-connection>
-                            </v-list-item>
-                            <v-list-item>
-                                <delete-connection :connectionId="connection.connectionId"></delete-connection>
-                            </v-list-item>
-                        </v-list>
-                    </v-menu>
-                </v-col>
-            </v-row>
-            </v-container>
-            <h4 v-if="connection.company !== '' && connection.company !== null">{{ connection.company }}</h4>
-            <h4 v-if="connection.role !== '' && connection.role !== null">{{ connection.role }}</h4>
-            <a :href="`mailto:${connection.email}`" v-if="connection.email !== '' && connection.email !== null">{{ connection.email }}</a>
-            <h4 v-if="connection.phoneNumber !== '' && connection.phoneNumber !== null">{{ connection.phoneNumber }}</h4>
-            <a v-if="connection.linkedIn !== '' && connection.linkedIn !== null" :href="connection.LinkedIn">{{ connection.linkedIn }}</a>
-            <a :href="connection.website" v-if="connection.website !== '' || connection.website !== null">{{ connection.website }}</a>
-            <h4 v-if="connection.other !== '' && connection.other !== null">{{ connection.other }}</h4>
-            <h4 v-if="connection.notes !== '' && connection.notes !== null" class="heading mt-5">Notes:</h4>
-            <h4 v-if="connection.notes !== '' && connection.notes !== null">{{ connection.notes }}</h4>
+            <div v-if="networkingEventId === connection.networkingEventId">
+                <v-container>
+                    <v-row>
+                        <v-col cols="10" class="align-self-center">
+                            <h4 id="name">{{ connection.name }}</h4>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-menu offset-y>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn dark text color="black" v-bind="attrs" v-on="on">
+                                        <v-icon class="ml-n6">mdi-dots-horizontal</v-icon>
+                                    </v-btn>
+                                </template>
+                                <v-list>
+                                    <v-list-item>
+                                        <edit-connection :connectionId="connection.connectionId"></edit-connection>
+                                    </v-list-item>
+                                    <v-list-item>
+                                        <delete-connection :connectionId="connection.connectionId"></delete-connection>
+                                    </v-list-item>
+                                </v-list>
+                            </v-menu>
+                        </v-col>
+                    </v-row>
+                </v-container>
+                <h4 v-if="connection.company !== '' && connection.company !== null">{{ connection.company }}</h4>
+                <h4 v-if="connection.role !== '' && connection.role !== null">{{ connection.role }}</h4>
+                <a :href="`mailto:${connection.email}`" v-if="connection.email !== '' && connection.email !== null">{{ connection.email }}</a>
+                <h4 v-if="connection.phoneNumber !== '' && connection.phoneNumber !== null">{{ connection.phoneNumber }}</h4>
+                <a v-if="connection.linkedIn !== '' && connection.linkedIn !== null" :href="connection.LinkedIn">{{ connection.linkedIn }}</a>
+                <a :href="connection.website" v-if="connection.website !== '' || connection.website !== null">{{ connection.website }}</a>
+                <h4 v-if="connection.other !== '' && connection.other !== null">{{ connection.other }}</h4>
+                <h4 v-if="connection.notes !== '' && connection.notes !== null" class="heading mt-5">Notes:</h4>
+                <h4 v-if="connection.notes !== '' && connection.notes !== null">{{ connection.notes }}</h4>
+            </div>
         </div>
     </div>
 </template>
@@ -51,8 +53,9 @@
         },
 
         props: {
-            connections: Array
-        }
+            connections: Array,
+            networkingEventId: Number
+        },
     }
 </script>
 
