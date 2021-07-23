@@ -230,6 +230,36 @@ export default new Vuex.Store({
           // Updating the error message
           this.$store.commit('updateInterviewStatus', errorStatus);
       });
+    },
+
+    // Creating a GET request to get all the user's networking events
+    getNetworkingEvents(context, data) {
+      // Configuring the request with the url, type and data
+      axios.request({
+      url: `${process.env.VUE_APP_API_URL}/networking-events`,
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      params: {
+          userId: data
+      }
+      }).then((res) => {
+          // If the network is done and there are no errors, store the user's networking events
+          console.log(res);
+          context.commit('updateAllNetworkingEvents', res.data);
+      }).catch((err) => {
+          // If the network is done but the page errors, show a error message to the user
+          console.log(err);
+          let errorStatus = {
+          show: true,
+          message: "Failed to get networking events. Please refresh the page and try again.",
+          icon: "mdi-alert-circle",
+          color: "#B34C59"
+          }
+          // Updating the error message
+          this.$store.commit('updateNetworkinEventStatus', errorStatus);
+      });
     }
   },
 

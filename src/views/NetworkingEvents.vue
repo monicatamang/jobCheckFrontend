@@ -1,29 +1,51 @@
 <template>
     <section>
+        <status-alert :showStatus="showNetworkingEventStatus"></status-alert>
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Networking Events</h1>
         </div>
+        <add-networking-event></add-networking-event>
         <mobile-bottom-nav :value="2"></mobile-bottom-nav>
     </section>
 </template>
 
 <script>
     import cookies from "vue-cookies";
+    import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
+    import AddNetworkingEvent from "../components/NetworkingEvents/AddNetworkingEvent.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
     export default {
         name: "Networking-Events",
 
         components: {
+            StatusAlert,
             MobileHeader,
+            AddNetworkingEvent,
             MobileBottomNav
         },
 
         data() {
             return {
-                loginToken: cookies.get("loginToken")
+                loginToken: cookies.get("loginToken"),
+                clearNetworkingEventStatus: {
+                    show: false,
+                    message: "",
+                    icon: "",
+                    color: ""
+                }
+            }
+        },
+
+        computed: {
+            showNetworkingEventStatus() {
+                return this.$store.state.networkingEventStatus; 
+            },
+
+            userNetworkingEvents() {
+                return this.$store.state.allNetworkingEvents;
             }
         },
 
@@ -31,6 +53,13 @@
             // If the user does not have a login token, take the user back to the Home page
             if(this.loginToken === null || this.loginToken === '') {
                 this.$router.push("/");
+            }
+
+            // Clearing any messages printed to the user
+            this.$store.commit('updateNetworkingEventStatus', this.clearNetworkingEventStatus);
+
+            if(this.userNetworkingEvents.length <= 0) {
+                this.$store.dispatch('getNetworkingEvents', cookies.get("userData").userId);
             }
         },
     }

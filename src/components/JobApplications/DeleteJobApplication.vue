@@ -39,7 +39,7 @@
                     message: "",
                     icon: "mdi-check-circle",
                     color: "#53AC84"
-                },
+                }
             }
         },
 

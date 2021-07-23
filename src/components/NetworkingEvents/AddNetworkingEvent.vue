@@ -21,28 +21,28 @@
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newInterview.startTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="newNetworkingEvent.startTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-select v-model="newNetworkingEvent.startTimePeriod" label="Start Time Period*" :items="timePeriods" :color="primaryColor" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newInterview.endTime" label="End Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="newNetworkingEvent.endTime" label="End Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-select v-model="newNetworkingEvent.endTimePeriod" label="End Time Period*" :items="timePeriods" :color="primaryColor" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newInterview.timeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="newNetworkingEvent.timeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newInterview.location" label="location" hint="MST, EST, PST, etc." :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="newNetworkingEvent.location" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-select v-model="newNetworkingEvent.status" label="Networking Event Status*" :items="statusOptions" :color="primaryColor" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newInterview.notes" label="Notes" :color="primaryColor"></v-text-field>
+                            <v-textarea v-model="newNetworkingEvent.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
