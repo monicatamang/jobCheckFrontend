@@ -148,6 +148,10 @@ export default new Vuex.Store({
       state.allConnections.splice(data, 1);
     },
 
+    editConnection(state, data) {
+      state.allConnections.splice(data.index, 0, data.connection);
+    },
+
     // Updating the status when the user is searching for specific job applications
     updateSearchJobAppStatus(state, data) {
       state.searchJobAppStatus = data;
