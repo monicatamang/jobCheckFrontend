@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import cookies from 'vue-cookies';
 
 Vue.use(Vuex)
 
@@ -15,7 +14,7 @@ export default new Vuex.Store({
 
     allConnections: [],
 
-    filteredConnections: [],
+    allJobReferences: [],
 
     searchJobAppStatus: "",
 
@@ -56,6 +55,13 @@ export default new Vuex.Store({
       color: ""
     },
 
+    jobReferenceStatus: {
+      show: false,
+      message: "",
+      icon: "",
+      color: ""
+    },
+
     logoutStatus: {
       show: false,
       message: "",
@@ -85,9 +91,9 @@ export default new Vuex.Store({
       state.allConnections = data.reverse();
     },
 
-    // Storing all the user's connections
-    updateFilteredConnections(state, data) {
-      state.filteredConnections = data.reverse();
+    // Storing all the user's job references
+    updateAllJobReferences(state, data) {
+      state.allJobReferences = data;
     },
 
     // Adding a new job application to the page
@@ -95,29 +101,9 @@ export default new Vuex.Store({
       state.allJobApps.unshift(data);
     },
 
-    // Deleting a job application
-    deleteJobApp(state, data) {
-      state.allJobApps.splice(data, 1);
-    },
-
-    // Replacing the old job application with the updated job application
-    editJobApp(state, data) {
-      state.allJobApps.splice(data.index, 0, data.jobApp)
-    },
-
     // Adding a new interview to the page
     addNewInterview(state, data) {
       state.allInterviews.unshift(data);
-    },
-
-    // Deleting a interview
-    deleteInterview(state, data) {
-      state.allInterviews.splice(data, 1);
-    },
-
-    // Replacing the old interview with the updated interview
-    editInterview(state, data) {
-      state.allInterviews.splice(data.index, 0, data.interview)
     },
 
     // Adding a new networking event to the page
@@ -125,31 +111,64 @@ export default new Vuex.Store({
       state.allNetworkingEvents.unshift(data);
     },
 
+    // Adding a new connection
+    addNewConnection(state, data) {
+      state.allConnections.unshift(data);
+    },
+
+    // Adding a new job reference
+    addNewJobReference(state, data) {
+      state.allJobReferences.unshift(data);
+    },
+
+    // Deleting a job application
+    deleteJobApp(state, data) {
+      state.allJobApps.splice(data, 1);
+    },
+
+    // Deleting a interview
+    deleteInterview(state, data) {
+      state.allInterviews.splice(data, 1);
+    },
+
     // Deleting a networking event
     deleteNetworkingEvent(state, data) {
       state.allNetworkingEvents.splice(data, 1);
     },
 
-    editNetworkingEvent(state, data) {
-      state.allNetworkingEvents.splice(data.index, 0, data.networkingEvent);
-    },
-
-    // Adding a new connection to the 'allConnections' array
-    addNewConnectionToAllConnections(state, data) {
-      state.allConnections.unshift(data);
-    },
-
-    // Adding a new connection to the 'filteredConnections' array
-    addNewConnectionToFilteredConnections(state, data) {
-      state.filteredConnections.unshift(data);
-    },
-
+    // Deleting a connection
     deleteConnection(state, data) {
       state.allConnections.splice(data, 1);
     },
 
+    // Deleting a job reference
+    deleteJobReference(state, data) {
+      state.allJobReferences.splice(data, 1);
+    },
+
+    // Replacing the old job application with the updated job application
+    editJobApp(state, data) {
+      state.allJobApps.splice(data.index, 0, data.jobApp)
+    },
+
+    // Replacing the old interview with the updated interview
+    editInterview(state, data) {
+      state.allInterviews.splice(data.index, 0, data.interview)
+    },
+
+    // Editing a networking event
+    editNetworkingEvent(state, data) {
+      state.allNetworkingEvents.splice(data.index, 0, data.networkingEvent);
+    },
+
+    // Updating a connection
     editConnection(state, data) {
       state.allConnections.splice(data.index, 0, data.connection);
+    },
+
+    // Updating a job reference
+    editJobReference(state, data) {
+      state.allJobReferences.splice(data.index, 0, data.jobRef);
     },
 
     // Updating the status when the user is searching for specific job applications
@@ -194,20 +213,28 @@ export default new Vuex.Store({
       state.coverLetterStatus.color = data.color;
     },
 
-    // Updating the status when the user logs out
-    updateLogoutStatus(state, data) {
-      state.logoutStatus.show = data.show;
-      state.logoutStatus.message = data.message;
-      state.logoutStatus.icon = data.icon;
-      state.logoutStatus.color = data.color;
-    },
-
     // Updating the status when a user gets, creates, edits or deletes their networking event
     updateNetworkingEventStatus(state, data) {
       state.networkingEventStatus.show = data.show;
       state.networkingEventStatus.message = data.message;
       state.networkingEventStatus.icon = data.icon;
       state.networkingEventStatus.color = data.color;
+    },
+
+    // Updating the status when a user gets, creates, edits or deletes their job references
+    updateJobReferenceStatus(state, data) {
+      state.allJobReferences.show = data.show;
+      state.allJobReferences.message = data.message;
+      state.allJobReferences.icon = data.icon;
+      state.allJobReferences.color = data.color;
+    },
+
+    // Updating the status when the user logs out
+    updateLogoutStatus(state, data) {
+      state.logoutStatus.show = data.show;
+      state.logoutStatus.message = data.message;
+      state.logoutStatus.icon = data.icon;
+      state.logoutStatus.color = data.color;
     },
   },
 
@@ -332,34 +359,33 @@ export default new Vuex.Store({
       });
     },
 
-    // Creating a GET request to get the user's connections based on the networking event
-    getFilteredConnections(context, data) {
+    // Creating a GET request to get all the user's job references
+    getJobReferences(context, data) {
       // Configuring the request with the url, type and data
       axios.request({
-      url: `${process.env.VUE_APP_API_URL}/networking-connections`,
+      url: `${process.env.VUE_APP_API_URL}/job-references`,
       method: "GET",
       headers: {
           "Content-Type": "application/json"
       },
       params: {
-          userId: cookies.get("userData").userId,
-          networkingEventId: data
+          userId: data
       }
       }).then((res) => {
-          // If the network is done and there are no errors, store the user's networking events
+          // If the network is done and there are no errors, store the user's job references
           console.log(res);
-          context.commit('updateFilteredConnections', res.data);
+          context.commit('updateAllJobReferences', res.data);
       }).catch((err) => {
-          // If the network is done but the page errors, show an error message to the user
+          // If the network is done but the page errors, show a error message to the user
           console.log(err);
           let errorStatus = {
           show: true,
-          message: "Failed to get connections. Please refresh the page and try again.",
+          message: "Failed to get job references. Please refresh the page and try again.",
           icon: "mdi-alert-circle",
           color: "#B34C59"
           }
           // Updating the error message
-          this.$store.commit('updateNetworkingEventStatus', errorStatus);
+          this.$store.commit('updateJobReferenceStatus', errorStatus);
       });
     }
   },

@@ -126,14 +126,17 @@
         },
 
         methods: {
+            // Creating a function that takes the user to the Networking Events page
             goToNetworkingEventsPage() {
                 this.$router.push('/NetworkingEvents');
             },
 
+            // Listening to the 'AddConnection' component and notifying the Networking Event Details page that a connection has been added
             handleConnectionAdded(data) {
                 this.$emit('notifyNetworkingEventDetailsPage', data);
             },
 
+            // Listening to the 'EditNetworkingEvent' component and notifying the Networking Event Details page that a connection has been added
             handleUpdatedNetworkEventDetails(data) {
                 this.$emit('notifyParentUpdatedDetails', data);
             }

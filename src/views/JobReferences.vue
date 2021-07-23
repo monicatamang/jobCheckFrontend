@@ -4,6 +4,7 @@
         <div id="searchBarContainer">
             <h1>Job References</h1>
         </div>
+        <add-job-reference></add-job-reference>
         <mobile-bottom-nav :value="3"></mobile-bottom-nav>
     </section>
 </template>
@@ -11,6 +12,7 @@
 <script>
     import cookies from "vue-cookies";
     import MobileHeader from "../components/MobileHeader.vue";
+    import AddJobReference from "../components/JobReferences/AddJobReference.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
     export default {
@@ -18,6 +20,7 @@
 
         components: {
             MobileHeader,
+            AddJobReference,
             MobileBottomNav
         },
 

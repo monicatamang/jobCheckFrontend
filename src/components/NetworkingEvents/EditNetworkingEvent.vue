@@ -20,16 +20,24 @@
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="replaceNetworkingEvent.startTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
+                            <v-row>
+                                <v-col cols="6">
+                                    <v-text-field v-model="replaceNetworkingEvent.startTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-select v-model="replaceNetworkingEvent.startTimePeriod" label="AM/PM" :items="timePeriods" :color="primaryColor"></v-select>
+                                </v-col>
+                            </v-row>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="replaceNetworkingEvent.startTimePeriod" label="Start Time Period" :items="timePeriods" :color="primaryColor"></v-select>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="replaceNetworkingEvent.endTime" label="End Time" hint="HH:MM" :color="primaryColor"></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-select v-model="replaceNetworkingEvent.endTimePeriod" label="End Time Period" :items="timePeriods" :color="primaryColor"></v-select>
+                            <v-row>
+                                <v-col cols="6">
+                                    <v-text-field v-model="replaceNetworkingEvent.endTime" label="End Time" hint="HH:MM" :color="primaryColor"></v-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-select v-model="replaceNetworkingEvent.endTimePeriod" label="AM/PM" :items="timePeriods" :color="primaryColor"></v-select>
+                                </v-col>
+                            </v-row>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="replaceNetworkingEvent.timeZone" label="Time Zone" hint="MST, EST, PST, etc." :color="primaryColor"></v-text-field>

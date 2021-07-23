@@ -82,15 +82,12 @@
                 });
             },
 
+            // Listening to the 'ViewNetworkingEventDetails' component and appending the new connection to the page
             appendConnectionToPage(data) {
                 this.userConnections.unshift(data);
             },
 
-            updateConnectionOnPage(data) {
-                this.userConnections.splice(data.index, 1);
-                this.userConnections.splice(data.index, 0, data.connection);
-            },
-
+            // Listening to the 'ViewNetworkingEventDetails' component and updating the networking event details on the page
             replaceWithUpdatedDetails(data) {
                 // If the networking event has been updated, get the updated networking event from the API
                 if(data) {
@@ -126,10 +123,7 @@
 
             // Clearing any messages printed to the user
             this.$store.commit('updateNetworkingEventStatus', this.clearNetworkingEventStatus);
-
-            // Getting all the user's connections from the store
-            this.$store.dispatch('getConnections', cookies.get("userData").userId);
-        },
+        }
     }
 </script>
 

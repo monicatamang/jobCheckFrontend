@@ -21,16 +21,24 @@
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
+                            <v-row>
+                                <v-col cols="6">
                             <v-text-field v-model="newNetworkingEvent.startTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-select v-model="newNetworkingEvent.startTimePeriod" label="AM/PM*" :items="timePeriods" :color="primaryColor" required></v-select>
+                            </v-col>
+                            </v-row>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newNetworkingEvent.startTimePeriod" label="Start Time Period*" :items="timePeriods" :color="primaryColor" required></v-select>
-                        </v-col>
-                        <v-col cols="12">
+                            <v-row>
+                                <v-col cols="6">
                             <v-text-field v-model="newNetworkingEvent.endTime" label="End Time" hint="HH:MM" :color="primaryColor"></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-select v-model="newNetworkingEvent.endTimePeriod" label="End Time Period" :items="timePeriods" :color="primaryColor"></v-select>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-select v-model="newNetworkingEvent.endTimePeriod" label="AM/PM" :items="timePeriods" :color="primaryColor"></v-select>
+                            </v-col>
+                            </v-row>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="newNetworkingEvent.timeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
