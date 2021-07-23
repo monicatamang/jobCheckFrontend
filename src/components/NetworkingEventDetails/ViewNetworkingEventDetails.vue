@@ -53,6 +53,7 @@
                     </div>
                 </v-tab-item>
                 <v-tab-item>
+                    <connection-card :connections="connections"></connection-card>
                     <add-connection :networkingEventId="detail.networkingEventId"></add-connection>
                 </v-tab-item>
             </v-tabs>
@@ -64,6 +65,7 @@
     import EditNetworkingEvent from "../NetworkingEvents/EditNetworkingEvent.vue";
     import DeleteNetworkingEvent from "../NetworkingEvents/DeleteNetworkingEvent.vue";
     import AddConnection from "../NetworkingEventDetails/Connections/AddConnection.vue";
+    import ConnectionCard from "../NetworkingEventDetails/Connections/ConnectionCard.vue";
 
     export default {
         name: "view-networking-event-details",
@@ -71,11 +73,13 @@
         components: {
             EditNetworkingEvent,
             DeleteNetworkingEvent,
-            AddConnection
+            AddConnection,
+            ConnectionCard
         },
 
         props: {
-            details: Array
+            details: Array,
+            connections: Array
         },
 
         data() {
@@ -108,7 +112,7 @@
         display: grid;
     }
 
-    article, article > div  {
+    article, article > div {
         place-items: center;
     }
 

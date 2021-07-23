@@ -2,7 +2,7 @@
     <section>
         <status-alert :showStatus="showNetworkingEventStatus"></status-alert>
         <mobile-header></mobile-header>
-        <view-networking-event-details :details="networkingEventDetails"></view-networking-event-details>
+        <view-networking-event-details :details="networkingEventDetails" :connections="userConnections"></view-networking-event-details>
     </section>
 </template>
 
@@ -86,6 +86,10 @@
         computed: {
             showNetworkingEventStatus() {
                 return this.$store.state.networkingEventStatus; 
+            },
+
+            userConnections() {
+                return this.$store.state.allConnections;
             }
         },
 
@@ -103,7 +107,7 @@
             // Clearing any messages printed to the user
             this.$store.commit('updateNetworkingEventStatus', this.clearNetworkingEventStatus);
 
-            // Getting all the user's connection from the store
+            // Getting all the user's connections from the store
             this.$store.dispatch('getConnections', cookies.get("userData").userId);
         },
     }

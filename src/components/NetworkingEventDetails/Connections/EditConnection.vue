@@ -9,31 +9,31 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="newConnection.name" label="Name" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceConnection.name" label="Name" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newConnection.company" label="Company" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceConnection.company" label="Company" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newConnection.role" label="Role" :color="primaryColor"></v-select>
+                            <v-text-field v-model="replaceConnection.role" label="Role" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newConnection.email" label="Email" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceConnection.email" label="Email" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newConnection.phoneNumber" label="Phone Number" :color="primaryColor"></v-select>
+                            <v-text-field v-model="replaceConnection.phoneNumber" label="Phone Number" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newConnection.linkedIn" label="LinkedIn" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceConnection.linkedIn" label="LinkedIn" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newConnection.website" label="Website" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceConnection.website" label="Website" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newConnection.other" label="Other Contact Information" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceConnection.other" label="Other Contact Information" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea v-model="newConnection.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
+                            <v-textarea v-model="replaceConnection.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -55,7 +55,7 @@
         name: "edit-connection",
 
         props: {
-            networkingEventId: Number
+            connectionId: Number
         },
 
         data() {
@@ -76,7 +76,7 @@
                 },
                 replaceConnection: {
                     loginToken: cookies.get("loginToken"),
-                    networkingEventId: this.networkingEventId,
+                    connectionId: this.connectionId,
                     name: "",
                     company: "",
                     role: "",
@@ -92,7 +92,7 @@
 
         methods: {
             // Creating a PATCH request to update a user's connection
-            editNetworkingEvent() {
+            editConnection() {
                 // Configuring the request with the url, type and data
                 axios.request({
                 url: `${process.env.VUE_APP_API_URL}/networking-connections`,

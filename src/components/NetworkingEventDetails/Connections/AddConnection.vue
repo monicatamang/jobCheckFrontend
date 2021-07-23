@@ -16,13 +16,13 @@
                             <v-text-field v-model="newConnection.company" label="Company" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newConnection.role" label="Role" :color="primaryColor"></v-select>
+                            <v-text-field v-model="newConnection.role" label="Role" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="newConnection.email" label="Email" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="newConnection.phoneNumber" label="Phone Number" :color="primaryColor"></v-select>
+                            <v-text-field v-model="newConnection.phoneNumber" label="Phone Number" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="newConnection.linkedIn" label="LinkedIn" :color="primaryColor"></v-text-field>
@@ -96,7 +96,7 @@
             createNetworkingEvent() {
                 // Configuring the request with the url, type and data
                 axios.request({
-                url: `${process.env.VUE_APP_API_URL}/networking-events`,
+                url: `${process.env.VUE_APP_API_URL}/networking-connections`,
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -105,7 +105,7 @@
                 }).then((res) => {
                     // If the network is done and there are no errors, add the new connection to the store
                     console.log(res);
-                    this.$store.commit('addNewConnectionToFilteredConnections', res.data);
+                    this.$store.commit('addNewConnectionToAllConnections', res.data);
                     // Notifying the store to show a success message on the Networking Events page
                     this.successStatus.message = "You have successfully added a connection";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
