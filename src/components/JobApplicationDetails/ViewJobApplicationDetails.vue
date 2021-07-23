@@ -147,11 +147,11 @@
         width: 100%;
     }
 
-    article, article > div, #importantDetailsContainer, #editAndDeleteContainer, #otherDetails, #otherDetails div, #importantDetailsContainer div {
+    article, article > div, #importantDetailsContainer, #otherDetails, #otherDetails div, #importantDetailsContainer div {
         display: grid;
     }
 
-    article, article > div, #importantDetailsContainer, #editAndDeleteContainer  {
+    article, article > div, #importantDetailsContainer  {
         place-items: center;
     }
 
@@ -196,21 +196,6 @@
     h3 {
         font-weight: 400;
         font-size: 1.1rem;
-    }
-
-    #editAndDeleteContainer {
-        grid-template-columns: 2fr 1fr;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        background: white;
-        padding: 5%;
-    }
-
-    #editButton {
-        background: var(--primaryColor);
-        width: 100%;
-        border-radius: 3px;
     }
 
     .v-application a {

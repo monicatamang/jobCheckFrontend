@@ -1,6 +1,6 @@
 <template>
     <div id="searchBar">
-        <v-text-field placeholder="Search by Company" dense outlined single-line :color="accentColor" prepend-inner-icon="mdi-magnify" v-model="searchNetworkingEventInput" append-icon="mdi-close" @click:append="getCurrentNetworkingEvents" append-outer-icon="mdi-send" @click:append-outer="searchNetworkingEvent"></v-text-field>
+        <v-text-field placeholder="Search by Event" dense outlined single-line :color="accentColor" prepend-inner-icon="mdi-magnify" v-model="searchNetworkingEventInput" append-icon="mdi-close" @click:append="getCurrentNetworkingEvents" append-outer-icon="mdi-send" @click:append-outer="searchNetworkingEvent"></v-text-field>
     </div>
 </template>
 
