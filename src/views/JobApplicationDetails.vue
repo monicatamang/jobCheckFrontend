@@ -3,8 +3,7 @@
         <status-alert :showStatus="showResumeStatus"></status-alert>
         <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
-        <view-job-application-details :details="jobAppDetails"></view-job-application-details>
-        <!-- <add-interview :jobAppId="jobAppDetails[0].jobAppId"></add-interview> -->
+        <view-job-application-details :userInterviews="filteredInterviews" :details="jobAppDetails"></view-job-application-details>
     </section>
 </template>
 
@@ -14,7 +13,6 @@
     import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
     import ViewJobApplicationDetails from "../components/JobApplicationDetails/ViewJobApplicationDetails.vue";
-    // import AddInterview from "../components/Interviews/AddInterview.vue";
 
     export default {
         name: "Job-Application-Details",
@@ -22,8 +20,7 @@
         components: {
             StatusAlert,
             MobileHeader,
-            ViewJobApplicationDetails,
-            // AddInterview
+            ViewJobApplicationDetails
         },
 
         data() {
@@ -51,7 +48,12 @@
                     message: "",
                     icon: "",
                     color: ""
-                }
+                },
+                userData: {
+                    userId: cookies.get("userData").userId,
+                    jobAppId: this.jobAppId
+                },
+                filteredInterviews: []
             }
         },
 
@@ -85,6 +87,10 @@
                     // Updating the error message
                     this.$store.commit('updateJobAppStatus', errorStatus);
                 });
+            },
+
+            getAllInterviews() {
+                this.$store.dispatch('getInterviews', this.userData);
             }
         },
 
@@ -95,6 +101,20 @@
 
             showInterviewStatus() {
                 return this.$store.state.interviewStatus;
+            },
+
+            userInterviews() {
+                return this.$store.state.allInterviews; 
+            }
+        },
+
+        created() {
+            if(this.$route.params.jobAppId) {
+                this.filteredInterviews = this.userInterviews.filter((interview) => interview.jobAppId === this.$route.params.jobAppId);
+            }
+
+            if(this.userInterviews.length <= 0) {
+                this.getAllInterviews();
             }
         },
 

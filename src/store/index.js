@@ -10,6 +10,8 @@ export default new Vuex.Store({
 
     allInterviews: [],
 
+    allNetworkingEvents: [],
+
     searchJobAppStatus: "",
 
     jobAppStatus: {
@@ -40,6 +42,13 @@ export default new Vuex.Store({
       color: ""
     },
 
+    networkingEventStatus: {
+      show: false,
+      message: "",
+      icon: "",
+      color: ""
+    },
+
     logoutStatus: {
       show: false,
       message: "",
@@ -49,13 +58,19 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    // Storing all the user's job application in reverse chronological order
+    // Storing all the user's job applications
     updateAllJobApps(state, data) {
       state.allJobApps = data;
     },
 
+    // Storing all the user's interviews
     updateAllInterviews(state, data) {
       state.allInterviews = data;
+    },
+
+    // Storing all the user's networking events
+    updateAllNetworkingEvents(state, data) {
+      state.allNetworkingEvents = data;
     },
 
     // Adding a new job application to the page
@@ -86,6 +101,20 @@ export default new Vuex.Store({
     // Replacing the old interview with the updated interview
     editInterview(state, data) {
       state.allInterviews.splice(data.index, 0, data.interview)
+    },
+
+    // Adding a new networking event to the page
+    addNewNetworkingEvent(state, data) {
+      state.allNetworkingEvents.unshift(data);
+    },
+
+    // Deleting a networking event
+    deleteNetworkingEvent(state, data) {
+      state.allNetworkingEvents.splice(data, 1);
+    },
+
+    editNetworkingEvent(state, data) {
+      state.allNetworkingEvents.splice(data.index, 0, data.networkingEvent);
     },
 
     // Updating the status when the user is searching for specific job applications
@@ -131,6 +160,14 @@ export default new Vuex.Store({
       state.logoutStatus.message = data.message;
       state.logoutStatus.icon = data.icon;
       state.logoutStatus.color = data.color;
+    },
+
+    // Updating the status when a user gets, creates, edits or deletes their networking event
+    updateNetworkingEventStatus(state, data) {
+      state.networkingEventStatus.show = data.show;
+      state.networkingEventStatus.message = data.message;
+      state.networkingEventStatus.icon = data.icon;
+      state.networkingEventStatus.color = data.color;
     },
   },
 
@@ -180,7 +217,7 @@ export default new Vuex.Store({
       }).then((res) => {
           // If the network is done and there are no errors, store the user's interviews
           console.log(res);
-          context.commit('updateAllJobApps', res.data);
+          context.commit('updateAllInterviews', res.data);
       }).catch((err) => {
           // If the network is done but the page errors, show a error message to the user
           console.log(err);

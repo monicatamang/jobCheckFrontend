@@ -12,25 +12,25 @@
                         <v-col cols="12">
                             <v-menu ref="menu" v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="addInterviewData.interviewDate" :color="primaryColor" label="Date*" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle" required></v-text-field>
+                                    <v-text-field v-model="newInterview.interviewDate" :color="primaryColor" label="Date*" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle" required></v-text-field>
                                 </template>
-                                <v-date-picker v-model="addInterviewData.interviewDate" :color="primaryColor" no-title scrollable @input="dateMenu = false"></v-date-picker>
+                                <v-date-picker v-model="newInterview.interviewDate" :color="primaryColor" no-title scrollable @input="dateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="addInterviewData.interviewTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="newInterview.interviewTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="addInterviewData.interviewTimePeriod" label="Period*" :items="timePeriod" :color="primaryColor" required></v-select>
+                            <v-select v-model="newInterview.interviewTimePeriod" label="Period*" :items="timePeriod" :color="primaryColor" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="addInterviewData.interviewTimeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="newInterview.interviewTimeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="addInterviewData.interviewType" label="Type of Interview" hint="In-Person, Phone, Video Conference, etc." :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="newInterview.interviewType" label="Type of Interview" hint="In-Person, Phone, Video Conference, etc." :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="addInterviewData.interviewLocation" label="Location" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="newInterview.interviewLocation" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-textarea v-model="createInterview.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
@@ -76,7 +76,7 @@
                     icon: "mdi-check-circle",
                     color: "#53AC84"
                 },
-                addInterviewData: {
+                newInterview: {
                     interviewDate: "",
                     interviewTime: undefined,
                     interviewTimePeriod: "",
@@ -101,12 +101,12 @@
                 data: {
                     loginToken: cookies.get("loginToken"),
                     jobAppId: this.jobAppId,
-                    interviewDate: this.addInterviewData.interviewDate,
-                    interviewTime: this.addInterviewData.interviewTime,
-                    interviewTimePeriod: this.addInterviewData.interviewTimePeriod,
-                    interviewTimeZone: this.addInterviewData.interviewTimeZone,
-                    interviewLocation: this.addInterviewData.interviewLocation,
-                    notes: this.addInterviewData.notes
+                    interviewDate: this.newInterview.interviewDate,
+                    interviewTime: this.newInterview.interviewTime,
+                    interviewTimePeriod: this.newInterview.interviewTimePeriod,
+                    interviewTimeZone: this.newInterview.interviewTimeZone,
+                    interviewLocation: this.newInterview.interviewLocation,
+                    notes: this.newInterview.notes
                 }
                 }).then((res) => {
                     // If the network is done and there are no errors, add the new interview to the store

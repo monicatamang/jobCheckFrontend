@@ -78,15 +78,12 @@
                     </div>
                 </v-tab-item>
                 <v-tab-item>
-                    <div>
-                        <upload-resume :jobAppId="detail.jobAppId"></upload-resume>
-                    </div>
-                    <div>
-                        <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
-                    </div>
+                    <upload-resume :jobAppId="detail.jobAppId"></upload-resume>
+                    <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
                 </v-tab-item>
                 <v-tab-item>
-                    <add-interview :jobAppId="detail.jobAppId"></add-interview>
+                    <interview-card :interviews="userInterviews" :jobAppId="Number(detail.jobAppId)"></interview-card>
+                    <add-interview :jobAppId="Number(detail.jobAppId)"></add-interview>
                 </v-tab-item>
             </v-tabs>
         </div>
@@ -99,6 +96,7 @@
     import UploadResume from "../JobApplicationDetails/Resumes/UploadResume.vue";
     import UploadCoverLetter from "../JobApplicationDetails/CoverLetters/UploadCoverLetter.vue";
     import AddInterview from "../Interviews/AddInterview.vue";
+    import InterviewCard from "../Interviews/InterviewCard.vue";
 
     export default {
         name: "view-job-application-details",
@@ -108,11 +106,13 @@
             DeleteJobApplication,
             UploadResume,
             UploadCoverLetter,
-            AddInterview
+            AddInterview,
+            InterviewCard
         },
 
         props: {
-            details: Array
+            details: Array,
+            userInterviews: Array
         },
 
         data() {
@@ -126,8 +126,24 @@
             // Creating a function that takes the user to the Job Applications page after deleting a job application
             goToJobApplicationsPage() {
                 this.$router.push('/JobApplications');
-            }
-        }
+            },
+
+            // getAllInterviews() {
+            //     this.$store.dispatch('getInterviews', this.userData);
+            // }
+        },
+
+        // computed: {
+        //     userInterviews() {
+        //         return this.$store.state.allInterviews; 
+        //     }
+        // },
+
+        // mounted() {
+        //     if(this.userInterviews.length <= 0) {
+        //         this.getAllInterviews();
+        //     }
+        // },
     }
 </script>
 

@@ -19,7 +19,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                    <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n3">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -105,7 +105,7 @@
         row-gap: 2vh;
         margin: 20vh 0vw 15vh 0vw;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        width: 90%;
+        width: 100%;
     }
 
     .jobAppCard {
@@ -116,7 +116,7 @@
         background: white;
         box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
         padding: 5% 5% 7% 5%;
-        width: 100%;
+        width: 90%;
     }
 
     .v-btn {
