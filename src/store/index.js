@@ -144,6 +144,10 @@ export default new Vuex.Store({
       state.filteredConnections.unshift(data);
     },
 
+    deleteConnection(state, data) {
+      state.allConnections.splice(data, 1);
+    },
+
     // Updating the status when the user is searching for specific job applications
     updateSearchJobAppStatus(state, data) {
       state.searchJobAppStatus = data;

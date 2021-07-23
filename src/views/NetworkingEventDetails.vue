@@ -102,6 +102,9 @@
 
             // Clearing any messages printed to the user
             this.$store.commit('updateNetworkingEventStatus', this.clearNetworkingEventStatus);
+
+            // Getting all the user's connection from the store
+            this.$store.dispatch('getConnections', cookies.get("userData").userId);
         },
     }
 </script>
