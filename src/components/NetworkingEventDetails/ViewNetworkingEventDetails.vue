@@ -54,7 +54,7 @@
                 </v-tab-item>
                 <v-tab-item>
                     <connection-card :connections="connections"></connection-card>
-                    <add-connection :networkingEventId="detail.networkingEventId"></add-connection>
+                    <add-connection :networkingEventId="detail.networkingEventId" @connectionAdded="handleConnectionAdded"></add-connection>
                 </v-tab-item>
             </v-tabs>
         </div>
@@ -92,8 +92,12 @@
         methods: {
             goToNetworkingEventsPage() {
                 this.$router.push('/NetworkingEvents');
+            },
+
+            handleConnectionAdded(data) {
+                this.$emit('notifyNetworkingEventDetailsPage', data);
             }
-        },
+        }
     }
 </script>
 

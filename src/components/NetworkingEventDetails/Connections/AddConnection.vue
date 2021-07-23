@@ -105,10 +105,11 @@
                 }).then((res) => {
                     // If the network is done and there are no errors, add the new connection to the store
                     console.log(res);
-                    this.$store.commit('addNewConnectionToAllConnections', res.data);
+                    // this.$store.commit('addNewConnectionToAllConnections', res.data);
                     // Notifying the store to show a success message on the Networking Events page
                     this.successStatus.message = "You have successfully added a connection";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
+                    this.$emit('connectionAdded', res.data);
                 }).catch((err) => {
                     // If the network is done and the page errors, notify the store to show an error message on the Networking Events page
                     console.log(err);

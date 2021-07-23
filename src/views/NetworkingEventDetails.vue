@@ -2,7 +2,7 @@
     <section>
         <status-alert :showStatus="showNetworkingEventStatus"></status-alert>
         <mobile-header></mobile-header>
-        <view-networking-event-details :details="networkingEventDetails" :connections="userConnections"></view-networking-event-details>
+        <view-networking-event-details :details="networkingEventDetails" :connections="userConnections" @notifyNetworkingEventDetailsPage="appendConnectionToPage"></view-networking-event-details>
     </section>
 </template>
 
@@ -80,6 +80,15 @@
                     // Updating the error message
                     this.$store.commit('updateNetworkingEventStatus', errorStatus);
                 });
+            },
+
+            appendConnectionToPage(data) {
+                this.userConnections.unshift(data);
+            },
+
+            updateConnectionOnPage(data) {
+                this.userConnections.splice(data.index, 1);
+                this.userConnections.splice(data.index, 0, data.connection);
             }
         },
 

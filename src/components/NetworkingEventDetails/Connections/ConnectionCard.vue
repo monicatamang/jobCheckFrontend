@@ -3,15 +3,14 @@
         <div v-for="connection in connections" :key="connection.connectionId" class="connectionCard">
             <v-container>
             <v-row>
-                <v-col cols="3" class="align-self-center">
+                <v-col cols="10" class="align-self-center">
                     <h4 id="name">{{ connection.name }}</h4>
                 </v-col>
-                <v-spacer></v-spacer>
-                <v-col cols="3">
+                <v-col cols="2">
                     <v-menu offset-y>
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
+                                <v-icon class="ml-n6">mdi-dots-horizontal</v-icon>
                             </v-btn>
                         </template>
                         <v-list>
@@ -53,7 +52,7 @@
 
         props: {
             connections: Array
-        },
+        }
     }
 </script>
 
