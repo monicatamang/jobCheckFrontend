@@ -9,34 +9,34 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.name" label="Name" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.name" label="Name" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.position" label="Job Position" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.position" label="Job Position" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.companyName" label="Company" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.companyName" label="Company" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.companyAddress" label="Address" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.companyAddress" label="Address" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.postalCode" label="Postal Code" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.postalCode" label="Postal Code" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.city" label="City" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.city" label="City" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.province" label="Province" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.province" label="Province" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.email" label="Email" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.email" label="Email" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.phoneNumber" label="Phone Number" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="replaceJobReference.phoneNumber" label="Phone Number" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.notes" label="Phone Number" :color="primaryColor"></v-text-field>
+                            <v-textarea v-model="replaceJobReference.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -79,6 +79,7 @@
                 },
                 replaceJobReference: {
                     loginToken: cookies.get("loginToken"),
+                    jobRefId: this.jobRefId,
                     name: "",
                     position: undefined,
                     companyName: undefined,

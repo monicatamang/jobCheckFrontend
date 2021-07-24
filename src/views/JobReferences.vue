@@ -1,9 +1,11 @@
 <template>
     <section>
+        <status-alert :showStatus="showJobReferenceStatus"></status-alert>
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Job References</h1>
         </div>
+        <job-reference-card :jobRefs="currentJobReferences"></job-reference-card>
         <add-job-reference></add-job-reference>
         <mobile-bottom-nav :value="3"></mobile-bottom-nav>
     </section>
@@ -11,7 +13,9 @@
 
 <script>
     import cookies from "vue-cookies";
+    import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
+    import JobReferenceCard from "../components/JobReferences/JobReferenceCard.vue";
     import AddJobReference from "../components/JobReferences/AddJobReference.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
@@ -19,14 +23,26 @@
         name: "Job-References",
 
         components: {
+            StatusAlert,
             MobileHeader,
             AddJobReference,
+            JobReferenceCard,
             MobileBottomNav
         },
 
         data() {
             return {
                 loginToken: cookies.get("loginToken")
+            }
+        },
+
+        computed: {
+            currentJobReferences() {
+                return this.$store.state.allJobReferences; 
+            },
+
+            showJobReferenceStatus() {
+                return this.$store.state.jobReferenceStatus;
             }
         },
 

@@ -223,10 +223,10 @@ export default new Vuex.Store({
 
     // Updating the status when a user gets, creates, edits or deletes their job references
     updateJobReferenceStatus(state, data) {
-      state.allJobReferences.show = data.show;
-      state.allJobReferences.message = data.message;
-      state.allJobReferences.icon = data.icon;
-      state.allJobReferences.color = data.color;
+      state.jobReferenceStatus.show = data.show;
+      state.jobReferenceStatus.message = data.message;
+      state.jobReferenceStatus.icon = data.icon;
+      state.jobReferenceStatus.color = data.color;
     },
 
     // Updating the status when the user logs out

@@ -26,8 +26,9 @@ export default {
     // }
 
     if(this.userData !== null && this.userData !== '') {
-      this.$store.dispatch("getInterviews", cookies.get("userData").userId);
-      this.$store.dispatch('getConnections', cookies.get("userData").userId);
+      this.$store.dispatch("getInterviews", this.userData.userId);
+      this.$store.dispatch('getConnections', this.userData.userId);
+      this.$store.dispatch('getJobReferences', this.userData.userId);
     }
   }
 };

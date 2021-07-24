@@ -37,7 +37,7 @@
                             <v-text-field v-model="newJobReference.phoneNumber" label="Phone Number" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newJobReference.notes" label="Phone Number" :color="primaryColor"></v-text-field>
+                            <v-textarea v-model="replaceJobReference.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
