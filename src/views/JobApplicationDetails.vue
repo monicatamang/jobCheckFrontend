@@ -119,7 +119,6 @@
 
             appendInterview(data) {
                 this.filteredInterviews.unshift(data);
-                this.getFilteredInterviews();
             },
 
             replaceWithUpdatedInterview(data) {

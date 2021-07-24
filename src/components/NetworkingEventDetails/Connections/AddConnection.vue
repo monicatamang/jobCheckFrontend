@@ -42,7 +42,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn class="formButtons" large color="grey" text @click="dialog = false">Cancel</v-btn>
-                <v-btn class="formButtons" large :color="primaryColor" text @click="createNetworkingEvent(); dialog = false">Add</v-btn>
+                <v-btn class="formButtons" large :color="primaryColor" text @click="createConnection(); dialog = false">Add</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -93,7 +93,7 @@
 
         methods: {
             // Creating a POST request to create a new connection
-            createNetworkingEvent() {
+            createConnection() {
                 // Configuring the request with the url, type and data
                 axios.request({
                 url: `${process.env.VUE_APP_API_URL}/networking-connections`,

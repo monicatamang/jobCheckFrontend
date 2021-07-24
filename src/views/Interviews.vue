@@ -1,17 +1,24 @@
 <template>
     <section>
+        <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Interviews</h1>
+            <search-interview></search-interview>
         </div>
-        <interview-card :interviews="userInterviews"></interview-card>
+        <h4>{{ showSearchInterviewStatus }}</h4>
+        <div id="interviewCardsComp">
+            <interview-card :interviews="userInterviews"></interview-card>
+        </div>
         <mobile-bottom-nav :value="1"></mobile-bottom-nav>
     </section>
 </template>
 
 <script>
     import cookies from "vue-cookies";
+    import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
+    import SearchInterview from "../components/Interviews/SearchInterview.vue";
     import InterviewCard from "../components/Interviews/InterviewCard.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
@@ -19,14 +26,22 @@
         name: "Interviews",
 
         components: {
+            StatusAlert,
             MobileHeader,
+            SearchInterview,
             InterviewCard,
             MobileBottomNav
         },
 
         data() {
             return {
-                loginToken: cookies.get("loginToken")
+                loginToken: cookies.get("loginToken"),
+                clearStatus: {
+                    show: false,
+                    message: "",
+                    icon: "",
+                    color: ""
+                }
             }
         },
 
@@ -39,6 +54,14 @@
         computed: {
             userInterviews() {
                 return this.$store.state.allInterviews; 
+            },
+
+            showInterviewStatus() {
+                return this.$store.state.interviewStatus;
+            },
+
+            showSearchInterviewStatus() {
+                return this.$store.state.searchInterviewStatus;
             }
         },
 
@@ -47,6 +70,14 @@
             if(this.loginToken === null || this.loginToken === '') {
                 this.$router.push("/");
             }
+
+            // If the user's interviews are not shown on the Interviews page, get all the user's interviews from the store
+            if(this.userInterviews.length <= 0) {
+                this.$store.dispatch('getInterviews', cookies.get("userData").userId);
+            }
+
+            // Clearing any messages printed to the user
+            this.$store.commit('updateInterviewStatus', this.clearStatus);
         },
     }
 </script>
@@ -80,7 +111,15 @@
         border-bottom: 1px solid whitesmoke;
     }
 
-    section {
-        margin-top: 7vh;
+    #interviewCardsComp {
+        margin: 24vh 0vw 5vh 0vw;
+        width: 100%;
+    }
+
+    h4 {
+        position: relative;
+        top: 22vh;
+        font-family: var(--titleFont);
+        font-weight: 400;
     }
 </style>

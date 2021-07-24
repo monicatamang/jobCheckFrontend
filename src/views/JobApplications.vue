@@ -85,7 +85,7 @@
                 return this.$store.state.allJobApps;
             },
 
-             // Getting the API request status from the store when a user searches for a job application
+            // Getting the API request status from the store when a user searches for a job application
             showSearchJobAppStatus() {
                 return this.$store.state.searchJobAppStatus;
             }

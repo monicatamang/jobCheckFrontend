@@ -33,7 +33,7 @@
                 },
                 networkingEventDetails: [
                     {
-                        networkingEventId: this.$route.params.networkingEventId,
+                        networkingEventId: Number(this.$route.params.networkingEventId),
                         eventName: this.$route.params.eventName,
                         eventDate: this.$route.params.eventDate,
                         startTime: this.$route.params.startTime,

@@ -95,6 +95,11 @@
         },
 
         mounted () {
+            // If the user does not have a login token, take the user back to the Home page
+            if(this.loginToken === null || this.loginToken === '') {
+                this.$router.push("/");
+            }
+
             // If the user's interview data is undefined, send a GET request to get one of the user's interviews
             if(this.$route.params.interviewId !== undefined && this.$route.params.jobAppId === undefined && this.$route.params.company === undefined && this.$route.params.jobPosition === undefined && this.$route.params.interviewDate === undefined && this.$route.params.interviewTime === undefined && this.$route.params.interviewTimePeriod === undefined && this.$route.params.salaryAmount === undefined && this.$route.params.interviewTimeZone === undefined && this.$route.params.interviewLocation === undefined && this.$route.params.notes === undefined) {
                 this.getSingleInterview();

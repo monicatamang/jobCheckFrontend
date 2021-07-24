@@ -4,7 +4,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="9" class="align-self-center">
-                        <h4 class="interviewNum">Interview #{{ interviews.indexOf(interview) + 1 }}</h4>
+                        <h4 class="company">{{ interview.company }}</h4>
                     </v-col>
                     <v-col cols="3">
                         <v-menu offset-y>
@@ -25,8 +25,7 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <h4 class="company ml-3">{{ interview.company }}</h4>
-            <h4 class="ml-3">{{ interview.jobPosition }}</h4>
+            <h4 class="ml-3 mt-n4">{{ interview.jobPosition }}</h4>
             <h4 class="ml-3">Date: {{ interview.interviewDate }}</h4>
             <h4 class="ml-3">Time: {{ interview.interviewTime }} {{ interview.interviewTimePeriod }} ({{ interview.interviewTimeZone }})</h4>
             <h4 class="ml-3">{{ interview.interviewLocation }}</h4>
@@ -90,7 +89,7 @@
         font-weight: 400;
     }
 
-    .interviewNum {
+    .company {
         color: var(--primaryColor);
         font-weight: 700;
     }
@@ -112,17 +111,9 @@
         row-gap: 10px;
         background: white;
         box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
-        padding: 4% 4% 6% 4%;
+        padding: 4% 4% 7% 4%;
         width: 90%;
     }
-
-    /* .interviewCard > div {
-        display: grid;
-        justify-items: start;
-        align-items: center;
-        row-gap: 10px;
-        width: 100%;
-    } */
 
     .v-btn {
         text-transform: capitalize;
