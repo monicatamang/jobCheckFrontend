@@ -27,7 +27,7 @@
             </v-container>
             <h3 class="company">{{ detail.company }}</h3>
             <h3>{{ detail.jobPosition }}</h3>
-            <!-- <router-link :to="{ name: 'JobApplicationDetails', params: detail.jobAppId }">View Job Application</router-link> -->
+            <router-link :to="{ name: 'JobApplicationDetails', params: detail.jobAppId }">View Job Application</router-link>
             <div class="importantDetailsContainer">
                 <div>
                     <h4 class="heading">Date</h4>
@@ -149,5 +149,10 @@
     h3 {
         font-weight: 400;
         font-size: 1.1rem;
+    }
+
+    .v-application a {
+        color: var(--primaryColor);
+        text-decoration: none;
     }
 </style>

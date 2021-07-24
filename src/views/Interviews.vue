@@ -4,6 +4,7 @@
         <div id="searchBarContainer">
             <h1>Interviews</h1>
         </div>
+        <interview-card :interviews="userInterviews"></interview-card>
         <mobile-bottom-nav :value="1"></mobile-bottom-nav>
     </section>
 </template>
@@ -11,6 +12,7 @@
 <script>
     import cookies from "vue-cookies";
     import MobileHeader from "../components/MobileHeader.vue";
+    import InterviewCard from "../components/Interviews/InterviewCard.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
 
     export default {
@@ -18,12 +20,25 @@
 
         components: {
             MobileHeader,
+            InterviewCard,
             MobileBottomNav
         },
 
         data() {
             return {
                 loginToken: cookies.get("loginToken")
+            }
+        },
+
+        methods: {
+            getAllUserInterviews() {
+                this.$store.dispatch('getInterviews', cookies.get("userData").userId);
+            }
+        },
+
+        computed: {
+            userInterviews() {
+                return this.$store.state.allInterviews; 
             }
         },
 
