@@ -105,7 +105,7 @@
         display: grid;
         justify-items: start;
         align-items: center;
-        row-gap: 10px;
+        row-gap: 13px;
         background: white;
         box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
         padding: 4% 4% 6% 4%;

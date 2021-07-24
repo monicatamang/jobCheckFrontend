@@ -15,10 +15,10 @@
                             </template>
                             <v-list>
                                 <v-list-item>
-                                    <edit-job-application :jobAppId="Number(detail.jobAppId)"></edit-job-application>
+                                    <edit-job-application :jobAppId="detail.jobAppId" @jobAppUpdated="handleJobAppUpdated"></edit-job-application>
                                 </v-list-item>
                                 <v-list-item>
-                                    <delete-job-application :jobAppId="Number(detail.jobAppId)"></delete-job-application>
+                                    <delete-job-application :jobAppId="detail.jobAppId"></delete-job-application>
                                 </v-list-item>
                             </v-list>
                         </v-menu>
@@ -139,6 +139,10 @@
 
             sendIndexToJobAppDetails(data) {
                 this.$emit('deleteInterviewFromPage', data);
+            },
+
+            handleJobAppUpdated(data) {
+                this.$emit('notifyDetailsPage', data);
             }
         }
     }

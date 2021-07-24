@@ -45,7 +45,7 @@
                         interviewLocation: interview.interviewLocation,
                         notes: interview.notes
                     } 
-                }" class="ml-3">View Details <v-icon small>mdi-arrow-right</v-icon></router-link>
+                }" class="ml-3 mt-n3">View Details <v-icon small>mdi-arrow-right</v-icon></router-link>
             </div>
         </div>
     </article>

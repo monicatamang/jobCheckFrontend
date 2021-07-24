@@ -4,7 +4,7 @@
         <status-alert :showStatus="showCoverLetterStatus"></status-alert>
         <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
-        <view-job-application-details :userInterviews="filteredInterviews" :details="jobAppDetails" @printInterview="appendInterview" @printUpdatedInterview="replaceWithUpdatedInterview" @deleteInterviewFromPage="removeInterview"></view-job-application-details>
+        <view-job-application-details :userInterviews="filteredInterviews" :details="jobAppDetails" @printInterview="appendInterview" @printUpdatedInterview="replaceWithUpdatedInterview" @deleteInterviewFromPage="removeInterview" @notifyDetailsPage="replaceWithUpdatedJobApp"></view-job-application-details>
     </section>
 </template>
 
@@ -101,7 +101,7 @@
                 },
                 params: {
                     userId: cookies.get("userData").userId,
-                    jobAppId: this.$route.params.jobAppId
+                    jobAppId: Number(this.$route.params.jobAppId)
                 }
                 }).then((res) => {
                     // If the network is done and there are no errors, store the user's interviews
@@ -135,6 +135,12 @@
             removeInterview(data) {
                 if(data) {
                     this.getFilteredInterviews();
+                }
+            },
+
+            replaceWithUpdatedJobApp(data) {
+                if(data) {
+                    this.getSingleJobApp()
                 }
             }
         },

@@ -109,6 +109,8 @@
                     color: "#53AC84"
                 },
                 editJobApp: {
+                    loginToken: cookies.get("loginToken"),
+                    jobAppId: this.jobAppId,
                     jobPostingUrl: "",
                     company: "",
                     position: "",
@@ -135,22 +137,7 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                data: {
-                    loginToken: cookies.get("loginToken"),
-                    jobAppId: this.jobAppId,
-                    company: this.editJobApp.company,
-                    jobPostingUrl: this.editJobApp.jobPostingUrl,
-                    jobPosition: this.editJobApp.position,
-                    jobLocation: this.editJobApp.location,
-                    employmentType: this.editJobApp.employmentType,
-                    salaryType: this.editJobApp.salaryRate,
-                    salaryAmount: this.editJobApp.salaryAmount,
-                    jobStartDate: this.editJobApp.startDate,
-                    dueDate: this.editJobApp.dueDate,
-                    status: this.editJobApp.status,
-                    appliedDate: this.editJobApp.appliedDate,
-                    notes: this.editJobApp.notes
-                }
+                data: this.editJobApp
                 }).then((res) => {
                     // If the network is done and there are no errors, delete the old job application and insert the updated job application in the store
                     console.log(res);
@@ -162,6 +149,7 @@
                             }
                             this.$store.commit('deleteJobApp', editedJobApp.index)
                             this.$store.commit('editJobApp', editedJobApp);
+                            this.$emit('jobAppUpdated', true);
                         }
                     }
                     // Notifying the store and show a success message to the user
