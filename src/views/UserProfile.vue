@@ -19,7 +19,7 @@
                         <h2>Account Information</h2>
                     </v-col>
                     <v-col cols="2">
-                        <edit-profile></edit-profile>
+                        <edit-profile @userProfileUpdated="handleUpdatedProfile"></edit-profile>
                     </v-col>
                 </v-row>
             </v-container>
@@ -60,7 +60,7 @@
             </v-container>
         </article>  
         <article id="dashboard">
-            <h2>Dashboard</h2>
+            <h2 class="mb-3 mx-3">Dashboard</h2>
             <v-divider></v-divider>
             <v-container>
                 <v-row>
@@ -118,12 +118,14 @@
             </v-container>
         </article>
         <logout-user></logout-user>
+        <delete-profile></delete-profile>
     </section>
 </template>
 
 <script>
     import cookies from "vue-cookies";
     import EditProfile from "../components/UserProfile/EditProfile.vue";
+    import DeleteProfile from "../components/UserProfile/DeleteProfile.vue";
     import LogoutUser from "../components/LogoutUser.vue";
     import StatusAlert from "../components/StatusAlert.vue";
 
@@ -132,6 +134,7 @@
 
         components: {
             EditProfile,
+            DeleteProfile,
             LogoutUser,
             StatusAlert
         },
@@ -140,11 +143,12 @@
             return {
                 loginToken: cookies.get("loginToken"),
                 userData: cookies.get("userData"),
-                jobApps: undefined,
-                interviews: undefined,
-                networkingEvents: undefined,
-                connections: undefined,
-                jobRefs: undefined
+                clearJobAppStatus: {
+                    show: false,
+                    message: "",
+                    icon: "",
+                    color: ""
+                }
             }
         },
 
@@ -152,6 +156,11 @@
             goToPreviousPage() {
                 this.$router.go(-1);
             },
+
+            // Listening to the 'Edit Profile' component and updated the user's data
+            handleUpdatedProfile(data) {
+                this.userData = data;
+            }
         },
 
         computed: {
@@ -190,6 +199,29 @@
             if(this.loginToken === null || this.loginToken === '') {
                 this.$router.push("/");
             }
+
+            if(this.userJobApps === undefined) {
+                this.$store.dispatch('getJobApps', this.userData.userId);
+            }
+
+            if(this.userInterviews === undefined) {
+                this.$store.dispatch('getInterviews', this.userData.userId);
+            }
+
+            if(this.userNetworkingEvents === undefined) {
+                this.$store.dispatch('getNetworkingEvents', this.userData.userId);
+            }
+
+            if(this.userConnections === undefined) {
+                this.$store.dispatch('getConnections', this.userData.userId);
+            }
+
+            if(this.userJobRefs === undefined) {
+                this.$store.dispatch('getJobReferences', this.userData.userId);
+            }
+
+            // Clearing any messages printed to the user
+            this.$store.commit('updateUserProfileStatus', this.clearJobAppStatus);
         },
     }
 </script>
@@ -200,6 +232,7 @@
         place-items: center;
         row-gap: 3vh;
         width: 100%;
+        margin-bottom: 3vh;
     }
 
     h1 {

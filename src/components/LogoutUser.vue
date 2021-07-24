@@ -1,5 +1,5 @@
 <template>
-    <v-btn block depressed dark @click="deleteLogin" :color="primaryColor">
+    <v-btn depressed dark @click="deleteLogin" :color="primaryColor">
         <span :class="{ hideText: isLoading }">Logout</span>
         <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
     </v-btn>
@@ -65,5 +65,6 @@
 
     .v-btn {
         text-transform: capitalize;
+        width: 90%;
     }
 </style>

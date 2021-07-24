@@ -20,7 +20,7 @@
                             <v-text-field v-model="editedProfile.email" label="Email" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="editedProfile.password" label="password" :color="primaryColor"></v-text-field>
+                            <v-text-field type="password" v-model="editedProfile.password" label="Password" :color="primaryColor"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -69,7 +69,7 @@
 
         methods: {
             // Creating a PATCH request to update a user
-            editConnection() {
+            editProfile() {
                 // Configuring the request with the url, type and data
                 axios.request({
                 url: `${process.env.VUE_APP_API_URL}/users`,
@@ -83,6 +83,8 @@
                     console.log(res);
                     let updatedUserProfile = JSON.stringify(res.data);
                     cookies.set("userData", updatedUserProfile);
+                    // Notify the 'User Profile' page that the user has been updated
+                    this.$emit('userProfileUpdated', res.data);
                     // Notifying the store and show a success message to the user
                     this.successStatus.message = "Your profile was successfully updated";
                     this.$store.commit('updateUserProfileStatus', this.successStatus);
