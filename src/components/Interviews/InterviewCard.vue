@@ -16,10 +16,10 @@
                                 </template>
                                 <v-list>
                                     <v-list-item>
-                                        <edit-interview :interviewId="interview.interviewId"></edit-interview>
+                                        <edit-interview :interviewId="interview.interviewId" @interviewUpdated="handleInterviewUpdated"></edit-interview>
                                     </v-list-item>
                                     <v-list-item>
-                                        <delete-interview :interviewId="interview.interviewId"></delete-interview>
+                                        <delete-interview :interviewId="interview.interviewId" @interviewDeleted="handleInterviewDeleted"></delete-interview>
                                     </v-list-item>
                                 </v-list>
                             </v-menu>
@@ -72,6 +72,16 @@
             return {
                 primaryColor: "#52688F",
                 secondaryColor: "#E3E7F1"
+            }
+        },
+
+        methods: {
+            handleInterviewUpdated(data) {
+                this.$emit('sendUpdatedInterview', data);
+            },
+
+            handleInterviewDeleted(data) {
+                this.$emit('sendIndexOfDeletedInterview', data);
             }
         },
     }

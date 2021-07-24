@@ -122,7 +122,7 @@ export default new Vuex.Store({
 
     // Adding a new interview to the page
     addNewInterview(state, data) {
-      state.allInterviews.unshift(data);
+      state.allInterviews.push(data);
     },
 
     // Adding a new networking event to the page

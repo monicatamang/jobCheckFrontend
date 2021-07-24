@@ -1,5 +1,5 @@
 <template>
-    <v-btn outlined v-if="coverLetterId !== undefined" @click="getCoverLetterName">Download</v-btn>
+    <v-btn outlined :color="primaryColor" v-if="coverLetterId !== undefined" @click="getCoverLetterName">Download</v-btn>
 </template>
 
 <script>
@@ -15,6 +15,7 @@
 
         data() {
             return {
+                primaryColor: "#52688F",
                 coverLetterFilename: "",
                 loginToken: cookies.get("loginToken"),
                 errorStatus: {
@@ -41,7 +42,7 @@
                 }).then((res) => {
                     console.log(res);
                     this.coverLetterFilename = res.data;
-                    this.downloadCoverLetter()
+                    this.downloadCoverLetter(this.coverLetterFilename)
                 }).catch((err) => {
                     console.log(err);
                     this.errorStatus.message = "Sorry, something went wrong. Please refresh the page and try again.";
@@ -49,9 +50,9 @@
                 });
             },
 
-            downloadCoverLetter() {
+            downloadCoverLetter(coverLetterFilename) {
                 axios.request({
-                    url: `${process.env.VUE_APP_API_URL}/download-cover-letter/${this.coverLetterFilename}`,
+                    url: `${process.env.VUE_APP_API_URL}/download-cover-letter/${coverLetterFilename}`,
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -66,7 +67,7 @@
                     const url = window.URL.createObjectURL(new Blob([res.data]));
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', this.coverLetterFilename);
+                    link.setAttribute('download', coverLetterFilename);
                     document.body.appendChild(link);
                     link.click();
                 }).catch((err) => {
@@ -74,8 +75,8 @@
                     this.errorStatus.message = "Failed to download cover letter. Please refresh page and try again.";
                     this.$store.commit('updateCoverLetterStatus', this.errorStatus);
                 });
-            },
-        },
+            }
+        }
     }
 </script>
 

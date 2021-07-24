@@ -1,5 +1,17 @@
 <template>
-    <v-btn outlined :color="primaryColor" v-if="resumeId !== undefined" @click="deleteResumeFile">Delete</v-btn>
+    <v-dialog v-model="dialog" width="500px" v-if="resumeId !== undefined">
+        <template v-slot:activator="{ on, attrs }">
+            <v-btn color="black" outlined v-bind="attrs" v-on="on">Delete</v-btn>
+        </template>
+        <v-card>
+            <v-card-title>Confirm Deletion</v-card-title>
+            <v-card-subtitle class="mt-5">Are you sure you want to permanently delete this resume?</v-card-subtitle>
+            <v-card-actions>
+                <v-btn text color="grey" @click="dialog = false">Cancel</v-btn>
+                <v-btn text color="#B34C59" @click="deleteResumeFile(); dialog = false">Delete</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 </template>
 
 <script>
@@ -15,7 +27,7 @@
 
         data() {
             return {
-                primaryColor: "#52688F",
+                dialog: false,
                 errorStatus: {
                     show: true,
                     message: "",
@@ -47,9 +59,10 @@
                     console.log(res);
                     this.successStatus.message = "Your resume was succesfully deleted.";
                     this.$store.commit('updateResumeStatus', this.successStatus);
+                    this.$emit('resumeIsDeleted', true);
                 }).catch((err) => {
                     console.log(err);
-                    this.errorStatus.message = "Failed to upload resume. Please refresh the page and try again.";
+                    this.errorStatus.message = "Failed to delete resume. Please refresh the page and try again.";
                     this.$store.commit('updateResumeStatus', this.errorStatus);
                 });
             },
@@ -59,6 +72,6 @@
 
 <style scoped>
     .v-btn {
-        width: 28%;
+        text-transform: capitalize;
     }
 </style>

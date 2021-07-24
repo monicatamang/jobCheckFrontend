@@ -1,9 +1,10 @@
 <template>
     <section>
         <status-alert :showStatus="showResumeStatus"></status-alert>
+        <status-alert :showStatus="showCoverLetterStatus"></status-alert>
         <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
-        <view-job-application-details :userInterviews="filteredInterviews" :details="jobAppDetails" @printInterview="appendInterview"></view-job-application-details>
+        <view-job-application-details :userInterviews="filteredInterviews" :details="jobAppDetails" @printInterview="appendInterview" @printUpdatedInterview="replaceWithUpdatedInterview" @deleteInterviewFromPage="removeInterview"></view-job-application-details>
     </section>
 </template>
 
@@ -123,6 +124,18 @@
             appendInterview(data) {
                 this.filteredInterviews.unshift(data);
                 this.getFilteredInterviews();
+            },
+
+            replaceWithUpdatedInterview(data) {
+                if(data) {
+                    this.getFilteredInterviews();
+                }
+            },
+
+            removeInterview(data) {
+                if(data) {
+                    this.getFilteredInterviews();
+                }
             }
         },
 
@@ -133,6 +146,14 @@
 
             showInterviewStatus() {
                 return this.$store.state.interviewStatus;
+            },
+
+            currentInterviews() {
+                return this.$store.state.allInterviews;
+            },
+
+            showCoverLetterStatus() {
+                return this.$store.state.coverLetterStatus;
             }
         },
 

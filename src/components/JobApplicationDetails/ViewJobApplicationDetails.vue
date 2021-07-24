@@ -82,8 +82,8 @@
                     <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
                 </v-tab-item>
                 <v-tab-item>
-                    <interview-card :interviews="userInterviews" :jobAppId="Number(detail.jobAppId)"></interview-card>
-                    <add-interview :jobAppId="Number(detail.jobAppId)" @newInterviewCreated="passInterviewToDetailsPage"></add-interview>
+                    <interview-card :interviews="userInterviews" :jobAppId="detail.jobAppId" @sendUpdatedInterview="notifyJobAppDetails" @sendIndexOfDeletedInterview="sendIndexToJobAppDetails"></interview-card>
+                    <add-interview :jobAppId="detail.jobAppId" @newInterviewCreated="passInterviewToDetailsPage"></add-interview>
                 </v-tab-item>
             </v-tabs>
         </div>
@@ -131,6 +131,14 @@
 
             passInterviewToDetailsPage(data) {
                 this.$emit("printInterview", data);
+            },
+
+            notifyJobAppDetails(data) {
+                this.$emit('printUpdatedInterview', data);
+            },
+
+            sendIndexToJobAppDetails(data) {
+                this.$emit('deleteInterviewFromPage', data);
             }
         }
     }

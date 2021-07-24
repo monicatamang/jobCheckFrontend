@@ -1,5 +1,5 @@
 <template>
-    <v-btn outlined v-if="resumeId !== undefined" @click="getResumeName">Download</v-btn>
+    <v-btn outlined :color="primaryColor" v-if="resumeId !== undefined" @click="getResumeName">Download</v-btn>
 </template>
 
 <script>
@@ -15,6 +15,7 @@
 
         data() {
             return {
+                primaryColor: "#52688F",
                 resumeFilename: "",
                 loginToken: cookies.get("loginToken"),
                 errorStatus: {
@@ -74,13 +75,11 @@
                     this.errorStatus.message = "Failed to download resume. Please refresh page and try again.";
                     this.$store.commit('updateResumeStatus', this.errorStatus);
                 });
-            },
-        },
+            }
+        }
     }
 </script>
 
 <style scoped>
-    .v-btn {
-        width: 28%;
-    }
+
 </style>

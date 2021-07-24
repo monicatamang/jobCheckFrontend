@@ -64,6 +64,7 @@
                         if(this.currentInterviews[i].interviewId === this.interviewId) {
                             let index = i;
                             this.$store.commit('deleteInterview', index);
+                            this.$emit('interviewDeleted', true);
                         }
                     }
                     // Notifying the store that the user's interview is deleted and showing a success message to the user

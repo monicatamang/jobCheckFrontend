@@ -1,14 +1,23 @@
 <template>
     <div class="px-6 pt-2">
-        <h4 class="pb-3">Cover Letter</h4>
-        <h5 v-if="coverLetterId !== undefined">Please delete your current resume before uploading a new resume.</h5>
+        <h4 class="pb-3" id="heading">Cover Letter</h4>
+        <h4 class="mb-4" v-if="coverLetterId !== undefined">Please delete your current cover letter before uploading a new cover letter.</h4>
         <v-form>
             <input type="file" name="coverLetterFile" id="coverLetterFile">
             <v-btn class="mt-3" dark depressed :color="primaryColor" @click="uploadCoverLetterFile">Upload</v-btn>
         </v-form>
-        <delete-cover-letter :coverLetterId="coverLetterId"></delete-cover-letter>
-        <h5 v-if="coverLetterId !== undefined">Lastest Upload on {{ coverLetterCreatedDate }}</h5>
-        <download-cover-letter :coverLetterId="coverLetterId"></download-cover-letter>
+        <v-container v-if="isCoverLetterDeleted === false">
+            <v-row>
+                <v-col cols="4" class="ml-n3">
+                    <download-cover-letter :coverLetterId="coverLetterId"></download-cover-letter>
+                </v-col>
+                <v-col cols="3" class="ml-3">
+                    <delete-cover-letter :coverLetterId="coverLetterId" @coverLetterIsDeleted="hideDownloadAndDeleteCoverLetterButton"></delete-cover-letter>
+                </v-col>
+                <v-spacer></v-spacer>
+            </v-row>
+        </v-container>
+        <h4 v-if="coverLetterId !== undefined">Last upload on {{ coverLetterCreatedDate }}</h4>
     </div>
 </template>
 
@@ -33,6 +42,10 @@
         data() {
             return {
                 loginToken: cookies.get("loginToken"),
+                coverLetterId: undefined,
+                isCoverLetterDeleted: false,
+                coverLetterExists: false,
+                coverLetterCreatedDate: "",
                 primaryColor: "#52688F",
                 errorStatus: {
                     show: true,
@@ -45,9 +58,7 @@
                     message: "",
                     icon: "mdi-check-circle",
                     color: "#53AC84"
-                },
-                coverLetterId: undefined,
-                coverLetterCreatedDate: ""
+                }
             }
         },
 
@@ -55,8 +66,8 @@
             uploadCoverLetterFile() {
                 let formData = new FormData();
                 formData.append('coverLetterFile', document.getElementById("coverLetterFile").files[0])
-                formData.append('loginToken', this.loginToken)
-                formData.append('jobAppId', 2)
+                formData.append('loginToken', this.loginToken);
+                formData.append('jobAppId', this.jobAppId);
 
                 axios.request({
                     url: `${process.env.VUE_APP_API_URL}/upload-cover-letter`,
@@ -77,7 +88,39 @@
                     this.$store.commit('updateCoverLetterStatus', this.errorStatus);
                 });
             },
+
+            getSingleCoverLetter() {
+                axios.request({
+                    url: `${process.env.VUE_APP_API_URL}/cover-letter-file`,
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Login-Token": `${this.loginToken}`
+                    },
+                    params: {
+                        jobAppId: this.jobAppId
+                    }
+                }).then((res) => {
+                    console.log(res);
+                    this.coverLetterId = res.data.coverLetterId;
+                    this.coverLetterCreatedDate = res.data.createdAt;
+                }).catch((err) => {
+                    console.log(err);
+                    this.errorStatus.message = "Failed to download cover letter. Please refresh page and try again.";
+                    this.$store.commit('updateCoverLetterStatus', this.errorStatus);
+                });
+            },
+
+            hideDownloadAndDeleteCoverLetterButton(data) {
+                this.isCoverLetterDeleted = data;
+            }
         },
+
+        mounted() {
+            if(this.coverLetterExists) {
+                this.getSingleCoverLetter();
+            }
+        }
     }
 </script>
 
@@ -86,7 +129,7 @@
         text-transform: capitalize;
     }
 
-    h5 {
+    h4, h5 {
         font-weight: 400;
     }
 
@@ -94,7 +137,7 @@
         background: var(--backgroundColorTwo);
     }
 
-    h4 {
+    #heading {
         font-size: 1rem;
         font-weight: 600;
     }
