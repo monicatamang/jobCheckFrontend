@@ -16,6 +16,16 @@ export default new Vuex.Store({
 
     allJobReferences: [],
 
+    jobAppsLength: undefined,
+
+    interviewLength: undefined,
+
+    networkingEventLength: undefined,
+
+    connectionsLength: undefined,
+
+    jobRefsLength: undefined,
+
     searchJobAppStatus: "",
 
     searchNetworkingEventStatus: "",
@@ -58,6 +68,13 @@ export default new Vuex.Store({
     },
 
     jobReferenceStatus: {
+      show: false,
+      message: "",
+      icon: "",
+      color: ""
+    },
+
+    userProfileStatus: {
       show: false,
       message: "",
       icon: "",
@@ -236,12 +253,40 @@ export default new Vuex.Store({
       state.jobReferenceStatus.color = data.color;
     },
 
+    // Updating the status when a user updates or deletes their profile
+    updateUserProfileStatus(state, data) {
+      state.userProfileStatus.show = data.show;
+      state.userProfileStatus.message = data.message;
+      state.userProfileStatus.icon = data.icon;
+      state.userProfileStatus.color = data.color;
+    },
+
     // Updating the status when the user logs out
     updateLogoutStatus(state, data) {
       state.logoutStatus.show = data.show;
       state.logoutStatus.message = data.message;
       state.logoutStatus.icon = data.icon;
       state.logoutStatus.color = data.color;
+    },
+
+    updateJobAppsLength(state, data) {
+      state.jobAppsLength = data;
+    },
+
+    updateInterviewsLength(state, data) {
+      state.interviewsLength = data;
+    },
+
+    updateNetworkingEventsLength(state, data) {
+      state.networkingEventsLength = data;
+    },
+
+    updateConnectionsLength(state, data) {
+      state.connectionsLength = data;
+    },
+
+    updateJobRefsLength(state, data) {
+      state.jobRefsLength = data;
     },
   },
 
@@ -262,6 +307,7 @@ export default new Vuex.Store({
         // If the network is done and there are no errors, store the user's job applications
         console.log(res);
         context.commit('updateAllJobApps', res.data);
+        context.commit('updateJobAppsLength', res.data.length);
       }).catch((err) => {
         // If the network is done but the page errors, show a error message to the user
         console.log(err);
@@ -292,6 +338,7 @@ export default new Vuex.Store({
           // If the network is done and there are no errors, store the user's interviews
           console.log(res);
           context.commit('updateAllInterviews', res.data);
+          context.commit('updateInterviewsLength', res.data.length);
       }).catch((err) => {
           // If the network is done but the page errors, show a error message to the user
           console.log(err);
@@ -322,6 +369,7 @@ export default new Vuex.Store({
           // If the network is done and there are no errors, store the user's networking events
           console.log(res);
           context.commit('updateAllNetworkingEvents', res.data);
+          context.commit('updateNetworkingEventsLength', res.data.length);
       }).catch((err) => {
           // If the network is done but the page errors, show a error message to the user
           console.log(err);
@@ -352,6 +400,7 @@ export default new Vuex.Store({
           // If the network is done and there are no errors, store the user's networking events
           console.log(res);
           context.commit('updateAllConnections', res.data);
+          context.commit('updateConnectionsLength', res.data.length);
       }).catch((err) => {
           // If the network is done but the page errors, show a error message to the user
           console.log(err);
@@ -382,6 +431,7 @@ export default new Vuex.Store({
           // If the network is done and there are no errors, store the user's job references
           console.log(res);
           context.commit('updateAllJobReferences', res.data);
+          context.commit('updateJobRefsLength', res.data.length);
       }).catch((err) => {
           // If the network is done but the page errors, show a error message to the user
           console.log(err);
