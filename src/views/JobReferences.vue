@@ -4,7 +4,9 @@
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Job References</h1>
+            <search-job-reference></search-job-reference>
         </div>
+        <h4>{{ showSearchJobReferenceStatus }}</h4>
         <job-reference-card :jobRefs="currentJobReferences"></job-reference-card>
         <add-job-reference></add-job-reference>
         <mobile-bottom-nav :value="3"></mobile-bottom-nav>
@@ -15,6 +17,7 @@
     import cookies from "vue-cookies";
     import StatusAlert from "../components/StatusAlert.vue";
     import MobileHeader from "../components/MobileHeader.vue";
+    import SearchJobReference from "../components/JobReferences/SearchJobReference.vue";
     import JobReferenceCard from "../components/JobReferences/JobReferenceCard.vue";
     import AddJobReference from "../components/JobReferences/AddJobReference.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
@@ -25,6 +28,7 @@
         components: {
             StatusAlert,
             MobileHeader,
+            SearchJobReference,
             AddJobReference,
             JobReferenceCard,
             MobileBottomNav
@@ -32,7 +36,13 @@
 
         data() {
             return {
-                loginToken: cookies.get("loginToken")
+                loginToken: cookies.get("loginToken"),
+                clearJobRefStatus: {
+                    show: false,
+                    message: "",
+                    icon: "",
+                    color: ""
+                }
             }
         },
 
@@ -43,6 +53,10 @@
 
             showJobReferenceStatus() {
                 return this.$store.state.jobReferenceStatus;
+            },
+
+            showSearchJobReferenceStatus() {
+                return this.$store.state.searchJobReferenceStatus;
             }
         },
 
@@ -51,6 +65,9 @@
             if(this.loginToken === null || this.loginToken === '') {
                 this.$router.push("/");
             }
+
+            // Clearing any messages printed to the user
+            this.$store.commit('updateJobReferenceStatus', this.clearJobRefStatus);
         },
     }
 </script>
@@ -64,6 +81,14 @@
         margin-top: 3vh;
         font-size: 1.4rem;
         letter-spacing: 1px;
+    }
+
+    h4 {
+        font-weight: 400;
+        position: relative;
+        top: 22vh;
+        font-family: var(--titleFont);
+        font-weight: 400;
     }
 
     section, #searchBarContainer {

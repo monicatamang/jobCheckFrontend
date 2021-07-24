@@ -20,6 +20,8 @@ export default new Vuex.Store({
 
     searchNetworkingEventStatus: "",
 
+    searchJobReferenceStatus: "",
+
     jobAppStatus: {
       show: false,
       message: "",
@@ -179,6 +181,11 @@ export default new Vuex.Store({
     // Updating the status when the user is searching for specific networking events
     updateSearchNetworkingEventStatus(state, data) {
       state.searchNetworkingEventStatus = data;
+    },
+
+    // Updating the status when the user is searching for specific job references
+    updateSearchJobReferenceStatus(state, data) {
+      state.searchJobReferenceStatus = data;
     },
 
     // Updating the status when the user gets, creates, edits or deletes a new job application

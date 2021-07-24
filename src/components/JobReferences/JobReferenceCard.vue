@@ -32,7 +32,8 @@
             <h4 class="ml-3" v-if="jobRef.postalCode === '' || jobRef.postalCode === null">{{ jobRef.city }}, {{ jobRef.province }}</h4>
             <a :href="jobRef.email" class="ml-3" v-if="jobRef.email !== '' && jobRef.email === null">{{ jobRef.email }}</a>
             <h4 class="ml-3" v-if="jobRef.phoneNumber !== '' && jobRef.phoneNumber === null">{{ jobRef.phoneNumber }}</h4>
-            <h4 class="ml-3" v-if="jobRef.notes !== '' && jobRef.notes === null">{{ jobRef.notes }}</h4>
+            <h4 class="heading ml-3 mt-5" v-if="jobRef.notes !== '' && jobRef.notes !== null">Notes</h4>
+            <h4 class="ml-3" v-if="jobRef.notes !== '' && jobRef.notes !== null">{{ jobRef.notes }}</h4>
         </div>
     </article>
 </template>
@@ -66,6 +67,10 @@
     .name {
         color: var(--primaryColor);
         font-weight: 700;
+    }
+
+    .heading {
+        font-weight: 600;
     }
 
     h4 {

@@ -63,7 +63,7 @@
                     for(let i = 0; i < this.currentJobReferences.length; i++) {
                         if(this.currentJobReferences[i].jobRefId === this.jobRefId) {
                             let index = i;
-                            this.$store.commit('deleteJobReferences', index);
+                            this.$store.commit('deleteJobReference', index);
                         }
                     }
                     // Notifying the store that the user's job reference is deleted and showing a success message to the user

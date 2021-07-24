@@ -1,5 +1,6 @@
 <template>
     <section>
+        <status-alert :showStatus="showJobAppStatus"></status-alert>
         <mobile-header></mobile-header>
         <div id="searchBarContainer">
             <h1>Job Applications</h1>
@@ -14,7 +15,6 @@
         <h4>{{ showSearchJobAppStatus }}</h4>
         <job-application-card :jobApps="userJobApps"></job-application-card>
         <add-job-application></add-job-application>
-        <status-alert :showStatus="showJobAppStatus"></status-alert>
         <mobile-bottom-nav :value="0"></mobile-bottom-nav>
     </section>
 </template>
