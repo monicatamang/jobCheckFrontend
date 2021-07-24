@@ -18,10 +18,14 @@
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newInterview.interviewTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-select v-model="newInterview.interviewTimePeriod" label="Period*" :items="timePeriod" :color="primaryColor" required></v-select>
+                            <v-row>
+                                <v-col cols="6">
+                                    <v-text-field v-model="newInterview.interviewTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-select v-model="newInterview.interviewTimePeriod" label="AM/PM*" :items="timePeriod" :color="primaryColor" required></v-select>
+                                </v-col>
+                            </v-row>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="newInterview.interviewTimeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>

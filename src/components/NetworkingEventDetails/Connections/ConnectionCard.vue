@@ -1,5 +1,5 @@
 <template>
-    <div class="connectionsContainer">
+    <div class="connectionsContainer" v-if="networkingEventId">
         <div v-for="connection in connections" :key="connection.connectionId" class="connectionCard">
             <div v-if="networkingEventId === connection.networkingEventId">
                 <v-container>
@@ -74,14 +74,18 @@
     }
 
     .connectionCard {
+        width: 90%;
+    }
+
+    .connectionCard > div {
         display: grid;
         justify-items: start;
         align-items: center;
         row-gap: 5px;
+        box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.25);
         background: white;
-        box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
+        width: 100%;
         padding: 2% 3% 5% 3%;
-        width: 90%;
     }
 
     .connectionCard > h4, .connectionCard a {
@@ -100,10 +104,12 @@
     #name {
         color: var(--primaryColor);
         font-weight: 700;
+        padding: 0%;
     }
 
     h4 {
         font-size: 1rem;
         font-weight: 400;
+        padding: 0% 4%;
     }
 </style>
