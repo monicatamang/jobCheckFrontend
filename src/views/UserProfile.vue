@@ -16,7 +16,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="10">
-                        <h2>Account Information</h2>
+                        <h3>Account Information</h3>
                     </v-col>
                     <v-col cols="2">
                         <edit-profile @userProfileUpdated="handleUpdatedProfile"></edit-profile>
@@ -29,30 +29,30 @@
                     <v-col cols="12">
                         <v-row>
                             <v-col cols="12">
-                                <h3 class="heading">First Name</h3>
+                                <h4 class="heading">First Name</h4>
                             </v-col>
                             <v-col cols="12">
-                                <h3>{{ userData.firstName }}</h3>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-row>
-                            <v-col cols="12">
-                                <h3 class="heading">Last Name</h3>
-                            </v-col>
-                            <v-col cols="12">
-                                <h3>{{ userData.lastName }}</h3>
+                                <h4>{{ userData.firstName }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
                             <v-col cols="12">
-                                <h3 class="heading">Email</h3>
+                                <h4 class="heading">Last Name</h4>
                             </v-col>
                             <v-col cols="12">
-                                <h3>{{ userData.email }}</h3>
+                                <h4>{{ userData.lastName }}</h4>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-row>
+                            <v-col cols="12">
+                                <h4 class="heading">Email</h4>
+                            </v-col>
+                            <v-col cols="12">
+                                <h4>{{ userData.email }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -60,57 +60,57 @@
             </v-container>
         </article>  
         <article id="dashboard">
-            <h2 class="mb-3 mx-3">Dashboard</h2>
+            <h3 class="mb-5 mx-3">Dashboard</h3>
             <v-divider></v-divider>
             <v-container>
                 <v-row>
                     <v-col cols="12">
                         <v-row>
                             <v-col cols="10">
-                                <h3>Job Applications</h3>
+                                <h4>Job Applications</h4>
                             </v-col>
                             <v-col cols="2">
-                                <h3>{{ userJobApps }}</h3>
+                                <h4>{{ userJobApps }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
                             <v-col cols="10">
-                                <h3>Interviews</h3>
+                                <h4>Interviews</h4>
                             </v-col>
                             <v-col cols="2">
-                                <h3>{{ userInterviews }}</h3>
+                                <h4>{{ userInterviews }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
                             <v-col cols="10">
-                                <h3>Networking Events</h3>
+                                <h4>Networking Events</h4>
                             </v-col>
                             <v-col cols="2">
-                                <h3>{{ userNetworkingEvents }}</h3>
+                                <h4>{{ userNetworkingEvents }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
                             <v-col cols="10">
-                                <h3>Networking Connections</h3>
+                                <h4>Networking Connections</h4>
                             </v-col>
                             <v-col cols="2">
-                                <h3>{{ userConnections }}</h3>
+                                <h4>{{ userConnections }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
                             <v-col cols="10">
-                                <h3>Job References</h3>
+                                <h4>Job References</h4>
                             </v-col>
                             <v-col cols="2">
-                                <h3>{{ userJobRefs }}</h3>
+                                <h4>{{ userJobRefs }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -246,11 +246,11 @@
         width: 90%;
     }
 
-    h2 {
+    h3 {
         font-family: var(--titleFont);
     }
 
-    h3 {
+    h4 {
         font-weight: 400;
     }
 
