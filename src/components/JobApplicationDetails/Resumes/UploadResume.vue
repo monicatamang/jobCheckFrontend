@@ -1,23 +1,23 @@
 <template>
     <div class="px-6 py-5">
         <h4 class="pb-3" id="heading">Resume</h4>
-        <h4 class="mb-5" v-if="resumeId !== undefined">Please delete your current resume before uploading a new resume.</h4>
-        <v-form>
+        <h4 class="mb-5" v-if="resumeId !== undefined && (isResumeDeleted === false || resumeIsUploaded === true)">Please delete your current resume before uploading a new resume.</h4>
+        <v-form v-if="resumeId === undefined || isResumeDeleted === true">
             <input type="file" name="resumeFile" id="resumeFile">
             <v-btn class="mt-3" dark depressed :color="primaryColor" @click="uploadResumeFile">Upload</v-btn>
         </v-form>
-        <v-container v-if="isResumeDeleted === false">
+        <v-container>
             <v-row>
-                <v-col cols="4" class="ml-n3">
+                <v-col cols="4" class="ml-n3" v-if="isResumeDeleted === false || resumeIsUploaded === true">
                     <download-resume :resumeId="resumeId"></download-resume>
                 </v-col>
-                <v-col cols="3" class="ml-3">
+                <v-col cols="3" class="ml-3" v-if="isResumeDeleted === false || resumeIsUploaded === true">
                     <delete-resume :resumeId="resumeId" @resumeIsDeleted="hideDownloadAndDeleteResumeButton"></delete-resume>
                 </v-col>
                 <v-spacer></v-spacer>
             </v-row>
         </v-container>
-        <h4 v-if="resumeId !== undefined" class="mt-3">Last upload on {{ resumeCreatedDate }}</h4>
+        <h4 v-if="resumeId !== undefined && (isResumeDeleted === false || resumeIsUploaded === true)" class="mt-3">Last upload on {{ resumeCreatedDate }}</h4>
     </div>
 </template>
 
@@ -44,7 +44,7 @@
                 loginToken: cookies.get("loginToken"),
                 resumeId: undefined,
                 isResumeDeleted: false,
-                resumeExists: false,
+                resumeIsUploaded: false,
                 resumeCreatedDate: "",
                 primaryColor: "#52688F",
                 errorStatus: {
@@ -59,7 +59,7 @@
                     icon: "mdi-check-circle",
                     color: "#53AC84"
                 },
-                clearJobAppStatus: {
+                clearResumeStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -86,9 +86,9 @@
                     console.log(res);
                     this.resumeId = res.data.resumeId;
                     this.resumeCreatedDate = res.data.createdAt;
+                    this.resumeIsUploaded = true;
                     this.successStatus.message = "Your resume was successfully uploaded.";
                     this.$store.commit('updateResumeStatus', this.successStatus);
-                    this.resumeExists = true;
                 }).catch((err) => {
                     console.log(err);
                     this.errorStatus.message = "Failed to upload resume. Please refresh the page and try again.";
@@ -98,24 +98,27 @@
 
             getSingleResume() {
                 axios.request({
-                    url: `${process.env.VUE_APP_API_URL}/resume-file`,
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Login-Token": `${this.loginToken}`
-                    },
-                    params: {
-                        jobAppId: this.jobAppId
-                    }
-                }).then((res) => {
+                url: `${process.env.VUE_APP_API_URL}/resume-file`,
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Login-Token": `${this.loginToken}`
+                },
+                params: {
+                    jobAppId: this.jobAppId
+                }
+            }).then((res) => {
+                if(res.status === 204) {
                     console.log(res);
+                } else {
                     this.resumeId = res.data.resumeId;
                     this.resumeCreatedDate = res.data.createdAt;
-                }).catch((err) => {
-                    console.log(err);
-                    this.errorStatus.message = "Failed to download resume. Please refresh page and try again.";
-                    this.$store.commit('updateResumeStatus', this.errorStatus);
-                });
+                }
+            }).catch((err) => {
+                console.log(err);
+                this.errorStatus.message = "Failed to download resume. Please refresh page and try again.";
+                this.$store.commit('updateResumeStatus', this.errorStatus);
+            });
             },
 
             hideDownloadAndDeleteResumeButton(data) {
@@ -124,13 +127,8 @@
         },
 
         mounted() {
-            if(this.resumeExists) {
-                this.getSingleResume();
-            }
-
-            // Clearing any messages printed to the user
-            this.$store.commit('updateResumeStatus', this.clearJobAppStatus);
-        },
+            this.getSingleResume();
+        }
     }
 </script>
 

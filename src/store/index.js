@@ -18,9 +18,9 @@ export default new Vuex.Store({
 
     jobAppsLength: undefined,
 
-    interviewLength: undefined,
+    interviewsLength: undefined,
 
-    networkingEventLength: undefined,
+    networkingEventsLength: undefined,
 
     connectionsLength: undefined,
 

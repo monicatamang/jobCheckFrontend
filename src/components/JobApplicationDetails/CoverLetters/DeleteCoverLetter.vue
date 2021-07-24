@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" width="500px" v-if="coverLetterId !== undefined">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn color="black" outlined v-bind="attrs" v-on="on">Delete</v-btn>
+            <v-btn text outlined v-bind="attrs" v-on="on">Delete</v-btn>
         </template>
         <v-card>
             <v-card-title>Confirm Deletion</v-card-title>

@@ -1,23 +1,23 @@
 <template>
     <div class="px-6 pt-2">
         <h4 class="pb-3" id="heading">Cover Letter</h4>
-        <h4 class="mb-4" v-if="coverLetterId !== undefined">Please delete your current cover letter before uploading a new cover letter.</h4>
-        <v-form>
+        <h4 class="mb-4" v-if="coverLetterId !== undefined && (isCoverLetterDeleted === false || coverLetterIsUploaded === true)">Please delete your current cover letter before uploading a new cover letter.</h4>
+        <v-form v-if="coverLetterId === undefined || isCoverLetterDeleted === true">
             <input type="file" name="coverLetterFile" id="coverLetterFile">
             <v-btn class="mt-3" dark depressed :color="primaryColor" @click="uploadCoverLetterFile">Upload</v-btn>
         </v-form>
-        <v-container v-if="isCoverLetterDeleted === false">
+        <v-container>
             <v-row>
-                <v-col cols="4" class="ml-n3">
+                <v-col cols="4" class="ml-n3" v-if="isCoverLetterDeleted === false || coverLetterIsUploaded">
                     <download-cover-letter :coverLetterId="coverLetterId"></download-cover-letter>
                 </v-col>
-                <v-col cols="3" class="ml-3">
+                <v-col cols="3" class="ml-3" v-if="isCoverLetterDeleted === false || coverLetterIsUploaded">
                     <delete-cover-letter :coverLetterId="coverLetterId" @coverLetterIsDeleted="hideDownloadAndDeleteCoverLetterButton"></delete-cover-letter>
                 </v-col>
                 <v-spacer></v-spacer>
             </v-row>
         </v-container>
-        <h4 v-if="coverLetterId !== undefined">Last upload on {{ coverLetterCreatedDate }}</h4>
+        <h4 v-if="coverLetterId !== undefined && (isCoverLetterDeleted === false || coverLetterIsUploaded === true)">Last upload on {{ coverLetterCreatedDate }}</h4>
     </div>
 </template>
 
@@ -44,7 +44,7 @@
                 loginToken: cookies.get("loginToken"),
                 coverLetterId: undefined,
                 isCoverLetterDeleted: false,
-                coverLetterExists: false,
+                coverLetterIsUploaded: false,
                 coverLetterCreatedDate: "",
                 primaryColor: "#52688F",
                 errorStatus: {
@@ -58,6 +58,12 @@
                     message: "",
                     icon: "mdi-check-circle",
                     color: "#53AC84"
+                },
+                clearCoverLetterStatus: {
+                    show: false,
+                    message: "",
+                    icon: "",
+                    color: ""
                 }
             }
         },
@@ -80,6 +86,7 @@
                     console.log(res);
                     this.coverLetterId = res.data.coverLetterId;
                     this.coverLetterCreatedDate = res.data.createdAt;
+                    this.coverLetterIsUploaded = true;
                     this.successStatus.message = "Your cover letter was successfully uploaded.";
                     this.$store.commit('updateCoverLetterStatus', this.successStatus);
                 }).catch((err) => {
@@ -101,9 +108,12 @@
                         jobAppId: this.jobAppId
                     }
                 }).then((res) => {
-                    console.log(res);
-                    this.coverLetterId = res.data.coverLetterId;
-                    this.coverLetterCreatedDate = res.data.createdAt;
+                    if(res.status === 204) {
+                        console.log(res);
+                    } else {
+                        this.coverLetterId = res.data.coverLetterId;
+                        this.coverLetterCreatedDate = res.data.createdAt;
+                    }
                 }).catch((err) => {
                     console.log(err);
                     this.errorStatus.message = "Failed to download cover letter. Please refresh page and try again.";
@@ -117,9 +127,7 @@
         },
 
         mounted() {
-            if(this.coverLetterExists) {
-                this.getSingleCoverLetter();
-            }
+            this.getSingleCoverLetter();
         }
     }
 </script>

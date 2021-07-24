@@ -44,7 +44,7 @@
                         notes: this.$route.params.notes
                     }
                 ],
-                clearInterviewStatus: {
+                clearStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -180,7 +180,9 @@
             }
 
             // Clearing any messages printed to the user
-            this.$store.commit('updateInterviewStatus', this.clearInterviewStatus);
+            this.$store.commit('updateInterviewStatus', this.clearStatus);
+            this.$store.commit('updateResumeStatus', this.clearStatus);
+            this.$store.commit('updateCoverLetterStatus', this.clearStatus);
         }
     }
 </script>
