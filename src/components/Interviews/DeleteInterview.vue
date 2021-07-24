@@ -70,6 +70,8 @@
                     // Notifying the store that the user's interview is deleted and showing a success message to the user
                     this.successStatus.message = "Your interview was successfully deleted";
                     this.$store.commit('updateInterviewStatus', this.successStatus);
+                    // Taking the user to the previous page
+                    this.$router.go(-1);
                 }).catch((err) => {
                     // If the network is done but the page errors, notify the store and show an error message to the user
                     console.log(err);

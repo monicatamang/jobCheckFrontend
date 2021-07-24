@@ -50,10 +50,10 @@
                     icon: "",
                     color: ""
                 },
-                userData: {
-                    userId: cookies.get("userData").userId,
-                    jobAppId: this.jobAppId
-                },
+                // userData: {
+                //     userId: cookies.get("userData").userId,
+                //     jobAppId: this.jobAppId
+                // },
                 filteredInterviews: [],
             }
         },
