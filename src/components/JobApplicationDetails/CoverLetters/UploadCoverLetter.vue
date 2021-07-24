@@ -59,7 +59,7 @@
                     icon: "mdi-check-circle",
                     color: "#53AC84"
                 },
-                clearCoverLetterStatus: {
+                clearStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -128,6 +128,8 @@
 
         mounted() {
             this.getSingleCoverLetter();
+
+            this.$store.commit('updateCoverLetterStatus', this.clearStatus);
         }
     }
 </script>

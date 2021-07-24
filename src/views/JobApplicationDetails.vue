@@ -183,5 +183,7 @@
 </script>
 
 <style scoped>
-    
+    section {
+        background: var(--backgroundColorOne);
+    }
 </style>

@@ -9,8 +9,8 @@
             <v-card-text>
                 <v-container>
                     <v-row>
-                        <v-col cols="12">
-                            <v-text-field type="password" v-model="password" single-line label="Password" required :color="primaryColor"></v-text-field>
+                        <v-col cols="12" class="mt-n5">
+                            <v-text-field full-width type="password" v-model="password" single-line label="Password" required :color="primaryColor"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>

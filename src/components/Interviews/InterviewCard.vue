@@ -25,7 +25,7 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <h4 class="ml-3 mt-n4">{{ interview.jobPosition }}</h4>
+            <h4 class="ml-3">{{ interview.jobPosition }}</h4>
             <h4 class="ml-3">Date: {{ interview.interviewDate }}</h4>
             <h4 class="ml-3">Time: {{ interview.interviewTime }} {{ interview.interviewTimePeriod }} ({{ interview.interviewTimeZone }})</h4>
             <h4 class="ml-3">{{ interview.interviewLocation }}</h4>

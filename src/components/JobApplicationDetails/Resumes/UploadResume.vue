@@ -59,7 +59,7 @@
                     icon: "mdi-check-circle",
                     color: "#53AC84"
                 },
-                clearResumeStatus: {
+                clearStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -128,6 +128,8 @@
 
         mounted() {
             this.getSingleResume();
+
+            this.$store.commit('updateResumeStatus', this.clearStatus);
         }
     }
 </script>

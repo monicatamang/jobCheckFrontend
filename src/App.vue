@@ -21,9 +21,9 @@ export default {
 
   mounted() {
     // If the user does not have a login token, take the user to the Home page
-    // if(this.loginToken !== '' && this.loginToken !== null) {
-    //   this.$router.push("/JobApplications");
-    // }
+    if(this.loginToken !== '' && this.loginToken !== null) {
+      this.$router.push("/JobApplications");
+    }
 
     if(this.userData !== null && this.userData !== '') {
       this.$store.dispatch('getInterviews', this.userData.userId);
