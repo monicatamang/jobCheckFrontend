@@ -87,7 +87,7 @@
         display: grid;
         place-items: center;
         row-gap: 5vh;
-        margin-top: 10vh;
+        margin-top: 12vh;
     }
 
     h1 {
@@ -120,5 +120,32 @@
 
     .showErrorMessage, .showSuccessMessage {
         display: block;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        section {
+            margin-top: 15vh;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        div {
+            display: grid;
+            place-items: center;
+            width: 90%;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            padding: 4.5%;
+        }
+
+        #linkToCreateAccountPage {
+            font-size: 1.1rem;
+        }
     }
 </style>

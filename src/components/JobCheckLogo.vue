@@ -12,4 +12,11 @@
     #logo {
         width: 50vw;
     }
+
+    @media only screen and (min-width: 768px) {
+        
+        #logo {
+            width: 45vw;
+        }
+    }
 </style>

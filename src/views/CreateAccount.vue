@@ -1,7 +1,7 @@
 <template>
     <section>
         <v-alert icon="mdi-alert-circle" :color="errorColor" dismissible dark :class="{ showErrorMessage: isError }">Sorry, something went wrong. Please refresh the page and try again.</v-alert>
-        <v-alert icon="mdi-check-circle" :color="successColor" dismissible dark :class="{ showSuccessMessage: isSuccess }">Your Job Check account was successfully created!</v-alert>
+        <v-alert icon="mdi-check-circle" :color="successColor" dismissible dark :class="{ showSuccessMessage: isSuccess }">Your Job Check account was successfully created</v-alert>
         <job-check-logo></job-check-logo>
         <h1>Create Account</h1>
         <v-form>
@@ -130,5 +130,32 @@
 
     .showErrorMessage, .showSuccessMessage {
         display: block;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        section {
+            margin-top: 10vh;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        div {
+            display: grid;
+            place-items: center;
+            width: 90%;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            padding: 4.5%;
+        }
+
+        #linkToLoginPage {
+            font-size: 1.1rem;
+        }
     }
 </style>

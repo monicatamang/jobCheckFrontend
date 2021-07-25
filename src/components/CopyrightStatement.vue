@@ -13,4 +13,11 @@
         font-family: var(--titleFont);
         font-size: 0.8rem;
     }
+
+    @media only screen and (min-width: 768px) {
+        
+        p {
+            font-size: 1rem;
+        }
+    }
 </style>
