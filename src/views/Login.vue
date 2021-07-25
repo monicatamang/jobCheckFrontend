@@ -2,23 +2,26 @@
     <section>
         <v-alert icon="mdi-alert-circle" :color="errorColor" dismissible dark :class="{ showErrorMessage: isError }">Sorry, something went wrong. Please refresh the page and try again.</v-alert>
         <v-alert icon="mdi-check-circle" :color="successColor" dismissible dark :class="{ showSuccessMessage: isSuccess }">You have successfully logged in!</v-alert>
-        <job-check-logo></job-check-logo>
-        <h1>Login</h1>
-        <v-form>
-            <v-container>
-                <v-row>
-                    <v-col cols="12" class="mb-n6">
-                        <v-text-field v-model="userEmail" :color="inputColor" label="Email" outlined required></v-text-field>
-                    </v-col>
-                    <v-col cols="12" class="mb-n6">
-                        <v-text-field type="password" v-model="userPassword" :color="inputColor" label="Password" outlined required></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-            <v-btn large depressed dark :color="inputColor" class="mt-8" @click="loginUser">Continue</v-btn>
-        </v-form>
-        <p id="linkToCreateAccountPage">Don't have an account? <router-link to="/CreateAccount">Create Account</router-link></p>
-        <copyright-statement></copyright-statement>
+        <article>
+            <job-check-logo></job-check-logo>
+            <h1>Login</h1>
+            <v-form>
+                <v-container id="inputFields">
+                    <v-row>
+                        <v-col cols="12" class="mb-n6">
+                            <v-text-field v-model="userEmail" :color="inputColor" label="Email" outlined required></v-text-field>
+                        </v-col>
+                        <v-col cols="12" class="mb-n6">
+                            <v-text-field type="password" v-model="userPassword" :color="inputColor" label="Password" outlined required></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+                <v-btn large depressed dark :color="inputColor" class="mt-8" @click="loginUser">Continue</v-btn>
+            </v-form>
+            <p id="linkToCreateAccountPage">Don't have an account? <router-link to="/CreateAccount">Create Account</router-link></p>
+            <copyright-statement></copyright-statement>
+        </article>
+        <div id="background"></div>
     </section>
 </template>
 
@@ -51,32 +54,35 @@
         methods: {
             // Creating a function that logs in a user
             loginUser() {
-                // Configuring the request with the url, type and data
-                axios.request({
-                url: `${process.env.VUE_APP_API_URL}/login`,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                data: {
-                    email: this.userEmail,
-                    password: this.userPassword
+                // Send the request only if the user enters their email and password
+                if(this.userEmail !== '' && this.userPassword !== '') {
+                    // Configuring the request with the url, type and data
+                    axios.request({
+                    url: `${process.env.VUE_APP_API_URL}/login`,
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    data: {
+                        email: this.userEmail,
+                        password: this.userPassword
+                    }
+                    }).then((res) => {
+                        // If the network is done and there are no errors, store the user's data and login token as cookies
+                        console.log(res);
+                        let userDataJSON = JSON.stringify(res.data);
+                        cookies.set("userData", userDataJSON);
+                        cookies.set("loginToken", res.data.loginToken);
+                        // Showing a success message to the user
+                        this.isSuccess = true;
+                        // Taking the user to the Job Applications page
+                        this.$router.push('/JobApplications');
+                    }).catch((err) => {
+                        console.log(err);
+                        // If the network is done but the page errors, show an error message to the user
+                        this.isError = true;
+                    });
                 }
-                }).then((res) => {
-                    // If the network is done and there are no errors, store the user's data and login token as cookies
-                    console.log(res);
-                    let userDataJSON = JSON.stringify(res.data);
-                    cookies.set("userData", userDataJSON);
-                    cookies.set("loginToken", res.data.loginToken);
-                    // Showing a success message to the user
-                    this.isSuccess = true;
-                    // Taking the user to the Job Applications page
-                    this.$router.push('/JobApplications');
-                }).catch((err) => {
-                    console.log(err);
-                    // If the network is done but the page errors, show an error message to the user
-                    this.isError = true;
-                });
             }
         },
     }
@@ -84,6 +90,11 @@
 
 <style scoped>
     section {
+        display: grid;
+        place-items: center;
+    }
+
+    article {
         display: grid;
         place-items: center;
         row-gap: 5vh;
@@ -122,6 +133,10 @@
         display: block;
     }
 
+    #background {
+        display: none;
+    }
+
     @media only screen and (min-width: 768px) {
 
         section {
@@ -132,7 +147,7 @@
             font-size: 1.8rem;
         }
 
-        div {
+        #inputFields {
             display: grid;
             place-items: center;
             width: 90%;
@@ -147,5 +162,54 @@
         #linkToCreateAccountPage {
             font-size: 1.1rem;
         }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        section {
+            grid-template-columns: 3fr 1fr;
+            margin-top: 0vh;
+        }
+
+        article {
+            display: grid;
+            place-items: center;
+            row-gap: 5vh;
+            padding: 10vh 0vw 5vh 0vw;
+            height: 100%;
+            margin-top: 0vh;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+        }
+
+        #inputFields {
+            width: 30%;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            padding: 2%;
+        }
+
+        #background {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+            background: var(--primaryColor);
+        }
+
+        .v-btn.v-size--large {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        #linkToCreateAccountPage {
+            font-size: 0.9rem;
+        }
+
     }
 </style>
