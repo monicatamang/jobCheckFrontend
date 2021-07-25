@@ -58,13 +58,15 @@
             EditProfile,
         },
 
+        // Receiving the user's data from the User Profile page
         props: {
             userData: Object
         },
 
         methods: {
-            // Listening to the 'EditProfile' component and send the data to the User Profile page
+            // Listening to the Edit Profile component for when the user's data has been updated and send the data to the User Profile page
             handleUpdatedProfile(data) {
+                // Notifying and sending the updated user's data to the User Profile page
                 this.$emit('sendUpdatedProfileToPage', data);
             }
         },

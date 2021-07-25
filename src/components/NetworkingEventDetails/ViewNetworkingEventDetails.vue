@@ -77,6 +77,7 @@
             ConnectionCard
         },
 
+        // Receiving the user's networking event details and connections from the Networking Event page
         props: {
             details: Array,
             connections: Array
@@ -95,12 +96,12 @@
                 this.$router.push('/NetworkingEvents');
             },
 
-            // Listening to the 'AddConnection' component and notifying the Networking Event Details page that a connection has been added
+            // Listening to the Add Connection component and notifying the Networking Event Details page that a connection has been added
             handleConnectionAdded(data) {
                 this.$emit('notifyNetworkingEventDetailsPage', data);
             },
 
-            // Listening to the 'EditNetworkingEvent' component and notifying the Networking Event Details page that a connection has been added
+            // Listening to the Edit Networking Event component and notifying the Networking Event Details page that a connection has been added
             handleUpdatedNetworkEventDetails(data) {
                 this.$emit('notifyParentUpdatedDetails', data);
             }

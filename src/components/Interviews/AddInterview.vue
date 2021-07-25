@@ -23,7 +23,7 @@
                                     <v-text-field v-model="newInterview.interviewTime" label="Start Time*" hint="HH:MM" :color="primaryColor" required></v-text-field>
                                 </v-col>
                                 <v-col cols="6">
-                                    <v-select v-model="newInterview.interviewTimePeriod" label="AM/PM*" :items="timePeriod" :color="primaryColor" required></v-select>
+                                    <v-select v-model="newInterview.interviewTimePeriod" label="AM/PM*" :items="timePeriods" :color="primaryColor" required></v-select>
                                 </v-col>
                             </v-row>
                         </v-col>
@@ -66,7 +66,7 @@
             return {
                 dialog: false,
                 primaryColor: "#52688F",
-                timePeriod: ['AM', 'PM'],
+                timePeriods: ['AM', 'PM'],
                 dateMenu: false,
                 errorStatus: {
                     show: true,
@@ -81,6 +81,8 @@
                     color: "#53AC84"
                 },
                 newInterview: {
+                    loginToken: cookies.get("loginToken"),
+                    jobAppId: this.jobAppId,
                     interviewDate: "",
                     interviewTime: undefined,
                     interviewTimePeriod: "",
@@ -102,28 +104,18 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                data: {
-                    loginToken: cookies.get("loginToken"),
-                    jobAppId: this.jobAppId,
-                    interviewDate: this.newInterview.interviewDate,
-                    interviewTime: this.newInterview.interviewTime,
-                    interviewTimePeriod: this.newInterview.interviewTimePeriod,
-                    interviewTimeZone: this.newInterview.interviewTimeZone,
-                    interviewLocation: this.newInterview.interviewLocation,
-                    notes: this.newInterview.notes
-                }
+                data: this.newInterview
                 }).then((res) => {
                     // If the network is done and there are no errors, add the new interview to the store
                     console.log(res);
                     this.$store.commit('addNewInterview', res.data);
-
+                    // Notifying the View Job Application Details page that a new interview has been created
                     this.$emit("newInterviewCreated", res.data);
-
-                    // Notifying the store to show a success message on the Job Application Details page
+                    // Updating the store with a success message to the store and displaying it on the Job Application Details pae
                     this.successStatus.message = "You have successfully added an interview";
                     this.$store.commit('updateInterviewStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done and the page errors, notify the store to show an error message on the Job Application Details page
+                    // If the network is done and the page errors, update the store with an error message and display it on the Job Application Details page
                     console.log(err);
                     this.errorStatus.message = "Failed to add interview. Please refresh the page and try again.";
                     this.$store.commit('updateInterviewStatus', this.errorStatus);

@@ -65,6 +65,7 @@
             DeleteNetworkingEvent
         },
 
+        // Receiving the user's networking events from the View Networking Event Details component
         props: {
             networkingEvents: Array
         },

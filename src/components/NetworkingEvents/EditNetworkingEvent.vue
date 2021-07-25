@@ -106,8 +106,8 @@
                     endTime: undefined,
                     endTimePeriod: "",
                     timeZone: "",
-                    eventLocation: "",
                     eventType: "",
+                    eventLocation: "",
                     eventStatus: "",
                     notes: ""
                 }
@@ -136,14 +136,15 @@
                             }
                             this.$store.commit('deleteNetworkingEvent', editedNetworkingEvent.index)
                             this.$store.commit('editNetworkingEvent', editedNetworkingEvent);
+                            // Notifying the View Networking Event Details component that the user's networking event has been updated
                             this.$emit('networkingEventDetailsUpdated', true);
                         }
                     }
-                    // Notifying the store and show a success message to the user
+                    // Updating the store with a success message and displaying it on the Networking Events page
                     this.successStatus.message = "Your networking event was successfully updated";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, updating the store with an error message and display it on the Networking Events page
                     console.log(err);
                     this.errorStatus.message = "Failed to update networking event. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);

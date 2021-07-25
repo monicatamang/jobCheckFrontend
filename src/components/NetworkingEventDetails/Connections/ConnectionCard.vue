@@ -52,6 +52,7 @@
             DeleteConnection
         },
 
+        // Receiving the user's connections and networking event id from the View Networking Event Details component
         props: {
             connections: Array,
             networkingEventId: Number

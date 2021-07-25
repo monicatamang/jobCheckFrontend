@@ -1,4 +1,5 @@
 <template>
+    <!-- Show delete button only if the user has existing resume file -->
     <v-dialog v-model="dialog" width="500px" v-if="resumeId !== undefined">
         <template v-slot:activator="{ on, attrs }">
             <v-btn text outlined v-bind="attrs" v-on="on">Delete</v-btn>
@@ -21,6 +22,7 @@
     export default {
         name: "delete-resume",
 
+        // Receiving the resume id from the Upload Resume component
         props: {
             resumeId: Number
         },
@@ -44,7 +46,9 @@
         },
 
         methods: {
+            // Creating a DELETE request to delete a user's existing resume file
             deleteResumeFile() {
+                // Configuring the request with the url, type and data
                 axios.request({
                     url: `${process.env.VUE_APP_API_URL}/upload-resume`,
                     method: "DELETE",
@@ -56,11 +60,14 @@
                         resumeId: this.resumeId
                     }
                 }).then((res) => {
+                    // If the network is done and there are no errors, update the store with a success message and display it on the Job Application Details page
                     console.log(res);
                     this.successStatus.message = "Your resume was succesfully deleted.";
                     this.$store.commit('updateResumeStatus', this.successStatus);
+                    // Notifying the View Job Application Details component that the user's resume has been deleted
                     this.$emit('resumeIsDeleted', true);
                 }).catch((err) => {
+                    // If the network is done but the page errors, update the store with an error message and display it on the Job Application Details page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete resume. Please refresh the page and try again.";
                     this.$store.commit('updateResumeStatus', this.errorStatus);

@@ -6,6 +6,7 @@
     export default {
         name: "status-alert",
 
+        // Receiving the API request statuses from components and pages
         props: {
             showStatus: Object
         },

@@ -72,44 +72,54 @@
         },
 
         computed: {
+            // Getting the total number of job applications the user has from the store
             userJobApps() {
                 return this.$store.state.jobAppsLength;
             },
 
+            // Getting the total number of interviews the user has from the store
             userInterviews() {
                 return this.$store.state.interviewsLength;
             },
 
+            // Getting the total number of networking event the user has from the store
             userNetworkingEvents() {
                 return this.$store.state.networkingEventsLength;
             },
 
+            // Getting the total number of connections the user has from the store
             userConnections() {
                 return this.$store.state.connectionsLength;
             },
 
+            // Getting the total number of job references the user has from the store
             userJobRefs() {
                 return this.$store.state.jobRefsLength;
             },
         },
 
         mounted () {
+            // If the total number of job applications are not shown on the page, get the user's job applications from the API
             if(this.userJobApps === undefined) {
                 this.$store.dispatch('getJobApps', this.userData.userId);
             }
 
+            // If the total number of interviews are not shown on the page, get the user's interviews from the API
             if(this.userInterviews === undefined) {
                 this.$store.dispatch('getInterviews', this.userData.userId);
             }
 
+            // If the total number of networking events are not shown on the page, get the user's networking events from the API
             if(this.userNetworkingEvents === undefined) {
                 this.$store.dispatch('getNetworkingEvents', this.userData.userId);
             }
 
+            // If the total number of connections are not shown on the page, get the user's connection from the API
             if(this.userConnections === undefined) {
                 this.$store.dispatch('getConnections', this.userData.userId);
             }
 
+            // If the total number of job references are not shown on the page, get the user's job references from the API
             if(this.userJobRefs === undefined) {
                 this.$store.dispatch('getJobReferences', this.userData.userId);
             }

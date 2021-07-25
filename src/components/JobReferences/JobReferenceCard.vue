@@ -50,6 +50,7 @@
             DeleteJobReference
         },
 
+        // Receiving the user's job references from the Job References page
         props: {
             jobRefs: Array
         },

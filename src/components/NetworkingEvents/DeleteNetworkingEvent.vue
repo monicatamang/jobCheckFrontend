@@ -66,13 +66,13 @@
                             this.$store.commit('deleteNetworkingEvent', index);
                         }
                     }
-                    // Notifying the store that the user's networking event is deleted and showing a success message to the user
+                    // Update the store with a success message and display it on the Networking Event page
                     this.successStatus.message = "Your networking event was successfully deleted";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                     // Taking the user to the Networking Events page
                     this.$router.push('/NetworkingEvents');
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, updating the store with an error message and display it on the Networking Event page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete networking event. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);

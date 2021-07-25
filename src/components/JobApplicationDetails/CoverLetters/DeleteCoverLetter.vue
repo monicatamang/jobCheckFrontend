@@ -1,4 +1,5 @@
 <template>
+    <!-- Show delete button only if the user has an existing cover letter file -->
     <v-dialog v-model="dialog" width="500px" v-if="coverLetterId !== undefined">
         <template v-slot:activator="{ on, attrs }">
             <v-btn text outlined v-bind="attrs" v-on="on">Delete</v-btn>
@@ -20,7 +21,8 @@
 
     export default {
         name: "delete-cover-letter",
-
+        
+        // Recieving the cover letter id from the Upload Cover Letter component
         props: {
             coverLetterId: Number
         },
@@ -44,7 +46,9 @@
         },
 
         methods: {
+            // Creating a DELETE request that will delete a user's existing cover letter
             deleteCoverLetterFile() {
+                // Configuring the request with the url, type and data
                 axios.request({
                     url: `${process.env.VUE_APP_API_URL}/upload-cover-letter`,
                     method: "DELETE",
@@ -56,11 +60,14 @@
                         coverLetterId: this.coverLetterId
                     }
                 }).then((res) => {
+                    // If the network is done and there are no errors, update the store with a success message and display it on the Job Application Details page
                     console.log(res);
                     this.successStatus.message = "Your cover letter was succesfully deleted.";
                     this.$store.commit('updateCoverLetterStatus', this.successStatus);
+                    // Notifying the Upload Cover Letter component that the user's cover letter has been deleted
                     this.$emit('coverLetterIsDeleted', true);
                 }).catch((err) => {
+                    // If the network is done but the page errors, update the store with an error message and display it on the Job Application Details page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete cover letter. Please refresh the page and try again.";
                     this.$store.commit('updateCoverLetterStatus', this.errorStatus);

@@ -46,11 +46,12 @@
                         // If the network is done and there are no errors, send the search results to the store
                         console.log(res);
                         this.$store.commit('updateAllJobReferences', res.data);
-                        // If there are no results returned, print a message to the user
+                        // If there are no results returned, print a message to the user on the Job References page
                         if(res.data.length === 0) {
                             this.$store.commit('updateSearchJobReferenceStatus', "0 Job References Found");
                         }
                     }).catch((err) => {
+                        // If the network is done but the page errors, update the store with an error message and display it on the Job References page
                         console.log(err);
                         this.errorStatus.message = "Sorry, something went wrong. Please refresh the page and try again.";
                         this.$store.commit('updateJobReferenceStatus', this.errorStatus);

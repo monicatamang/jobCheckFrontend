@@ -72,6 +72,7 @@
             DeleteJobApplication
         },
 
+        // Receiving the user's job applications from the View Job Application Details component
         props: {
             jobApps: Array
         },

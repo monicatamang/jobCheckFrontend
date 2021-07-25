@@ -94,6 +94,7 @@
                     color: "#53AC84"
                 },
                 newNetworkingEvent: {
+                    loginToken: cookies.get("loginToken"),
                     eventName: "",
                     eventDate: undefined,
                     startTime: undefined,
@@ -119,29 +120,16 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                data: {
-                    loginToken: cookies.get("loginToken"),
-                    eventName: this.newNetworkingEvent.eventName,
-                    eventDate: this.newNetworkingEvent.eventDate,
-                    startTime: this.newNetworkingEvent.startTime,
-                    startTimePeriod: this.newNetworkingEvent.startTimePeriod,
-                    endTime: this.newNetworkingEvent.endTime,
-                    endTimePeriod: this.newNetworkingEvent.endTimePeriod,
-                    timeZone: this.newNetworkingEvent.timeZone,
-                    eventType: this.newNetworkingEvent.eventType,
-                    eventLocation: this.newNetworkingEvent.eventLocation,
-                    eventStatus: this.newNetworkingEvent.eventStatus,
-                    notes: this.newNetworkingEvent.notes
-                }
+                data: this.newNetworkingEvent
                 }).then((res) => {
                     // If the network is done and there are no errors, add the new networking event to the store
                     console.log(res);
                     this.$store.commit('addNewNetworkingEvent', res.data);
-                    // Notifying the store to show a success message on the Networking Events page
+                    // Updating the store with a success message and displaying it on the Networking Events page
                     this.successStatus.message = "You have successfully added a networking event";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done and the page errors, notify the store to show an error message on the Networking Events page
+                    // If the network is done and the page errors, update the store with an error message and display it on the Networking Events page
                     console.log(err);
                     this.errorStatus.message = "Failed to add networking event. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);

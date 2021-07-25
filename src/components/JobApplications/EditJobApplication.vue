@@ -15,10 +15,10 @@
                             <v-text-field v-model="editJobApp.company" label="Company" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="editJobApp.position" label="Position" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="editJobApp.jobPosition" label="Position" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="editJobApp.location" label="Location" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="editJobApp.jobLocation" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="editJobApp.employmentType" label="Employment Type" hint="Full-Time, Part-Time, Contract, etc." :color="primaryColor"></v-text-field>
@@ -29,16 +29,16 @@
                                     <v-text-field v-model="editJobApp.salaryAmount" label="Salary" prepend-inner-icon="mdi-currency-usd" :color="primaryColor"></v-text-field>
                                 </v-col>
                                 <v-col cols="6">
-                                    <v-select v-model="editJobApp.salaryRate" label="Salary Rate" :items="salaryRates" :color="primaryColor"></v-select>
+                                    <v-select v-model="editJobApp.salaryType" label="Salary Rate" :items="salaryRates" :color="primaryColor"></v-select>
                                 </v-col>
                             </v-row>
                         </v-col>
                         <v-col cols="12">
                             <v-menu ref="menu" v-model="startDateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="editJobApp.startDate" :color="primaryColor" label="Start Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
+                                    <v-text-field v-model="editJobApp.jobStartDate" :color="primaryColor" label="Start Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
                                 </template>
-                                <v-date-picker v-model="editJobApp.startDate" :color="primaryColor" no-title scrollable @input="startDateMenu = false"></v-date-picker>
+                                <v-date-picker v-model="editJobApp.jobStartDate" :color="primaryColor" no-title scrollable @input="startDateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
@@ -111,14 +111,14 @@
                 editJobApp: {
                     loginToken: cookies.get("loginToken"),
                     jobAppId: this.jobAppId,
-                    jobPostingUrl: "",
                     company: "",
-                    position: "",
-                    location: "",
+                    jobPostingUrl: "",
+                    jobPosition: "",
+                    jobLocation: "",
                     employmentType: "",
                     salaryAmount: undefined,
-                    salaryRate: "",
-                    startDate: undefined,
+                    salaryType: "",
+                    jobStartDate: undefined,
                     dueDate: undefined,
                     status: "",
                     appliedDate: undefined,
@@ -149,14 +149,15 @@
                             }
                             this.$store.commit('deleteJobApp', editedJobApp.index)
                             this.$store.commit('editJobApp', editedJobApp);
+                            // Notifying the Job Application Card component that the user has updated their job application
                             this.$emit('jobAppUpdated', true);
                         }
                     }
-                    // Notifying the store and show a success message to the user
+                    // Updating the store with a success message and displaying it on the Job Application page
                     this.successStatus.message = "Your job application was successfully updated";
                     this.$store.commit('updateJobAppStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store with an error message and displaying it on the Job Application page
                     console.log(err);
                     this.errorStatus.message = "Failed to update job application. Please refresh the page and try again.";
                     this.$store.commit('updateJobAppStatus', this.errorStatus);

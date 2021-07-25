@@ -21,6 +21,7 @@
     export default {
         name: "delete-job-reference",
 
+        // Receiving the job reference id from the Job Reference Card component
         props: {
             jobRefId: Number
         },
@@ -66,11 +67,11 @@
                             this.$store.commit('deleteJobReference', index);
                         }
                     }
-                    // Notifying the store that the user's job reference is deleted and showing a success message to the user
+                    // Update the store with a success message and display it on the Job References page
                     this.successStatus.message = "Your job reference was successfully deleted";
                     this.$store.commit('updateJobReferenceStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store with an error message and display it on the Job References page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete job reference. Please refresh the page and try again.";
                     this.$store.commit('updateJobReferenceStatus', this.errorStatus);

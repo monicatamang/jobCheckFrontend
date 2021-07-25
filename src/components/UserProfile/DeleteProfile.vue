@@ -72,7 +72,7 @@
                     // Taking the user to the Home page
                     this.$router.push('/');
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store with an error message and display it on the User's Profile page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete profile. Please refresh the page and try again.";
                     this.$store.commit('updateUserProfileStatus', this.errorStatus);

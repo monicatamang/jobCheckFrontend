@@ -16,10 +16,10 @@
                             <v-text-field v-model="createJobApp.company" label="Company*" :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="createJobApp.position" label="Position*" :color="primaryColor" required></v-text-field>
+                            <v-text-field v-model="createJobApp.jobPosition" label="Position*" :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="createJobApp.location" label="Location" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="createJobApp.jobLocation" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="createJobApp.employmentType" label="Type of Employment" hint="Full-Time, Part-Time, Contract, etc." :color="primaryColor"></v-text-field>
@@ -30,16 +30,16 @@
                                     <v-text-field v-model="createJobApp.salaryAmount" label="Salary" prepend-inner-icon="mdi-currency-usd" :color="primaryColor"></v-text-field>
                                 </v-col>
                                 <v-col cols="6">
-                                    <v-select v-model="createJobApp.salaryRate" label="Salary Rate" :items="salaryRates" :color="primaryColor"></v-select>
+                                    <v-select v-model="createJobApp.salaryType" label="Salary Rate" :items="salaryRates" :color="primaryColor"></v-select>
                                 </v-col>
                             </v-row>
                         </v-col>
                         <v-col cols="12">
                             <v-menu ref="menu" v-model="startDateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="createJobApp.startDate" :color="primaryColor" label="Start Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
+                                    <v-text-field v-model="createJobApp.jobStartDate" :color="primaryColor" label="Start Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
                                 </template>
-                                <v-date-picker v-model="createJobApp.startDate" :color="primaryColor" no-title scrollable @input="startDateMenu = false"></v-date-picker>
+                                <v-date-picker v-model="createJobApp.jobStartDate" :color="primaryColor" no-title scrollable @input="startDateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
@@ -105,14 +105,15 @@
                     color: "#53AC84"
                 },
                 createJobApp: {
-                    jobPostingUrl: "",
+                    loginToken: cookies.get("loginToken"),
                     company: "",
-                    position: "",
-                    location: "",
+                    jobPostingUrl: "",
+                    jobPosition: "",
+                    jobLocation: "",
                     employmentType: "",
                     salaryAmount: undefined,
-                    salaryRate: "",
-                    startDate: undefined,
+                    salaryType: "",
+                    jobStartDate: undefined,
                     dueDate: undefined,
                     status: "",
                     appliedDate: undefined,
@@ -131,30 +132,16 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                data: {
-                    loginToken: cookies.get("loginToken"),
-                    company: this.createJobApp.company,
-                    jobPostingUrl: this.createJobApp.jobPostingUrl,
-                    jobPosition: this.createJobApp.position,
-                    jobLocation: this.createJobApp.location,
-                    employmentType: this.createJobApp.employmentType,
-                    salaryType: this.createJobApp.salaryRate,
-                    salaryAmount: this.createJobApp.salaryAmount,
-                    jobStartDate: this.createJobApp.startDate,
-                    dueDate: this.createJobApp.dueDate,
-                    status: this.createJobApp.status,
-                    appliedDate: this.createJobApp.appliedDate,
-                    notes: this.createJobApp.notes
-                }
+                data: this.createJobApp
                 }).then((res) => {
                     // If the network is done and there are no errors, add the new job application to the store
                     console.log(res);
                     this.$store.commit('addNewJobApp', res.data);
-                    // Notifying the store to show a success message on the Job Application page
+                    // Updating the store with a success message and displaying it on the Job Application page
                     this.successStatus.message = "You have successfully added a job application";
                     this.$store.commit('updateJobAppStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done and the page errors, notify the store to show an error message on the Job Application page
+                    // If the network is done and the page errors, update the store with error message and display it on the Job Application page
                     console.log(err);
                     this.errorStatus.message = "Failed to add job application. Please refresh the page and try again.";
                     this.$store.commit('updateJobAppStatus', this.errorStatus);

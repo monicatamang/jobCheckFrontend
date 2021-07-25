@@ -21,6 +21,7 @@
     export default {
         name: "delete-job-application",
 
+        // Recieving the job application id from the Job Application Card component
         props: {
             jobAppId: Number
         },
@@ -66,13 +67,13 @@
                             this.$store.commit('deleteJobApp', index);
                         }
                     }
-                    // Notifying the store that the user's job application is deleted and showing a success message to the user
+                    // Updating the store with a success message and displaying it on the Job Application page
                     this.successStatus.message = "Your job application was successfully deleted";
                     this.$store.commit('updateJobAppStatus', this.successStatus);
                     // Taking the user to the Job Applications page
                     this.$router.push('/JobApplications');
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store an error message and display it on the Job Application page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete job application. Please refresh the page and try again.";
                     this.$store.commit('updateJobAppStatus', this.errorStatus);

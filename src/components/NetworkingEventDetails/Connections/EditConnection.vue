@@ -54,6 +54,7 @@
     export default {
         name: "edit-connection",
 
+        // Receiving the connection id from the Connection Card component
         props: {
             connectionId: Number
         },
@@ -114,11 +115,11 @@
                             this.$store.commit('editConnection', editedConnection);
                         }
                     }
-                    // Notifying the store and show a success message to the user
+                    // Updating the store with a success message and displaying it on the Networking Event Details page
                     this.successStatus.message = "Your connection was successfully updated";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, updating the store with an error message and display it on the Networking Event Details page
                     console.log(err);
                     this.errorStatus.message = "Failed to update connection. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);

@@ -105,11 +105,11 @@
                     // If the network is done and there are no errors, add the new job reference to the store
                     console.log(res);
                     this.$store.commit('addNewJobReference', res.data);
-                    // Notifying the store to show a success message on the Job References page
+                    // Update the store with a success message and display it on the Job References page
                     this.successStatus.message = "You have successfully added a job reference";
                     this.$store.commit('updateJobReferenceStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done and the page errors, notify the store to show an error message on the Job References page
+                    // If the network is done and the page errors, update the store wtih an error message and display it on the Job References page
                     console.log(err);
                     this.errorStatus.message = "Failed to add job reference. Please refresh the page and try again.";
                     this.$store.commit('updateJobReferenceStatus', this.errorStatus);

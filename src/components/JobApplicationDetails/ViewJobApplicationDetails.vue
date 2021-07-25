@@ -82,7 +82,7 @@
                     <upload-cover-letter :jobAppId="detail.jobAppId"></upload-cover-letter>
                 </v-tab-item>
                 <v-tab-item>
-                    <interview-card :interviews="userInterviews" :jobAppId="detail.jobAppId" @sendUpdatedInterview="notifyJobAppDetails" @sendIndexOfDeletedInterview="sendIndexToJobAppDetails"></interview-card>
+                    <interview-card :interviews="userInterviews" :jobAppId="detail.jobAppId" @sendUpdatedInterview="notifyJobAppDetails" @notifyJobAppDetailsInterviewDeleted="sendDeletedJobAppToJobAppDetails"></interview-card>
                     <add-interview :jobAppId="detail.jobAppId" @newInterviewCreated="passInterviewToDetailsPage"></add-interview>
                 </v-tab-item>
             </v-tabs>
@@ -129,20 +129,28 @@
                 this.$router.push('/JobApplications');
             },
 
-            passInterviewToDetailsPage(data) {
-                this.$emit("printInterview", data);
+            // Listening to the Edit Job Application componet for when a user updates a job application
+            handleJobAppUpdated(data) {
+                // Notifying the Job Application Details page that a job application was updated
+                this.$emit('notifyDetailsPage', data);
             },
 
-            notifyJobAppDetails(data) {
-                this.$emit('printUpdatedInterview', data);
-            },
-
-            sendIndexToJobAppDetails(data) {
+            // Listening to the Delete Job Application component for when a user deletes a job application
+            sendDeletedJobAppToJobAppDetails(data) {
+                // Notifying the Job Application Details page that a job application was deleted
                 this.$emit('deleteInterviewFromPage', data);
             },
 
-            handleJobAppUpdated(data) {
-                this.$emit('notifyDetailsPage', data);
+            // Listening to the Add Interview component for when a user adds an interview
+            passInterviewToDetailsPage(data) {
+                // Notifying the Job Application Details page that an interview was added
+                this.$emit("printInterview", data);
+            },
+
+            // Listening to the Interview Card component for when a user updates an interview
+            notifyJobAppDetails(data) {
+                // Notifying the Job Application Details page that an interview was updated
+                this.$emit('printUpdatedInterview', data);
             }
         }
     }

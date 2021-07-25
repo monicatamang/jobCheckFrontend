@@ -34,18 +34,22 @@
         },
 
         methods: {
+            // Taking the user to the Job Applications page
             goTojobApplicationsPage() {
                 this.$router.push("/JobApplications");
             },
 
+            // Taking the user to the Interviews page
             goToInterviewsPage() {
                 this.$router.push("/Interviews");
             },
 
+            // Taking the user to the Networking Events page
             goToNetworkingEventsPage() {
                 this.$router.push("/NetworkingEvents");
             },
 
+            // Taking the user to the Job References page
             goToJobReferencesPage() {
                 this.$router.push("/JobReferences");
             }

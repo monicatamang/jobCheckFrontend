@@ -104,7 +104,7 @@
                     console.log(res);
                     this.filteredInterviews = res.data;
                 }).catch((err) => {
-                    // If the network is done but the page errors, show a error message to the user
+                    // If the network is done but the page errors, updating the store with an error message and displaying it on the page
                     console.log(err);
                     let errorStatus = {
                     show: true,
@@ -112,7 +112,6 @@
                     icon: "mdi-alert-circle",
                     color: "#B34C59"
                     }
-                    // Updating the error message in the store
                     this.$store.commit('updateInterviewStatus', errorStatus);
                 });
             },

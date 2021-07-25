@@ -83,13 +83,13 @@
                     console.log(res);
                     let updatedUserProfile = JSON.stringify(res.data);
                     cookies.set("userData", updatedUserProfile);
-                    // Notify the 'User Profile' page that the user has been updated
+                    // Notify the User Profile page that the user has been updated
                     this.$emit('userProfileUpdated', res.data);
-                    // Notifying the store and show a success message to the user
+                    // Update the store with a success message and display it on the User's Profile page
                     this.successStatus.message = "Your profile was successfully updated";
                     this.$store.commit('updateUserProfileStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store with an error message and display it on the User's Profile page
                     console.log(err);
                     this.errorStatus.message = "Failed to update profile. Please refresh the page and try again.";
                     this.$store.commit('updateUserProfileStatus', this.errorStatus);

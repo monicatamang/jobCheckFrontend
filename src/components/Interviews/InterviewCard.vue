@@ -61,6 +61,7 @@
             DeleteInterview
         },
 
+        // Receiving the user's interviews from the View Job Application Details component and Interview page
         props: {
             interviews: Array
         },
@@ -73,12 +74,16 @@
         },
 
         methods: {
+            // Listening to the Edit Interview component for when an interview has been updated
             handleInterviewUpdated(data) {
+                // Notifying the View Job Application Details component that an interview has been updated
                 this.$emit('sendUpdatedInterview', data);
             },
 
+            // Listening to the Delete Interview component for when an interview has been deleted
             handleInterviewDeleted(data) {
-                this.$emit('sendIndexOfDeletedInterview', data);
+                // Notifying the View Job Application Details component that an interview was deleted
+                this.$emit('notifyJobAppDetailsInterviewDeleted', data);
             }
         },
     }

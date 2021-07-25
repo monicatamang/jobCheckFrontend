@@ -71,16 +71,20 @@
             DeleteInterview
         },
 
+        // Receiving an array of one user's interview
         props: {
             details: Array
         },
 
         methods: {
+            // Taking the user to the previous page
             goToPreviousPage() {
                 this.$router.go(-1);
             },
 
+            // Listening to the Edit Interview component for when a user updates their interview
             handleInterviewUpdated(data) {
+                // Notifying the Intervew Details page that the user updated their interview
                 this.$emit('sendUpdatedInterviewToDetailsPage', data);
             }
         },

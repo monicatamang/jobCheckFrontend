@@ -21,6 +21,7 @@
     export default {
         name: "delete-connection",
 
+        // Receiving the connection id from the Connection Card component
         props: {
             connectionId: Number
         },
@@ -66,11 +67,11 @@
                             this.$store.commit('deleteConnection', index);
                         }
                     }
-                    // Notifying the store that the user's networking event is deleted and showing a success message to the user
+                    // Updating the store with a success message and displaying it on the Networking Event Details page
                     this.successStatus.message = "Your connection was successfully deleted";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store with an error message and display it on the Networking Event Details page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete connection. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);

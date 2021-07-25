@@ -64,16 +64,17 @@
                         if(this.currentInterviews[i].interviewId === this.interviewId) {
                             let index = i;
                             this.$store.commit('deleteInterview', index);
+                            // Notifying the Interview Card component that an interview has been deleted
                             this.$emit('interviewDeleted', true);
                         }
                     }
-                    // Notifying the store that the user's interview is deleted and showing a success message to the user
+                    // Updating the store with a success message and displaying it to the user on the Interviews page
                     this.successStatus.message = "Your interview was successfully deleted";
                     this.$store.commit('updateInterviewStatus', this.successStatus);
                     // Taking the user to the previous page
                     this.$router.go(-1);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store with an error message and display it to the user on the Interviews page
                     console.log(err);
                     this.errorStatus.message = "Failed to delete interview. Please refresh the page and try again.";
                     this.$store.commit('updateInterviewStatus', this.errorStatus);

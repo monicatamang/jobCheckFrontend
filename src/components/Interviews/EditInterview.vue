@@ -22,7 +22,7 @@
                                     <v-text-field v-model="replaceInterview.interviewTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
                                 </v-col>
                                 <v-col cols="6">
-                                    <v-select v-model="replaceInterview.interviewTimePeriod" label="AM/PM" :items="timePeriod" :color="primaryColor"></v-select>
+                                    <v-select v-model="replaceInterview.interviewTimePeriod" label="AM/PM" :items="timePeriods" :color="primaryColor"></v-select>
                                 </v-col>
                             </v-row>
                         </v-col>
@@ -65,7 +65,7 @@
             return {
                 dialog: false,
                 primaryColor: "#52688F",
-                timePeriod: ['AM', 'PM'],
+                timePeriods: ['AM', 'PM'],
                 dateMenu: false,
                 errorStatus: {
                     show: true,
@@ -115,14 +115,15 @@
                             }
                             this.$store.commit('deleteInterview', editedInterview.index);
                             this.$store.commit('editInterview', editedInterview);
+                            // Notify the Interview Card component and View Interiew Details component that an interview has been updated
                             this.$emit('interviewUpdated', true);
                         }
                     }
-                    // Notifying the store and show a success message to the user
+                    // Updating the store with a success message and displaying it to the user on the Interviews page
                     this.successStatus.message = "Your interview was successfully updated";
                     this.$store.commit('updateInterviewStatus', this.successStatus);
                 }).catch((err) => {
-                    // If the network is done but the page errors, notify the store and show an error message to the user
+                    // If the network is done but the page errors, update the store with an error message and display it to the user on the Interviews page
                     console.log(err);
                     this.errorStatus.message = "Failed to update interview. Please refresh the page and try again.";
                     this.$store.commit('updateInterviewStatus', this.errorStatus);
@@ -131,6 +132,7 @@
         },
 
         computed: {
+            // Getting all the user's interviews from the store
             currentInterviews() {
                 return this.$store.state.allInterviews;
             }
