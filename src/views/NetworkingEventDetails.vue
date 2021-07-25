@@ -25,7 +25,7 @@
         data() {
             return {
                 loginToken: cookies.get("loginToken"),
-                clearNetworkingEventStatus: {
+                clearStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -51,7 +51,7 @@
         },
 
         methods: {
-            // Getting a specific networking event from the store
+            // Creating a GET request to get a specific networking event
             getSingleNetworkingEvent() {
                 // Configuring the request with the url, type and data
                 axios.request({
@@ -77,19 +77,19 @@
                     icon: "mdi-alert-circle",
                     color: "#B34C59"
                     }
-                    // Updating the error message
+                    // Updating the error message in the store
                     this.$store.commit('updateNetworkingEventStatus', errorStatus);
                 });
             },
 
-            // Listening to the 'ViewNetworkingEventDetails' component and appending the new connection to the page
+            // Listening to the View Networking Event Details component for when a user adds a networking event
             appendConnectionToPage(data) {
                 this.userConnections.unshift(data);
             },
 
-            // Listening to the 'ViewNetworkingEventDetails' component and updating the networking event details on the page
+            // Listening to the View Networking Event Details component for when a user edits a networking event
             replaceWithUpdatedDetails(data) {
-                // If the networking event has been updated, get the updated networking event from the API
+                // If the user's networking event is edited, get the updated networking event from the API
                 if(data) {
                     this.getSingleNetworkingEvent();
                 }
@@ -97,17 +97,20 @@
         },
 
         computed: {
-            showNetworkingEventStatus() {
-                return this.$store.state.networkingEventStatus; 
+            // Getting all the user's networking events from the store
+            allCurrentNetworkingEvents() {
+                return this.$store.state.allNetworkingEvents;
             },
 
+            // Getting all the user's connection from the store
             userConnections() {
                 return this.$store.state.allConnections;
             },
 
-            allCurrentNetworkingEvents() {
-                return this.$store.state.allNetworkingEvents;
-            }
+            // Getting the API request status for when a user creates, edits, deletes or gets a networking event
+            showNetworkingEventStatus() {
+                return this.$store.state.networkingEventStatus; 
+            },
         },
 
         mounted() {
@@ -122,7 +125,7 @@
             }
 
             // Clearing any messages printed to the user
-            this.$store.commit('updateNetworkingEventStatus', this.clearNetworkingEventStatus);
+            this.$store.commit('updateNetworkingEventStatus', this.clearStatus);
         }
     }
 </script>

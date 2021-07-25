@@ -45,7 +45,7 @@
                 all: false,
                 upcoming: false,
                 attended: false,
-                clearNetworkingEventStatus: {
+                clearStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -88,7 +88,7 @@
             }
 
             // Clearing any messages printed to the user
-            this.$store.commit('updateNetworkingEventStatus', this.clearNetworkingEventStatus);
+            this.$store.commit('updateNetworkingEventStatus', this.clearStatus);
 
             // If the networking events are not shown on the page, get all the user's networking events from the store
             if(this.userNetworkingEvents.length <= 0) {

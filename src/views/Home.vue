@@ -29,10 +29,12 @@
         },
 
         methods: {
+            // Taking the user to the Create Account page
             goToCreateAccountPage() {
                 this.$router.push('/CreateAccount');
             },
 
+            // Taking the user to the Login page
             goToLoginPage() {
                 this.$router.push('/Login');
             }

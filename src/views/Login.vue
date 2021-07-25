@@ -51,7 +51,7 @@
         methods: {
             // Creating a function that logs in a user
             loginUser() {
-                // Configuring the request with the url, type, and data
+                // Configuring the request with the url, type and data
                 axios.request({
                 url: `${process.env.VUE_APP_API_URL}/login`,
                 method: "POST",

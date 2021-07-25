@@ -81,12 +81,12 @@
                     icon: "mdi-alert-circle",
                     color: "#B34C59"
                     }
-                    // Updating the error message
+                    // Updating the error message in the store
                     this.$store.commit('updateJobAppStatus', errorStatus);
                 });
             },
 
-            // Creating a GET request to get the user's interviews from specific job applications
+            // Creating a GET request to get the user's interviews that belong to a job application
             getFilteredInterviews() {
                 // Configuring the request with the url, type and data
                 axios.request({
@@ -100,7 +100,7 @@
                     jobAppId: Number(this.$route.params.jobAppId)
                 }
                 }).then((res) => {
-                    // If the network is done and there are no errors, store the user's interviews
+                    // If the network is done and there are no errors, store the user's interviews into the filtered interviews array
                     console.log(res);
                     this.filteredInterviews = res.data;
                 }).catch((err) => {
@@ -112,54 +112,66 @@
                     icon: "mdi-alert-circle",
                     color: "#B34C59"
                     }
-                    // Updating the error message
+                    // Updating the error message in the store
                     this.$store.commit('updateInterviewStatus', errorStatus);
                 });
             },
 
+            // Listening to the View Job Application Details component for when a user edits their job application
+            replaceWithUpdatedJobApp(data) {
+                // If the user's job application is edited, get the updated job application from the API
+                if(data) {
+                    this.getSingleJobApp()
+                }
+            },
+
+            // Listening to the View Job Application Details component for when a user adds an interview
             appendInterview(data) {
+                // Appending the new interview to the filtered interviews array
                 this.filteredInterviews.unshift(data);
             },
 
+            // Listening to the View Job Application Details component for when a user edits their interview
             replaceWithUpdatedInterview(data) {
+                // If the user edits their interview, get the udpated interview from the API
                 if(data) {
                     this.getFilteredInterviews();
                 }
             },
 
+            // Listening to the View Job Application Details component for when a user deletes their interview
             removeInterview(data) {
+                // If the user deletes their interview, get the current interviews that belong to a job application from the API
                 if(data) {
                     this.getFilteredInterviews();
-                }
-            },
-
-            replaceWithUpdatedJobApp(data) {
-                if(data) {
-                    this.getSingleJobApp()
                 }
             }
         },
 
         computed: {
-            showResumeStatus() {
-                return this.$store.state.resumeStatus;
-            },
-
+            // Getting the API status from the store when a user adds, edits, deletes or gets their interviews
             showInterviewStatus() {
                 return this.$store.state.interviewStatus;
             },
 
+            // Getting all the user's interviews from the store
             currentInterviews() {
                 return this.$store.state.allInterviews;
             },
 
+            // Getting the API status from the store when a user uploads, downloads or deletes their resume
+            showResumeStatus() {
+                return this.$store.state.resumeStatus;
+            },
+
+            // Getting the API status from the store when a user uploads, downloads or deletes their cover letter
             showCoverLetterStatus() {
                 return this.$store.state.coverLetterStatus;
             }
         },
 
         mounted() {
-            // If the user's filtered interview are not shown on the page, send an API request to get the user's filtered interviews
+            // If the user's filtered interviews are not shown on the page, send an API request to get the user's filtered interviews
             if(this.filteredInterviews.length <= 0) {
                 this.getFilteredInterviews();
             }

@@ -40,12 +40,6 @@
                         notes: this.$route.params.notes
                     }
                 ],
-                clearStatus: {
-                    show: false,
-                    message: "",
-                    icon: "",
-                    color: ""
-                }
             }
         },
 
@@ -76,12 +70,14 @@
                     icon: "mdi-alert-circle",
                     color: "#B34C59"
                     }
-                    // Updating the error message
+                    // Updating the error message in the store
                     this.$store.commit('updateInterviewStatus', errorStatus);
                 });
             },
 
+            // Listening to the View Interview Details component for when an interview is updated
             updateInterviewOnPage(data) {
+                // If a user's interview is updated, get the updated interview from the API
                 if(data) {
                     this.getSingleInterview();
                 }
@@ -89,12 +85,13 @@
         },
 
         computed: {
+            // Getting the API request status from the store when getting the user's interviews
             showInterviewStatus() {
                 return this.$store.state.interviewStatus; 
             }
         },
 
-        mounted () {
+        mounted() {
             // If the user does not have a login token, take the user back to the Home page
             if(this.loginToken === null || this.loginToken === '') {
                 this.$router.push("/");

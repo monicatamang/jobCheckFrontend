@@ -25,13 +25,13 @@ export default {
       this.$router.push("/JobApplications");
     }
 
+    // If the user is logged in, get the user's exisiting job applications, interviews, networking events, connections and job references  
     if(this.userData !== null && this.userData !== '') {
+      this.$store.dispatch('getJobApps', this.userData.userId);
       this.$store.dispatch('getInterviews', this.userData.userId);
+      this.$store.dispatch('getNetworkingEvents', this.userData.userId);
       this.$store.dispatch('getConnections', this.userData.userId);
       this.$store.dispatch('getJobReferences', this.userData.userId);
-      this.$store.dispatch('getJobApps', this.userData.userId);
-      this.$store.dispatch('getConnections', this.userData.userId);
-      this.$store.dispatch('getNetworkingEvents', this.userData.userId);
     }
   }
 };

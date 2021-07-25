@@ -47,14 +47,17 @@
         },
 
         computed: {
+            // Getting all the user's job references from the store
             currentJobReferences() {
                 return this.$store.state.allJobReferences; 
             },
 
+            // Getting the API request status when a user adds, edits, deletes or gets a job reference
             showJobReferenceStatus() {
                 return this.$store.state.jobReferenceStatus;
             },
 
+            // Getting the API request status when a user searches for a job reference
             showSearchJobReferenceStatus() {
                 return this.$store.state.searchJobReferenceStatus;
             }

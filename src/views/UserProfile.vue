@@ -52,25 +52,28 @@
         },
 
         methods: {
+            // Taking the user to the previous page
             goToPreviousPage() {
                 this.$router.go(-1);
             },
 
-            // Listening to the 'AccountInformation' component and updated the user's data
+            // Listening to the Account Information component for when a user edits their profile
             showUpdatedProfileOnPage(data) {
+                // Replacing the old user' profile data with the updated user's profile data
                 this.userData = data;
             }
         },
 
         computed: {
-            // Getting the API request status from the status when a user logs out
+            // Getting the API request status from the store when a user edits or deletes their profile
+            showUserProfileStatus() {
+                return this.$store.state.userProfileStatus;
+            },
+
+            // Getting the API request status from the store when a user logs out
             showLogoutStatus() {
                 return this.$store.state.logoutStatus; 
             },
-
-            showUserProfileStatus() {
-                return this.$store.state.userProfileStatus;
-            }
         },
 
         mounted() {

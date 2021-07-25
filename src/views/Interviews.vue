@@ -46,20 +46,24 @@
         },
 
         methods: {
+            // Getting all the user's interviews from the API
             getAllUserInterviews() {
                 this.$store.dispatch('getInterviews', cookies.get("userData").userId);
             }
         },
 
         computed: {
+            // Getting all the user's interviews from the store
             userInterviews() {
                 return this.$store.state.allInterviews; 
             },
 
+            // Getting the API request status when creating, editing, deleting or getting interviews
             showInterviewStatus() {
                 return this.$store.state.interviewStatus;
             },
 
+            // Getting the API request status when a user is searching for interviews
             showSearchInterviewStatus() {
                 return this.$store.state.searchInterviewStatus;
             }
