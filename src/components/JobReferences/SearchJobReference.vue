@@ -61,14 +61,17 @@
 
             // Getting all the user's current job references and showing them on the page
             getCurrentJobRefs() {
-                // Clearing any message printed to the user
-                this.$store.commit('updateSearchJobReferenceStatus', "");
-                // Getting the user's job references from the store
-                this.$store.dispatch('getJobReferences', cookies.get("userData").userId);
-                // Resetting the input field
-                this.searchJobReferenceInput = "";
-                // Removing the 'close' icon
-                this.sendIcon = "";
+                // Executive the following lines of code only if the user types content into the search bar
+                if(this.searchJobRefInput !== '') {
+                    // Clearing any message printed to the user
+                    this.$store.commit('updateSearchJobReferenceStatus', "");
+                    // Getting the user's job references from the store
+                    this.$store.dispatch('getJobReferences', cookies.get("userData").userId);
+                    // Resetting the input field
+                    this.searchJobRefInput = "";
+                    // Removing the 'close' icon
+                    this.sendIcon = "";
+                }
             }
         }
     }

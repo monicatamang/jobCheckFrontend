@@ -30,7 +30,7 @@
                 // Clearing any messages printed to the user
                 this.$store.commit('updateSearchNetworkingEventStatus', "");
                 // If the user does not input anything into the search bar, do not send the request
-                if(this.searchNetworkingInput !== '') {
+                if(this.searchNetworkingEventInput !== '') {
                     // Configuring the request with the url, type and data
                     axios.request({
                     url: `${process.env.VUE_APP_API_URL}/search-networking-events`,
@@ -61,14 +61,17 @@
 
             // Getting all the user's current job applications and showing them on the page
             getCurrentNetworkingEvents() {
-                // Clearing any message printed to the user
-                this.$store.commit('updateSearchNetworkingEventStatus', "");
-                // Getting the user's job applications from the store
-                this.$store.dispatch('getNetworkingEvents', cookies.get("userData").userId);
-                // Resetting the input field
-                this.searchNetworkingEventInput = "";
-                // Removing the 'close' icon
-                this.sendIcon = "";
+                // Executive the following lines of code only if the user types content into the search bar
+                if(this.searchNetworkingEventInput !== '') {
+                    // Clearing any message printed to the user
+                    this.$store.commit('updateSearchNetworkingEventStatus', "");
+                    // Getting the user's job applications from the store
+                    this.$store.dispatch('getNetworkingEvents', cookies.get("userData").userId);
+                    // Resetting the input field
+                    this.searchNetworkingEventInput = "";
+                    // Removing the 'close' icon
+                    this.sendIcon = "";
+                }
             }
         }
     }

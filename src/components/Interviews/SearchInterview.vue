@@ -61,14 +61,17 @@
 
             // Getting all the user's current interviews and showing them on the page
             getCurrentInterviews() {
-                // Clearing any message printed to the user
-                this.$store.commit('updateSearchInterviewStatus', "");
-                // Getting the user's interviews from the store
-                this.$store.dispatch('getInterviews', cookies.get("userData").userId);
-                // Resetting the input field
-                this.searchInterviewInput = "";
-                // Removing the 'close' icon
-                this.sendIcon = "";
+                // Executive the following lines of code only if the user types content into the search bar
+                if(this.searchInterviewInput !== '') {
+                    // Clearing any message printed to the user
+                    this.$store.commit('updateSearchInterviewStatus', "");
+                    // Getting the user's interviews from the store
+                    this.$store.dispatch('getInterviews', cookies.get("userData").userId);
+                    // Resetting the input field
+                    this.searchInterviewInput = "";
+                    // Removing the 'close' icon
+                    this.sendIcon = "";
+                }
             }
         }
     }

@@ -61,14 +61,17 @@
 
             // Getting all the user's current job applications and showing them on the page
             getCurrentJobApps() {
-                // Clearing any message printed to the user
-                this.$store.commit('updateSearchJobAppStatus', "");
-                // Getting the user's job applications from the store
-                this.$store.dispatch('getJobApps', cookies.get("userData").userId);
-                // Resetting the input field
-                this.searchJobAppInput = "";
-                // Removing the 'close' icon
-                this.sendIcon = "";
+                // Executive the following lines of code only if the user types content into the search bar
+                if(this.searchJobAppInput !== '') {
+                    // Clearing any message printed to the user
+                    this.$store.commit('updateSearchJobAppStatus', "");
+                    // Getting the user's job applications from the store
+                    this.$store.dispatch('getJobApps', cookies.get("userData").userId);
+                    // Resetting the input field
+                    this.searchJobAppInput = "";
+                    // Removing the 'close' icon
+                    this.sendIcon = "";
+                }
             }
         }
     }
