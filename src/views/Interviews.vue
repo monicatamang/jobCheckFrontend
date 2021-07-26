@@ -85,6 +85,7 @@
 
             // Clearing any messages printed to the user
             this.$store.commit('updateInterviewStatus', this.clearStatus);
+            this.$store.commit('updateSearchInterviewStatus', "");
         },
     }
 </script>
@@ -144,6 +145,11 @@
 
         #interviewCardsComp {
             margin: 20vh 0vw 0vh 0vw;
+        }
+
+        h4 {
+            left: 10%;
+            font-size: 1.2rem;
         }
     }
 </style>

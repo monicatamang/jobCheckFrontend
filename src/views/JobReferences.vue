@@ -40,7 +40,7 @@
         data() {
             return {
                 loginToken: cookies.get("loginToken"),
-                clearJobRefStatus: {
+                clearStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -73,7 +73,8 @@
             }
 
             // Clearing any messages printed to the user
-            this.$store.commit('updateJobReferenceStatus', this.clearJobRefStatus);
+            this.$store.commit('updateJobReferenceStatus', this.clearStatus);
+            this.$store.commit('updateSearchJobReferenceStatus', "");
         },
     }
 </script>
@@ -117,5 +118,17 @@
 
     section {
         margin-top: 7vh;
+    }
+
+    @media only screen and (min-width: 768px) {
+        
+        h4 {
+            left: 10%;
+            font-size: 1.2rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        
     }
 </style>

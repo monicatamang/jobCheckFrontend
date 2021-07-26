@@ -90,26 +90,21 @@
                 this.$router.push("/");
             }
 
-            // Clearing any messages printed to the user
-            this.$store.commit('updateNetworkingEventStatus', this.clearStatus);
-
             // If the networking events are not shown on the page, get all the user's networking events from the store
             if(this.userNetworkingEvents.length <= 0) {
                 this.$store.dispatch('getNetworkingEvents', cookies.get("userData").userId);
             }
+
+            // Clearing any messages printed to the user
+            this.$store.commit('updateNetworkingEventStatus', this.clearStatus);
+            this.$store.commit('updateSearchNetworkingEventStatus', "");
         },
     }
 </script>
 
 <style scoped>
-    h1 {
-        font-family: var(--titleFont);
-        text-transform: uppercase;
-        font-weight: 800;
-        color: var(--primaryColor);
-        margin-top: 3vh;
-        font-size: 1.4rem;
-        letter-spacing: 1px;
+    section {
+        margin-top: 7vh;
     }
 
     section, #searchBarContainer {
@@ -130,8 +125,14 @@
         border-bottom: 1px solid whitesmoke;
     }
 
-    section {
-        margin-top: 7vh;
+    h1 {
+        font-family: var(--titleFont);
+        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--primaryColor);
+        margin-top: 3vh;
+        font-size: 1.4rem;
+        letter-spacing: 1px;
     }
 
     h4, .v-chip-group {
@@ -146,5 +147,40 @@
         top: 22vh;
         font-family: var(--titleFont);
         font-weight: 400;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        section {
+            margin-top: 0vh;
+        }
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        #searchBarContainer {
+            top: 0;
+            padding-bottom: 2%;
+            margin-left: 10%;
+        }
+
+        .v-chip-group {
+            top: 20vh;
+            margin-left: 22%;
+        }
+
+        .v-chip {
+            font-size: 1.05rem;
+        }
+
+        h4 {
+            left: 10%;
+            font-size: 1.2rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        
     }
 </style>

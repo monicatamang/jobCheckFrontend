@@ -1,6 +1,6 @@
 <template>
     <article id="networkingEventCardsContainer">
-        <div v-for="networkingEvent in networkingEvents" :key="networkingEvent.networkingEventId" class="networkingEventCard">
+        <div v-for="networkingEvent in networkingEvents" :key="networkingEvent.networkingEventId" class="networkingEventCard px-sm-6 pb-sm-9 pt-sm-7">
             <v-container>
                 <v-row>
                     <v-col cols="9" v-if="networkingEvent.eventStatus === 'Upcoming'">
@@ -13,7 +13,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                    <v-icon class="mr-n3">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n3 mr-sm-n12">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -98,7 +98,6 @@
         place-items: center;
         row-gap: 2vh;
         margin: 20vh 0vw 15vh 0vw;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         width: 100%;
     }
 
@@ -131,5 +130,28 @@
 
     .v-list {
         z-index: -1;
+    }
+
+    @media only screen and (min-width: 768px) {
+        
+        .networkingEventCard {
+            height: 100%;
+            width: 100%;
+        }
+
+        #networkingEventCardsContainer {
+            margin-left: 20%;
+            width: 55%;
+            margin-top: 22vh;
+            margin-bottom: 10vh;
+        }
+
+        h4, a {
+            font-size: 1.15rem;
+        }
+
+        .v-chip {
+            font-size: 1rem;
+        }
     }
 </style>

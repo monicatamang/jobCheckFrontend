@@ -52,7 +52,7 @@
                 notApplied: false,
                 applied: false,
                 closed: false,
-                clearJobAppStatus: {
+                clearStatus: {
                     show: false,
                     message: "",
                     icon: "",
@@ -106,7 +106,8 @@
             }
 
             // Clearing any messages printed to the user
-            this.$store.commit('updateJobAppStatus', this.clearJobAppStatus);
+            this.$store.commit('updateJobAppStatus', this.clearStatus);
+            this.$store.commit('updateSearchJobAppStatus', "");
         },
     }
 </script>
@@ -127,7 +128,6 @@
         position: fixed;
         top: 7%;
         z-index: 1;
-        border-top: 1px solid rgba(211, 211, 211, 0.5);
         border-bottom: 1px solid whitesmoke;
     }
 
@@ -174,6 +174,11 @@
 
         .v-chip {
             font-size: 1.05rem;
+        }
+
+        h4 {
+            left: 10%;
+            font-size: 1.2rem;
         }
     }
 </style>

@@ -177,7 +177,7 @@
         #addButton {
             right: 0;
             bottom: 0;
-            width: 80%;
+            left: 10%;
         }
 
         .v-btn.v-size--large {
