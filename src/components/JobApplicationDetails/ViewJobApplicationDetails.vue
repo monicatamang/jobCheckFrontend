@@ -256,5 +256,9 @@
         .v-btn .v-icon {
             font-size: 2.2rem;
         }
+
+        .importantDetailsContainer div, .otherDetails div {
+            row-gap: 10px;
+        }
     }
 </style>

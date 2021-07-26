@@ -144,7 +144,9 @@
         }
 
         #interviewCardsComp {
-            margin: 20vh 0vw 0vh 0vw;
+            margin-left: 20%;
+            width: 80%;
+            margin-top: 20vh;
         }
 
         h4 {

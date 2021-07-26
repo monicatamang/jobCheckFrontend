@@ -103,7 +103,6 @@
         display: grid;
         place-items: center;
         row-gap: 2vh;
-        /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
         width: 100%;
         padding: 6% 0% 10% 0%;
         background: var(--backgroundColorTwo);
@@ -142,18 +141,13 @@
 
     @media only screen and (min-width: 768px) {
 
-        #interviewCardsContainer {
-            margin-left: 33%;
-            width: 55%;
-        }
-
         .interviewCard {
             height: 100%;
-            width: 100%;
+            width: 70%;
         }
 
         h4, a {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
         }
     }
 </style>
