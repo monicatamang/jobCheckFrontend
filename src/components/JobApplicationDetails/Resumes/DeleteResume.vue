@@ -81,4 +81,14 @@
     .v-btn {
         text-transform: capitalize;
     }
+
+    @media only screen and (min-width: 768px) {
+
+        .v-btn.v-size--default {
+            width: 80%;
+            font-size: 1rem;
+            padding: 14.5%;
+            margin-left: -10vw;
+        }
+    }
 </style>

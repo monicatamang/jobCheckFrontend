@@ -1,6 +1,6 @@
 <template>
     <!-- Show the download button only if the user has an existing cover letter -->
-    <v-btn outlined :color="primaryColor" v-if="coverLetterId !== undefined" @click="getCoverLetterName">Download</v-btn>
+    <v-btn outlined :color="primaryColor" v-if="coverLetterId !== undefined" @click="getCoverLetterName" class="mb-sm-3">Download</v-btn>
 </template>
 
 <script>
@@ -93,5 +93,12 @@
 </script>
 
 <style scoped>
+    @media only screen and (min-width: 768px) {
 
+        .v-btn.v-size--default {
+            width: 70%;
+            font-size: 1rem;
+            padding: 10%;
+        }
+    }
 </style>

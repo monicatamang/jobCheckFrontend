@@ -3,13 +3,13 @@
         <div v-for="detail in details" :key="detail.jobAppId">
             <v-container>
                 <v-row>
-                    <v-col cols="9">
-                        <v-btn text class="mt-16" @click="goToJobApplicationsPage"><v-icon>mdi-keyboard-backspace</v-icon>Back</v-btn>
+                    <v-col cols="9" sm="10">
+                        <v-btn text class="mt-16 mt-sm-5" @click="goToJobApplicationsPage"><v-icon>mdi-keyboard-backspace</v-icon>Back</v-btn>
                     </v-col>
-                    <v-col cols="3">
+                    <v-col cols="3" sm="2">
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16">
+                                <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16 mt-sm-5">
                                     <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
@@ -25,13 +25,13 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <h3 id="company">{{ detail.company }}</h3>
+            <h3 class="company">{{ detail.company }}</h3>
             <h3>{{ detail.jobPosition }}</h3>
             <v-chip-group>
                 <v-chip label v-if="detail.jobLocation !== '' && detail.jobLocation !== null" :color="secondaryColor" :text-color="primaryColor">{{ detail.jobLocation }}</v-chip>
                 <v-chip label v-if="detail.employmentType !== '' && detail.employmentType !== null" :color="secondaryColor" :text-color="primaryColor">{{ detail.employmentType }}</v-chip>
             </v-chip-group>
-            <div id="importantDetailsContainer">
+            <div class="importantDetailsContainer">
                 <div>
                     <h4 class="heading">Due Date</h4>
                     <h4 v-if="detail.dueDate !== '' && detail.dueDate !== null">{{ detail.dueDate }}</h4>
@@ -47,12 +47,12 @@
                     <h4 v-else-if="(detail.appliedDate === '' || detail.appliedDate === null) || (detail.status === 'Not Applied')">N/A</h4>
                 </div>
             </div>
-            <v-tabs centered background-color="transparent" :color="primaryColor" class="mt-3">
+            <v-tabs centered center-active background-color="transparent" :color="primaryColor" class="mt-3">
                 <v-tab>Details</v-tab>
                 <v-tab>Documents</v-tab>
                 <v-tab>Interviews</v-tab>
                 <v-tab-item>
-                    <div id="otherDetails" class="px-8 pt-5">
+                    <div class="otherDetails px-8 pt-5 px-sm-0 pt-sm-10">
                         <div>
                             <h4 class="heading">Job Posting</h4>
                             <a v-if="detail.jobPostingUrl !== '' && detail.jobPostingUrl !== null" target="_blank" :href="detail.jobPostingUrl">View Original Job Post</a>
@@ -167,11 +167,11 @@
         width: 100%;
     }
 
-    article, article > div, #importantDetailsContainer, #otherDetails, #otherDetails div, #importantDetailsContainer div {
+    article, article > div, .importantDetailsContainer, .otherDetails, .otherDetails div, .importantDetailsContainer div {
         display: grid;
     }
 
-    article, article > div, #importantDetailsContainer  {
+    article, article > div, .importantDetailsContainer  {
         place-items: center;
     }
 
@@ -180,19 +180,19 @@
         justify-self: start;
     }
 
-    #company {
+    .company {
         color: var(--primaryColor);
         font-weight: 700;
         font-size: 1.3rem;
     }
 
-    #otherDetails {
+    .otherDetails {
         justify-items: start;
         row-gap: 20px;
         background: var(--backgroundColorTwo);
     }
 
-    #importantDetailsContainer {
+    .importantDetailsContainer {
         grid-template-columns: repeat(3, 1fr);
         text-align: center;
         background: white;
@@ -200,7 +200,7 @@
         padding: 5% 3%;
     }
 
-    #importantDetailsContainer div, #otherDetails div {
+    .importantDetailsContainer div, .otherDetails div {
         row-gap: 5px;
     }
 
@@ -220,5 +220,41 @@
 
     .v-application a {
         color: var(--primaryColor);
+    }
+
+    @media only screen and (min-width: 768px) {
+        
+        article > div {
+            width: 90%;
+            margin-top: 3vh;
+        }
+
+        .company {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+        }
+
+        .v-tab {
+            font-size: 1.15rem;
+        }
+
+        .importantDetailsContainer {
+            margin: 2vh 0vw;
+        }
+
+        .v-btn {
+            font-size: 1.2rem;
+        }
+
+        .v-btn .v-icon {
+            font-size: 2.2rem;
+        }
     }
 </style>

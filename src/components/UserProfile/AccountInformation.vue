@@ -95,7 +95,7 @@
         article {
             width: 70%;
             margin-left: 20%;
-            margin-top: 2vh;
+            margin-top: 4vh;
         }
 
         h3 {

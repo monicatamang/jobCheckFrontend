@@ -156,4 +156,11 @@
     .v-text-field, .v-menu {
         font-family: var(--bodyFont);
     }
+
+    @media only screen and (min-width: 768px) {
+
+        .v-btn {
+            font-size: 1.3rem;
+        }
+    }
 </style>

@@ -102,4 +102,11 @@
     .v-card__title, .v-card__subtitle {
         font-family: var(--titleFont);
     }
+
+    @media only screen and (min-width: 768px) {
+
+        .v-btn {
+            font-size: 1.3rem;
+        }
+    }
 </style>

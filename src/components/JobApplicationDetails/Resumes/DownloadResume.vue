@@ -93,5 +93,12 @@
 </script>
 
 <style scoped>
+    @media only screen and (min-width: 768px) {
 
+        .v-btn.v-size--default {
+            width: 70%;
+            font-size: 1rem;
+            padding: 10%;
+        }
+    }
 </style>

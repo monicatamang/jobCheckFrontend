@@ -1,10 +1,10 @@
 <template>
     <div class="px-6 pt-2">
-        <h4 class="pb-3" id="heading">Cover Letter</h4>
+        <h4 class="pb-3 pb-sm-5" id="heading">Cover Letter</h4>
         <!-- Show statement if the user has an existing cover letter -->
         <h4 class="mb-4" v-if="coverLetterId !== undefined && (isCoverLetterDeleted === false || coverLetterIsUploaded === true)">Please delete your current cover letter before uploading a new cover letter.</h4>
         <!-- Show file and upload buttons if the user did not upload a cover letter -->
-        <v-form v-if="coverLetterId === undefined || isCoverLetterDeleted === true">
+        <v-form v-if="coverLetterId === undefined || isCoverLetterDeleted === true" id="uploadCoverLetterForm">
             <input type="file" name="coverLetterFile" id="coverLetterFile">
             <v-btn class="mt-3" dark depressed :color="primaryColor" @click="uploadCoverLetterFile">Upload</v-btn>
         </v-form>
@@ -161,7 +161,7 @@
         text-transform: capitalize;
     }
 
-    h4, h5 {
+    h4 {
         font-weight: 400;
     }
 
@@ -172,5 +172,32 @@
     #heading {
         font-size: 1rem;
         font-weight: 600;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        #heading {
+            font-size: 1.3rem;
+        }
+
+        #uploadCoverLetterForm {
+            display: grid;
+            align-items: center;
+            width: 100%;
+        }
+
+        .v-btn.v-size--default {
+            width: 18.5%;
+            font-size: 1.1rem;
+            padding: 3.5%;
+        }
+
+        input {
+            font-size: 1.2rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+        }
     }
 </style>
