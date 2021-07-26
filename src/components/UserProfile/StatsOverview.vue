@@ -6,50 +6,50 @@
                 <v-row>
                     <v-col cols="12" class="mt-3">
                         <v-row>
-                            <v-col cols="10">
+                            <v-col cols="10" sm="11">
                                 <h4>Job Applications</h4>
                             </v-col>
-                            <v-col cols="2">
+                            <v-col cols="2" sm="1">
                                 <h4>{{ userJobApps }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
-                            <v-col cols="10">
+                            <v-col cols="10" sm="11">
                                 <h4>Interviews</h4>
                             </v-col>
-                            <v-col cols="2">
+                            <v-col cols="2" sm="1">
                                 <h4>{{ userInterviews }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
-                            <v-col cols="10">
+                            <v-col cols="10" sm="11">
                                 <h4>Networking Events</h4>
                             </v-col>
-                            <v-col cols="2">
+                            <v-col cols="2" sm="1">
                                 <h4>{{ userNetworkingEvents }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
-                            <v-col cols="10">
+                            <v-col cols="10" sm="11">
                                 <h4>Networking Connections</h4>
                             </v-col>
-                            <v-col cols="2">
+                            <v-col cols="2" sm="1">
                                 <h4>{{ userConnections }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col cols="12">
                         <v-row>
-                            <v-col cols="10">
+                            <v-col cols="10" sm="11">
                                 <h4>Job References</h4>
                             </v-col>
-                            <v-col cols="2">
+                            <v-col cols="2" sm="1">
                                 <h4>{{ userJobRefs }}</h4>
                             </v-col>
                         </v-row>
@@ -142,5 +142,21 @@
 
     .heading {
         font-weight: 600;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        article {
+            width: 70%;
+            margin-left: 20%;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+        }
     }
 </style>

@@ -1,51 +1,51 @@
 <template>
     <article>
-            <v-container>
-                <v-row>
-                    <v-col cols="10">
-                        <h3>Account Information</h3>
-                    </v-col>
-                    <v-col cols="2">
-                        <edit-profile @userProfileUpdated="handleUpdatedProfile"></edit-profile>
-                    </v-col>
-                </v-row>
-            </v-container>
-            <v-divider></v-divider>
-            <v-container>
-                <v-row>
-                    <v-col cols="12">
-                        <v-row>
-                            <v-col cols="12">
-                                <h4 class="heading mt-3">First Name</h4>
-                            </v-col>
-                            <v-col cols="12">
-                                <h4>{{ userData.firstName }}</h4>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-row>
-                            <v-col cols="12">
-                                <h4 class="heading">Last Name</h4>
-                            </v-col>
-                            <v-col cols="12">
-                                <h4>{{ userData.lastName }}</h4>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-row>
-                            <v-col cols="12">
-                                <h4 class="heading">Email</h4>
-                            </v-col>
-                            <v-col cols="12">
-                                <h4>{{ userData.email }}</h4>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </article>
+        <v-container> 
+            <v-row>
+                <v-col cols="10" sm="11">
+                    <h3>Account Information</h3>
+                </v-col>
+                <v-col cols="2" sm="1">
+                    <edit-profile @userProfileUpdated="handleUpdatedProfile"></edit-profile>
+                </v-col>
+            </v-row>
+        </v-container>
+        <v-divider></v-divider>
+        <v-container>
+            <v-row>
+                <v-col cols="12">
+                    <v-row>
+                        <v-col cols="12">
+                            <h4 class="heading mt-3">First Name</h4>
+                        </v-col>
+                        <v-col cols="12">
+                            <h4>{{ userData.firstName }}</h4>
+                        </v-col>
+                    </v-row>
+                </v-col>
+                <v-col cols="12">
+                    <v-row>
+                        <v-col cols="12">
+                            <h4 class="heading">Last Name</h4>
+                        </v-col>
+                        <v-col cols="12">
+                            <h4>{{ userData.lastName }}</h4>
+                        </v-col>
+                    </v-row>
+                </v-col>
+                <v-col cols="12">
+                    <v-row>
+                        <v-col cols="12">
+                            <h4 class="heading">Email</h4>
+                        </v-col>
+                        <v-col cols="12">
+                            <h4>{{ userData.email }}</h4>
+                        </v-col>
+                    </v-row>
+                </v-col>
+            </v-row>
+        </v-container>
+    </article>
 </template>
 
 <script>
@@ -88,5 +88,22 @@
 
     .heading {
         font-weight: 600;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        article {
+            width: 70%;
+            margin-left: 20%;
+            margin-top: 2vh;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+        }
     }
 </style>

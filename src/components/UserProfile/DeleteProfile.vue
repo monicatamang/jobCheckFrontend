@@ -98,4 +98,14 @@
     .v-card__title, .v-card__subtitle {
         font-family: var(--titleFont);
     }
+
+    @media only screen and (min-width: 768px) {
+
+        #deleteProfileButton {
+            width: 70%;
+            margin-left: 20%;
+            font-size: 1.1rem;
+            height: 5vh;
+        }
+    }
 </style>

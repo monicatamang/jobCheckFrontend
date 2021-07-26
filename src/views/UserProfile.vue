@@ -9,7 +9,7 @@
             <v-spacer></v-spacer>
         </v-app-bar>
         <v-container>
-            <v-row>
+            <v-row class="hidden-sm-and-up">
                 <v-btn text class="mt-16" @click="goToPreviousPage"><v-icon>mdi-keyboard-backspace</v-icon>Back</v-btn>
             </v-row>
         </v-container>
@@ -108,10 +108,6 @@
         font-weight: 800;
     }
 
-    article {
-        width: 90%;
-    }
-
     h3 {
         font-family: var(--titleFont);
     }
@@ -122,5 +118,13 @@
 
     .heading {
         font-weight: 600;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        h1 {
+            font-size: 1.8em;
+            margin-left: 20%;
+        }
     }
 </style>

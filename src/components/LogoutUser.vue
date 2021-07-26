@@ -67,4 +67,14 @@
         text-transform: capitalize;
         width: 90%;
     }
+
+    @media only screen and (min-width: 768px) {
+
+        .v-btn.v-size--default {
+            width: 70%;
+            margin-left: 20%;
+            font-size: 1.1rem;
+            height: 5vh;
+        }
+    }
 </style>

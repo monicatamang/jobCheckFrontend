@@ -133,7 +133,7 @@
         #searchBarContainer {
             top: 0;
             padding-bottom: 2%;
-            margin-left: 10%;
+            left: 10%;
         }
         
         h4 {

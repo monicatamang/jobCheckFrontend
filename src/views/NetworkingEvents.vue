@@ -162,12 +162,12 @@
         #searchBarContainer {
             top: 0;
             padding-bottom: 2%;
-            margin-left: 10%;
+            left: 10%;
         }
 
         .v-chip-group {
             top: 20vh;
-            margin-left: 22%;
+            left: 10%;
         }
 
         .v-chip {
