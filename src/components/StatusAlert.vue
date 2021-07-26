@@ -25,13 +25,4 @@
     .showAlert {
         display: block;
     }
-
-    @media only screen and (min-width: 768px) {
-
-        .v-alert {
-            width: 80%;
-            margin-left: 20%;
-            font-size: 1.2rem;
-        }
-    }
 </style>

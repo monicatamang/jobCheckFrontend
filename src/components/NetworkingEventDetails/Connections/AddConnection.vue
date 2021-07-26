@@ -142,4 +142,18 @@
         font-family: var(--titleFont);
         font-size: 1rem;
     }
+
+    @media only screen and (min-width: 768px) {
+
+        #addButton {
+            right: 0;
+            bottom: 0;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            height: 5%;
+        }
+    }
 </style>

@@ -3,14 +3,14 @@
         <div v-for="detail in details" :key="detail.networkingEventId">
             <v-container>
                 <v-row>
-                    <v-col cols="9">
-                        <v-btn text class="mt-16" @click="goToNetworkingEventsPage"><v-icon>mdi-keyboard-backspace</v-icon>Back</v-btn>
+                    <v-col cols="9" sm="11">
+                        <v-btn text class="mt-16 mt-sm-5" @click="goToNetworkingEventsPage"><v-icon>mdi-keyboard-backspace</v-icon>Back</v-btn>
                     </v-col>
-                    <v-col cols="3">
+                    <v-col cols="3" sm="1">
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16">
-                                    <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
+                                <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16 mt-sm-5">
+                                    <v-icon class="mr-n5 ml-sm-n16">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -25,7 +25,7 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <h3 id="event">{{ detail.eventName }}</h3>
+            <h3 class="event">{{ detail.eventName }}</h3>
             <h3>{{ detail.eventDate }}</h3>
             <h3 v-if="detail.endTime !== null && detail.endTimePeriod !== ''">{{ detail.startTime }} {{ detail.startTimePeriod }} - {{ detail.endTime }} {{ detail.endTimePeriod }} ({{ detail.timeZone }})</h3>
             <h3 v-else-if="detail.endTime === null && detail.endTime === ''">{{ detail.startTime }} {{ detail.startTimePeriod }} ({{ detail.timeZone }})</h3>
@@ -34,7 +34,7 @@
                 <v-tab>Details</v-tab>
                 <v-tab>Connections</v-tab>
                 <v-tab-item>
-                    <div id="detailsContainer" class="px-8 pt-5">
+                    <div class="detailsContainer px-8 pt-5 pt-sm-10">
                         <div>
                             <h4 class="heading">Type of Networking Event</h4>
                             <h4 v-if="detail.eventType !== ''">{{ detail.eventType }}</h4>
@@ -120,7 +120,7 @@
         width: 100%;
     }
 
-    article, article > div, #detailsContainer, #detailsContainer div {
+    article, article > div, .detailsContainer, .detailsContainer div {
         display: grid;
     }
 
@@ -133,19 +133,19 @@
         justify-self: start;
     }
 
-    #event {
+    .event {
         color: var(--primaryColor);
         font-weight: 700;
         font-size: 1.3rem;
     }
 
-    #detailsContainer {
+    .detailsContainer {
         justify-items: start;
         row-gap: 20px;
         background: var(--backgroundColorTwo);
     }
 
-    #detailsContainer div {
+    .detailsContainer div {
         row-gap: 5px;
     }
 
@@ -161,5 +161,52 @@
     h3 {
         font-weight: 400;
         font-size: 1.1rem;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        article > div {
+            width: 90%;
+            row-gap: 20px;
+            margin: 3vh 0vw 6vh 0vw;
+        }
+
+        .event {
+            font-size: 1.8rem;
+            margin-top: 2vh;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+        }
+
+        .v-btn, .v-chip {
+            font-size: 1.2rem;
+        }
+
+        .v-btn .v-icon {
+            font-size: 2.2rem;
+        }
+
+        .v-tab {
+            font-size: 1.2rem;
+        }
+
+        .v-chip {
+            padding: 20px;
+            margin-bottom: 2vh;
+        }
+
+        .detailsContainer {
+            row-gap: 30px;
+        }
+
+        .v-alert {
+            width: 100%;
+        }
     }
 </style>

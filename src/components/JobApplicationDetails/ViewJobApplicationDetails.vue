@@ -226,7 +226,7 @@
         
         article > div {
             width: 90%;
-            margin-top: 3vh;
+            margin: 3vh 0vw 6vh 0vw;
         }
 
         .company {
@@ -237,7 +237,7 @@
             font-size: 1.6rem;
         }
 
-        h4 {
+        h4, .v-application a {
             font-size: 1.4rem;
         }
 
@@ -249,7 +249,7 @@
             margin: 2vh 0vw;
         }
 
-        .v-btn {
+        .v-btn, .v-chip {
             font-size: 1.2rem;
         }
 
@@ -259,6 +259,18 @@
 
         .importantDetailsContainer div, .otherDetails div {
             row-gap: 10px;
+        }
+
+        .otherDetails {
+            row-gap: 30px;
+        }
+
+        .otherDetails div {
+            margin: 0% 5%;
+        }
+
+        .v-chip {
+            padding: 20px;
         }
     }
 </style>

@@ -197,4 +197,11 @@
     section {
         background: var(--backgroundColorOne);
     }
+
+    @media only screen and (min-width: 768px) {
+
+        .v-alert {
+            width: 100%;
+        }
+    }
 </style>

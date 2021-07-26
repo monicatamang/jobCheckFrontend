@@ -140,6 +140,12 @@
             left: 10%;
             font-size: 1.2rem;
         }
+
+        .v-alert {
+            width: 80%;
+            left: 20%;
+            font-size: 1.2rem;
+        }
     }
 
     @media only screen and (min-width: 1024px) {
