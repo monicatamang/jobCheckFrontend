@@ -1,6 +1,6 @@
 <template>
-    <article id="jobRefsContainer">
-        <div v-for="jobRef in jobRefs" :key="jobRef.jobRefId" class="jobRefCard">
+    <article id="jobRefsCardsContainer">
+        <div v-for="jobRef in jobRefs" :key="jobRef.jobRefId" class="jobRefCard px-sm-6 pb-sm-9 pt-sm-7">
             <v-container>
                     <v-row>
                         <v-col cols="10" class="align-self-center">
@@ -10,7 +10,7 @@
                             <v-menu offset-y>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                        <v-icon class="ml-n7">mdi-dots-horizontal</v-icon>
+                                        <v-icon class="ml-n7 mr-sm-n6">mdi-dots-horizontal</v-icon>
                                     </v-btn>
                                 </template>
                                 <v-list>
@@ -78,12 +78,11 @@
         font-weight: 400;
     }
 
-    #jobRefsContainer {
+    #jobRefsCardsContainer {
         display: grid;
         place-items: center;
         row-gap: 2vh;
         margin: 20vh 0vw 15vh 0vw;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         width: 100%;
     }
 
@@ -93,7 +92,7 @@
         align-items: center;
         row-gap: 5px;
         background: white;
-        box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.251);
+        box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.25);
         padding: 3% 4% 7% 4%;
         width: 90%;
     }
@@ -116,5 +115,24 @@
 
     .v-list {
         z-index: -1;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        .jobRefCard {
+            height: 100%;
+            width: 100%;
+        }
+
+        #jobRefsCardsContainer {
+            margin-left: 20%;
+            width: 55%;
+            margin-top: 22vh;
+            margin-bottom: 8vh;
+        }
+
+        h4, a {
+            font-size: 1.15rem;
+        }
     }
 </style>

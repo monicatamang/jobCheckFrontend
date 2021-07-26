@@ -77,10 +77,10 @@
                 newJobReference: {
                     loginToken: cookies.get("loginToken"),
                     name: "",
-                    position: undefined,
-                    companyName: undefined,
+                    position: "",
+                    companyName: "",
                     companyAddress: "",
-                    postalCode: undefined,
+                    postalCode: "",
                     city: "",
                     province: "",
                     email: "",
@@ -93,27 +93,30 @@
         methods: {
             // Creating a POST request to create a new job reference
             createJobReference() {
-                // Configuring the request with the url, type and data
-                axios.request({
-                url: `${process.env.VUE_APP_API_URL}/job-references`,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                data: this.newJobReference
-                }).then((res) => {
-                    // If the network is done and there are no errors, add the new job reference to the store
-                    console.log(res);
-                    this.$store.commit('addNewJobReference', res.data);
-                    // Update the store with a success message and display it on the Job References page
-                    this.successStatus.message = "You have successfully added a job reference";
-                    this.$store.commit('updateJobReferenceStatus', this.successStatus);
-                }).catch((err) => {
-                    // If the network is done and the page errors, update the store wtih an error message and display it on the Job References page
-                    console.log(err);
-                    this.errorStatus.message = "Failed to add job reference. Please refresh the page and try again.";
-                    this.$store.commit('updateJobReferenceStatus', this.errorStatus);
-                });
+                // Send the request only if the user typed content into the input fields
+                if(this.newJobReference.name !== '' && this.newJobReference.position !== '' && this.newJobReference.companyName !== '' && this.newJobReference.companyAddress !== '' && this.newJobReference.postalCode !== '' && this.newJobReference.city !== '' && this.newJobReference.province !== '' && this.newJobReference.email !== '' && this.newJobReference.phoneNumber !== '' && this.newJobReference.notes !== '') {
+                    // Configuring the request with the url, type and data
+                    axios.request({
+                    url: `${process.env.VUE_APP_API_URL}/job-references`,
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    data: this.newJobReference
+                    }).then((res) => {
+                        // If the network is done and there are no errors, add the new job reference to the store
+                        console.log(res);
+                        this.$store.commit('addNewJobReference', res.data);
+                        // Update the store with a success message and display it on the Job References page
+                        this.successStatus.message = "You have successfully added a job reference";
+                        this.$store.commit('updateJobReferenceStatus', this.successStatus);
+                    }).catch((err) => {
+                        // If the network is done and the page errors, update the store wtih an error message and display it on the Job References page
+                        console.log(err);
+                        this.errorStatus.message = "Failed to add job reference. Please refresh the page and try again.";
+                        this.$store.commit('updateJobReferenceStatus', this.errorStatus);
+                    });
+                }
             }
         }
     }
@@ -137,5 +140,20 @@
         text-transform: capitalize;
         font-family: var(--titleFont);
         font-size: 1rem;
-    }    
+    }
+    
+    @media only screen and (min-width: 768px) {
+
+        #addButton {
+            right: 0;
+            bottom: 0;
+            left: 10%;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            height: 5%;
+        }
+    }
 </style>

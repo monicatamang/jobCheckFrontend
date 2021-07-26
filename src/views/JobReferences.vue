@@ -80,6 +80,10 @@
 </script>
 
 <style scoped>
+    section {
+        margin-top: 7vh;
+    }
+
     h1 {
         font-family: var(--titleFont);
         text-transform: uppercase;
@@ -116,11 +120,21 @@
         border-bottom: 1px solid whitesmoke;
     }
 
-    section {
-        margin-top: 7vh;
-    }
-
     @media only screen and (min-width: 768px) {
+
+        section {
+            margin-top: 0vh;
+        }
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        #searchBarContainer {
+            top: 0;
+            padding-bottom: 2%;
+            margin-left: 10%;
+        }
         
         h4 {
             left: 10%;
