@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed block dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Interview</v-btn>
+            <v-btn depressed dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Interview</v-btn>
         </template>
         <v-card>
             <v-card-title>Create Interview</v-card-title>
@@ -143,5 +143,5 @@
         text-transform: capitalize;
         font-family: var(--titleFont);
         font-size: 1rem;
-    }    
+    }
 </style>

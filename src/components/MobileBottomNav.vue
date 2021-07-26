@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation :color="navColor" :value="value" fixed>
+    <v-bottom-navigation :color="navColor" :value="value" grow fixed class="hidden-sm-and-up">
         <v-btn @click="goTojobApplicationsPage">
             <span>Applications</span>
             <v-icon>mdi-file</v-icon>

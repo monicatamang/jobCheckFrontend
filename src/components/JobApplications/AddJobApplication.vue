@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed block dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Job Application</v-btn>
+            <v-btn depressed dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Job Application</v-btn>
         </template>
         <v-card>
             <v-card-title>Create Job Application</v-card-title>
@@ -169,5 +169,20 @@
         text-transform: capitalize;
         font-family: var(--titleFont);
         font-size: 1rem;
-    }    
+    } 
+    
+    @media only screen and (min-width: 768px) {
+
+        #addButton {
+            right: 0;
+            bottom: 0;
+            width: 85%;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            height: 5%;
+        }
+    }
 </style>

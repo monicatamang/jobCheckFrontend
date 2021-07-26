@@ -5,8 +5,8 @@
         <article>
             <job-check-logo></job-check-logo>
             <h1>Login</h1>
-            <v-form>
-                <v-container id="inputFields">
+            <v-form id="inputFields">
+                <v-container>
                     <v-row>
                         <v-col cols="12" class="mb-n6">
                             <v-text-field v-model="userEmail" :color="inputColor" label="Email" outlined required></v-text-field>
@@ -16,9 +16,9 @@
                         </v-col>
                     </v-row>
                 </v-container>
-                <v-btn large depressed dark :color="inputColor" class="mt-8" @click="loginUser">Continue</v-btn>
+                <v-btn width="20vw" height="6vh" large depressed dark :color="inputColor" class="mt-8" @click="loginUser">Continue</v-btn>
             </v-form>
-            <p id="linkToCreateAccountPage">Don't have an account? <router-link to="/CreateAccount">Create Account</router-link></p>
+            <p id="linkToCreateAccountPage">Don't have an account? <router-link to="/">Create Account</router-link></p>
             <copyright-statement></copyright-statement>
         </article>
         <div id="background"></div>
@@ -140,7 +140,7 @@
     @media only screen and (min-width: 768px) {
 
         section {
-            margin-top: 15vh;
+            margin-top: 5vh;
         }
 
         h1 {
@@ -150,13 +150,12 @@
         #inputFields {
             display: grid;
             place-items: center;
-            width: 90%;
+            width: 70%;
         }
 
         .v-btn.v-size--large {
             font-size: 1.2rem;
             letter-spacing: 1px;
-            padding: 4.5%;
         }
 
         #linkToCreateAccountPage {

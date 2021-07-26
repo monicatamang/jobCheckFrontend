@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar color="white" flat fixed>
+    <v-app-bar color="white" flat fixed class="hidden-sm-and-up">
         <img src="../assets/jobCheckLogoIcon.jpg" alt="Job Check's official logo icon which is a cornflower blue coloured checkmark.">
         <v-spacer></v-spacer>
         <router-link to="/Profile">
@@ -38,5 +38,16 @@
 
     a {
         text-decoration: none;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        img {
+            width: 3vw;
+        }
+
+        span {
+            font-size: 1.1rem;
+        }
     }
 </style>

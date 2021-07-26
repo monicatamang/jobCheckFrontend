@@ -1,6 +1,6 @@
 <template>
     <article id="jobAppCardsContainer">
-        <div v-for="jobApp in jobApps" :key="jobApp.jobAppId" class="jobAppCard">
+        <div v-for="jobApp in jobApps" :key="jobApp.jobAppId" class="jobAppCard px-sm-5 pb-8 pt-6">
             <v-container>
                 <v-row>
                     <v-col cols="9" v-if="jobApp.status === 'Not Applied'">
@@ -19,7 +19,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                    <v-icon class="mr-n3">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n3 mr-sm-n10">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -34,7 +34,7 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <h4 class="company ml-3">{{ jobApp.company }}</h4>
+            <h4 class="company ml-3" >{{ jobApp.company }}</h4>
             <h4 class="ml-3">{{ jobApp.jobPosition }}</h4>
             <h4 class="ml-3" v-if="jobApp.jobLocation !== '' && jobApp.jobLocation !== null">{{ jobApp.jobLocation }}</h4>
             <h4 class="ml-3" v-if="jobApp.dueDate !== '' && jobApp.dueDate !== null">Due Date: {{ jobApp.dueDate }}</h4>
@@ -104,8 +104,7 @@
         display: grid;
         place-items: center;
         row-gap: 2vh;
-        margin: 20vh 0vw 15vh 0vw;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        margin: 29vh 0vw 15vh 0vw;
         width: 100%;
     }
 
@@ -138,5 +137,20 @@
 
     .v-list {
         z-index: -1;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        .jobAppCard {
+            height: 100%;
+            width: 100%;
+        }
+
+        #jobAppCardsContainer {
+            margin-left: 20%;
+            width: 50%;
+            margin-top: 22vh;
+            margin-bottom: 8vh;
+        }
     }
 </style>

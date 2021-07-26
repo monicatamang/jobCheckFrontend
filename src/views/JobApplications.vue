@@ -2,6 +2,7 @@
     <section>
         <status-alert :showStatus="showJobAppStatus"></status-alert>
         <mobile-header></mobile-header>
+        <tablet-side-nav></tablet-side-nav>
         <div id="searchBarContainer">
             <h1>Job Applications</h1>
             <search-job-application></search-job-application>
@@ -27,6 +28,7 @@
     import JobApplicationCard from "../components/JobApplications/JobApplicationCard.vue";
     import StatusAlert from "../components/StatusAlert.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
+    import TabletSideNav from "../components/TabletSideNav.vue";
 
     export default {
         name: "Job-Applications",
@@ -37,7 +39,8 @@
             JobApplicationCard,
             AddJobApplication,
             StatusAlert,
-            MobileBottomNav
+            MobileBottomNav,
+            TabletSideNav
         },
 
         data() {
@@ -109,16 +112,6 @@
 </script>
 
 <style scoped>
-    h1 {
-        font-family: var(--titleFont);
-        text-transform: uppercase;
-        font-weight: 800;
-        color: var(--primaryColor);
-        margin-top: 3vh;
-        font-size: 1.4rem;
-        letter-spacing: 1px;
-    }
-
     section, #searchBarContainer {
         display: grid;
         place-items: center;
@@ -132,13 +125,20 @@
         width: 100%;
         background: white;
         position: fixed;
-        top: 6%;
+        top: 7%;
         z-index: 1;
+        border-top: 1px solid rgba(211, 211, 211, 0.5);
         border-bottom: 1px solid whitesmoke;
     }
 
-    section {
-        margin-top: 7vh;
+    h1 {
+        font-family: var(--titleFont);
+        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--primaryColor);
+        margin-top: 3vh;
+        font-size: 1.4rem;
+        letter-spacing: 1px;
     }
 
     h4, .v-chip-group {
@@ -146,12 +146,30 @@
     }
 
     .v-chip-group {
-        top: 19vh;
+        top: 27vh;
     }
 
     h4 {
         top: 22vh;
         font-family: var(--titleFont);
         font-weight: 400;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        #searchBarContainer {
+            top: 0;
+            padding-bottom: 2%;
+            margin-left: 10%;
+        }
+
+        .v-chip-group {
+            top: 20vh;
+            margin-left: 20%;
+        }
     }
 </style>
