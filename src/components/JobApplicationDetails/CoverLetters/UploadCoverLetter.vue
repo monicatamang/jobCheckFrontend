@@ -1,12 +1,12 @@
 <template>
     <div class="px-6 pt-2">
-        <h4 class="pb-3 pb-sm-5" id="heading">Cover Letter</h4>
+        <h4 class="heading pb-3 pb-sm-5">Cover Letter</h4>
         <!-- Show statement if the user has an existing cover letter -->
         <h4 class="mb-4" v-if="coverLetterId !== undefined && (isCoverLetterDeleted === false || coverLetterIsUploaded === true)">Please delete your current cover letter before uploading a new cover letter.</h4>
         <!-- Show file and upload buttons if the user did not upload a cover letter -->
-        <v-form v-if="coverLetterId === undefined || isCoverLetterDeleted === true" id="uploadCoverLetterForm">
+        <v-form v-if="coverLetterId === undefined || isCoverLetterDeleted === true" class="uploadCoverLetterForm">
             <input type="file" name="coverLetterFile" id="coverLetterFile">
-            <v-btn class="mt-3" dark depressed :color="primaryColor" @click="uploadCoverLetterFile">Upload</v-btn>
+            <v-btn class="uploadButton mt-3" dark depressed :color="primaryColor" @click="uploadCoverLetterFile">Upload</v-btn>
         </v-form>
         <!-- Show the download and delete buttons if the user has an existing cover letter -->
         <v-container>
@@ -169,27 +169,27 @@
         background: var(--backgroundColorTwo);
     }
 
-    #heading {
+    .heading {
         font-size: 1rem;
         font-weight: 600;
     }
 
     @media only screen and (min-width: 768px) {
 
-        #heading {
-            font-size: 1.3rem;
+        .heading {
+            font-size: 1.4rem;
         }
 
-        #uploadCoverLetterForm {
+        .uploadCoverLetterForm {
             display: grid;
             align-items: center;
             width: 100%;
         }
 
-        .v-btn.v-size--default {
+        .uploadButton {
             width: 18.5%;
             font-size: 1.1rem;
-            padding: 3.5%;
+            padding: 5%;
         }
 
         input {
@@ -197,7 +197,7 @@
         }
 
         h4 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
     }
 </style>

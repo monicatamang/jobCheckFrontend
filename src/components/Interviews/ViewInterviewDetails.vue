@@ -3,13 +3,13 @@
         <div v-for="detail in details" :key="detail.interviewId">
             <v-container>
                 <v-row>
-                    <v-col cols="9">
-                        <v-btn text class="mt-16" @click="goToPreviousPage"><v-icon>mdi-keyboard-backspace</v-icon>Back</v-btn>
+                    <v-col cols="9" sm="10">
+                        <v-btn text class="mt-16 mt-sm-5" @click="goToPreviousPage"><v-icon>mdi-keyboard-backspace</v-icon>Back</v-btn>
                     </v-col>
-                    <v-col cols="3">
+                    <v-col cols="3" sm="2">
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16">
+                                <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16 mt-sm-5">
                                     <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
@@ -158,5 +158,50 @@
     .v-application a {
         color: var(--primaryColor);
         text-decoration: none;
+    }
+
+    @media only screen and (min-width: 768px) {
+        
+        article > div {
+            width: 90%;
+            margin: 3vh 0vw 6vh 0vw;
+        }
+
+        .company {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+        }
+
+        h4, .v-application a {
+            font-size: 1.4rem;
+        }
+
+        .v-tab {
+            font-size: 1.15rem;
+        }
+
+        .importantDetailsContainer {
+            margin: 2vh 0vw;
+            row-gap: 20px;
+        }
+
+        .v-btn, .v-chip {
+            font-size: 1.2rem;
+        }
+
+        .v-btn .v-icon {
+            font-size: 2.2rem;
+        }
+
+        .importantDetailsContainer div, .otherDetails div {
+            row-gap: 10px;
+        }
+
+        .otherDetails {
+            row-gap: 30px;
+        }
     }
 </style>

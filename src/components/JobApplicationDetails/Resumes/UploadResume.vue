@@ -1,12 +1,12 @@
 <template>
     <div class="px-6 py-5">
-        <h4 class="pb-3 pb-sm-5" id="heading">Resume</h4>
+        <h4 class="heading pb-3 pb-sm-5">Resume</h4>
         <!-- Show statement if the user has an existing resume -->
         <h4 class="mb-5" v-if="resumeId !== undefined && (isResumeDeleted === false || resumeIsUploaded === true)">Please delete your current resume before uploading a new resume.</h4>
         <!-- Show file and upload buttons if the user did not upload a resume -->
-        <v-form v-if="resumeId === undefined || isResumeDeleted === true" id="uploadResumeForm">
+        <v-form v-if="resumeId === undefined || isResumeDeleted === true" class="uploadResumeForm">
             <input type="file" name="resumeFile" id="resumeFile">
-            <v-btn class="mt-3" dark depressed :color="primaryColor" @click="uploadResumeFile">Upload</v-btn>
+            <v-btn class="uploadButton mt-3" dark depressed :color="primaryColor" @click="uploadResumeFile">Upload</v-btn>
         </v-form>
         <!-- Show the download and delete buttons if the user has an existing resume -->
         <v-container>
@@ -169,24 +169,24 @@
         background: var(--backgroundColorTwo);
     }
 
-    #heading {
+    .heading {
         font-size: 1rem;
         font-weight: 600;
     }
 
     @media only screen and (min-width: 768px) {
 
-        #heading {
-            font-size: 1.3rem;
+        .heading {
+            font-size: 1.4rem;
         }
 
-        #uploadResumeForm {
+        .uploadResumeForm {
             display: grid;
             align-items: center;
             width: 100%;
         }
 
-        .v-btn.v-size--default {
+        .uploadButton {
             width: 18.5%;
             font-size: 1.1rem;
             padding: 3.5%;
@@ -197,7 +197,7 @@
         }
 
         h4 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
     }
 </style>
