@@ -15,7 +15,9 @@
         </v-container>
         <account-information :userData="userData" @sendUpdatedProfileToPage="showUpdatedProfileOnPage"></account-information>
         <stats-overview></stats-overview>
-        <logout-user></logout-user>
+        <div id="hideOnDesktop">
+            <logout-user></logout-user>
+        </div>
         <delete-profile></delete-profile>
     </section>
 </template>
@@ -131,6 +133,13 @@
             width: 80%;
             left: 20%;
             font-size: 1.2rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        
+        #hideOnDesktop {
+            display: none
         }
     }
 </style>

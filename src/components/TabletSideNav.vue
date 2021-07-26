@@ -1,46 +1,63 @@
 <template>
     <div id="tabletNavContainer" class="hidden-xs-and-down">
-        <img src="../assets/jobCheckLogoIcon.jpg" alt="Job Check's official logo icon which is a cornflower blue coloured checkmark.">
+        <img id="tabletSizeLogo" src="../assets/jobCheckLogoIcon.jpg" alt="Job Check's official logo icon which is a cornflower blue coloured checkmark.">
+        <div id="desktopSizeLogo">
+            <img src="../assets/jobCheckLogoWhiteBackground.jpg" alt="Job Check's official logo which has the words 'Job Check' in a bold, blue grey colour with a cornflower blue-coloured check mark on the left side of the letter 'J' in 'Job Check'.">
+        </div>
         <div id="tabletNav">
             <v-btn plain depressed @click="goTojobApplicationsPage">
                 <div class="tabs">
-                    <v-icon large>mdi-file</v-icon>
+                    <v-icon>mdi-file</v-icon>
                     <span>Applications</span>
                 </div>
             </v-btn>
             <v-btn plain depressed @click="goToInterviewsPage">
                 <div class="tabs">
-                    <v-icon large>mdi-briefcase-variant</v-icon>
+                    <v-icon>mdi-briefcase-variant</v-icon>
                     <span>Interviews</span>
                 </div>
             </v-btn>
             <v-btn plain depressed @click="goToNetworkingEventsPage">
                 <div class="tabs">
-                    <v-icon large>mdi-account-group</v-icon>
+                    <v-icon>mdi-account-group</v-icon>
                     <span>Networking</span>
                 </div>
             </v-btn>
             <v-btn plain depressed @click="goToJobReferencesPage">
                 <div class="tabs">
-                    <v-icon large>mdi-account-supervisor</v-icon>
+                    <v-icon>mdi-account-supervisor</v-icon>
                     <span>References</span>
                 </div>
             </v-btn>
+            <v-btn plain depressed @click="goToProfilePage" id="desktopProfileTab">
+                <div class="tabs">
+                    <v-icon>mdi-account</v-icon>
+                    <span>Profile</span>
+                </div>
+            </v-btn>
         </div>
-        <router-link to="/Profile">
+        <router-link to="/Profile" id="tabletProfileTab">
             <v-avatar :color="avatarColor" size="50">
                 <span id="initials">{{ userData.firstName.charAt(0) }}{{ userData.lastName.charAt(0) }}</span>
             </v-avatar>
             <span id="profile">Profile</span>
         </router-link>
+        <div id="logoutButton">
+            <logout-user></logout-user>
+        </div>
     </div>
 </template>
 
 <script>
     import cookies from "vue-cookies";
+    import LogoutUser from "../components/LogoutUser.vue";
 
     export default {
         name: "tablet-side-nav",
+
+        components: {
+            LogoutUser,
+        },
 
         data() {
             return {
@@ -134,6 +151,70 @@
 
         #profile {
             letter-spacing: 1px;
+        }
+
+        #desktopSizeLogo, #desktopProfileTab, #logoutButton {
+            display: none;
+        }
+
+        .v-btn .v-icon {
+            font-size: 2.1rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        #tabletSizeLogo, #tabletProfileTab {
+            display: none;
+        }
+
+        #desktopSizeLogo, #logoutButton {
+            display: grid;
+            place-items: center;
+            height: 50%;
+            width: 100%;
+        }
+
+        #desktopProfileTab {
+            display: grid;
+        }
+
+        #desktopSizeLogo {
+            align-self: start;
+            border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+        }
+
+        #logoutButton {
+            align-self: end;
+            border-top: 1px solid rgba(211, 211, 211, 0.5);
+        }
+
+        img {
+            width: 55%;
+        }
+
+        #tabletNavContainer {
+            width: 15%;
+            height: 100%;
+        }
+
+        #tabletNav {
+            row-gap: 0px;
+        }
+
+        .tabs {
+            grid-template-rows: none;
+            grid-template-columns: auto 1fr;
+            column-gap: 5px;
+        }
+
+        span {
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .v-btn .v-icon {
+            font-size: 1.3rem;
         }
     }
 </style>

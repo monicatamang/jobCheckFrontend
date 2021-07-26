@@ -1,8 +1,16 @@
 <template>
-    <v-btn depressed dark @click="deleteLogin" :color="primaryColor" class="mb-n2">
-        <span :class="{ hideText: isLoading }">Logout</span>
-        <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
-    </v-btn>
+    <div>
+        <v-btn depressed dark @click="deleteLogin" :color="primaryColor" class="mb-n2 hidden-md-and-up" id="mobileTabletLogoutButton">
+            <span :class="{ hideText: isLoading }">Logout</span>
+            <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
+        </v-btn>
+        <v-btn depressed text @click="deleteLogin" :color="primaryColor" class="mb-n2 hidden-sm-and-down" id="desktopLogoutButton">
+            <div id="tab">
+                <v-icon>mdi-logout</v-icon>
+                <span>Logout</span>
+            </div>
+        </v-btn>
+    </div>
 </template>
 
 <script>
@@ -68,13 +76,45 @@
         width: 90%;
     }
 
+    #desktopLogoutButton {
+        display: none;
+    }
+
     @media only screen and (min-width: 768px) {
 
-        .v-btn.v-size--default {
+        #mobileTabletLogoutButton {
             width: 70%;
             margin-left: 20%;
             font-size: 1.1rem;
             height: 5vh;
+        }
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        #mobileTabletLogoutButton {
+            display: none;
+        }
+
+        #desktopLogoutButton {
+            display: grid;
+        }
+
+        #tab {
+            display: grid;
+            place-items: center;
+            grid-template-rows: none;
+            grid-template-columns: auto 1fr;
+            column-gap: 5px;
+        }
+
+        span {
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .v-btn .v-icon {
+            font-size: 1.3rem;
         }
     }
 </style>
