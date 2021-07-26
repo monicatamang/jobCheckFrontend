@@ -1,5 +1,5 @@
 <template>
-    <v-alert v-if="showStatus.message !== '' && showStatus.icon !== '' && showStatus.color !== ''" :icon="showStatus.icon" :color="showStatus.color" dismissible dark tile :class="{ showAlert: showStatus.show }">{{ showStatus.message }}</v-alert>
+    <v-alert min-width="100%" v-if="showStatus.message !== '' && showStatus.icon !== '' && showStatus.color !== ''" :icon="showStatus.icon" :color="showStatus.color" dismissible dark tile :class="{ showAlert: showStatus.show }">{{ showStatus.message }}</v-alert>
 </template>
 
 <script>

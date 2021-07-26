@@ -2,6 +2,7 @@
     <section>
         <status-alert :showStatus="showUserProfileStatus"></status-alert>
         <status-alert :showStatus="showLogoutStatus"></status-alert>
+        <tablet-side-nav></tablet-side-nav>
         <v-app-bar color="white" flat fixed>
             <v-spacer></v-spacer>
                 <h1>Profile</h1>
@@ -26,6 +27,7 @@
     import DeleteProfile from "../components/UserProfile/DeleteProfile.vue";
     import LogoutUser from "../components/LogoutUser.vue";
     import StatusAlert from "../components/StatusAlert.vue";
+    import TabletSideNav from "../components/TabletSideNav.vue";
 
     export default {
         name: "User-Profile",
@@ -35,7 +37,8 @@
             StatsOverview,
             DeleteProfile,
             LogoutUser,
-            StatusAlert
+            StatusAlert,
+            TabletSideNav
         },
 
         data() {

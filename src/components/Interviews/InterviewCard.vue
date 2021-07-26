@@ -1,6 +1,6 @@
 <template>
     <article id="interviewCardsContainer">
-        <div v-for="interview in interviews" :key="interview.interviewId" class="interviewCard">
+        <div v-for="interview in interviews" :key="interview.interviewId" class="interviewCard px-sm-6 pb-sm-9 pt-sm-7">
             <v-container>
                 <v-row>
                     <v-col cols="9" class="align-self-center">
@@ -10,7 +10,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                    <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n5 mr-sm-n12">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -103,7 +103,7 @@
         display: grid;
         place-items: center;
         row-gap: 2vh;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
         width: 100%;
         padding: 6% 0% 10% 0%;
         background: var(--backgroundColorTwo);
@@ -138,5 +138,22 @@
 
     .v-list {
         z-index: -1;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        #interviewCardsContainer {
+            margin-left: 33%;
+            width: 55%;
+        }
+
+        .interviewCard {
+            height: 100%;
+            width: 100%;
+        }
+
+        h4, a {
+            font-size: 1.15rem;
+        }
     }
 </style>

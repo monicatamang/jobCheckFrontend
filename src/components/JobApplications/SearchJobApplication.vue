@@ -81,7 +81,7 @@
     @media only screen and (min-width: 768px) {
 
         .v-input {
-            width: 50vw;
+            width: 55vw;
         }
     }
 </style>

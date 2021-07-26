@@ -155,6 +155,7 @@
     #addButton {
         font-family: var(--titleFont);
         bottom: 6.9%;
+        width: 100%;
     }
 
     .v-card__title {
@@ -176,7 +177,7 @@
         #addButton {
             right: 0;
             bottom: 0;
-            width: 85%;
+            width: 80%;
         }
 
         .v-btn.v-size--large {

@@ -169,7 +169,11 @@
 
         .v-chip-group {
             top: 20vh;
-            margin-left: 20%;
+            margin-left: 22%;
+        }
+
+        .v-chip {
+            font-size: 1.05rem;
         }
     }
 </style>

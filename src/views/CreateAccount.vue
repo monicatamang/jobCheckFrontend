@@ -1,7 +1,7 @@
 <template>
     <section>
-        <v-alert icon="mdi-alert-circle" :color="errorColor" dismissible dark :class="{ showErrorMessage: isError }">Sorry, something went wrong. Please refresh the page and try again.</v-alert>
-        <v-alert icon="mdi-check-circle" :color="successColor" dismissible dark :class="{ showSuccessMessage: isSuccess }">Your Job Check account was successfully created</v-alert>
+        <v-alert min-width="100%" icon="mdi-alert-circle" :color="errorColor" dismissible dark :class="{ showErrorMessage: isError }">Sorry, something went wrong. Please refresh the page and try again.</v-alert>
+        <v-alert min-width="100%" icon="mdi-check-circle" :color="successColor" dismissible dark :class="{ showSuccessMessage: isSuccess }">Your Job Check account was successfully created</v-alert>
         <article>
             <job-check-logo></job-check-logo>
             <h1>Create Account</h1>

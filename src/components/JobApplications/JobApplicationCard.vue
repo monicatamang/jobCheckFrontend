@@ -1,6 +1,6 @@
 <template>
     <article id="jobAppCardsContainer">
-        <div v-for="jobApp in jobApps" :key="jobApp.jobAppId" class="jobAppCard px-sm-5 pb-8 pt-6">
+        <div v-for="jobApp in jobApps" :key="jobApp.jobAppId" class="jobAppCard px-sm-6 pb-sm-9 pt-sm-7">
             <v-container>
                 <v-row>
                     <v-col cols="9" v-if="jobApp.status === 'Not Applied'">
@@ -19,7 +19,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                    <v-icon class="mr-n3 mr-sm-n10">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n3 mr-sm-n12">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -148,9 +148,17 @@
 
         #jobAppCardsContainer {
             margin-left: 20%;
-            width: 50%;
+            width: 55%;
             margin-top: 22vh;
             margin-bottom: 8vh;
+        }
+
+        h4, a {
+            font-size: 1.15rem;
+        }
+
+        .v-chip {
+            font-size: 1rem;
         }
     }
 </style>

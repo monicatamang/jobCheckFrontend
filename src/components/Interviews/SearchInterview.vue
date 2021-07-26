@@ -78,5 +78,10 @@
 </script>
 
 <style scoped>
+    @media only screen and (min-width: 768px) {
 
+        .v-input {
+            width: 55vw;
+        }
+    }
 </style>

@@ -2,6 +2,7 @@
     <section>
         <status-alert :showStatus="showInterviewStatus"></status-alert>
         <mobile-header></mobile-header>
+        <tablet-side-nav></tablet-side-nav>
         <div id="searchBarContainer">
             <h1>Interviews</h1>
             <search-interview></search-interview>
@@ -21,6 +22,7 @@
     import SearchInterview from "../components/Interviews/SearchInterview.vue";
     import InterviewCard from "../components/Interviews/InterviewCard.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
+    import TabletSideNav from "../components/TabletSideNav.vue";
 
     export default {
         name: "Interviews",
@@ -30,7 +32,8 @@
             MobileHeader,
             SearchInterview,
             InterviewCard,
-            MobileBottomNav
+            MobileBottomNav,
+            TabletSideNav
         },
 
         data() {
@@ -125,5 +128,22 @@
         top: 22vh;
         font-family: var(--titleFont);
         font-weight: 400;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        #searchBarContainer {
+            top: 0;
+            padding-bottom: 2%;
+            margin-left: 10%;
+        }
+
+        #interviewCardsComp {
+            margin: 20vh 0vw 0vh 0vw;
+        }
     }
 </style>

@@ -2,6 +2,7 @@
     <section>
         <status-alert :showStatus="showJobReferenceStatus"></status-alert>
         <mobile-header></mobile-header>
+        <tablet-side-nav></tablet-side-nav>
         <div id="searchBarContainer">
             <h1>Job References</h1>
             <search-job-reference></search-job-reference>
@@ -21,6 +22,7 @@
     import JobReferenceCard from "../components/JobReferences/JobReferenceCard.vue";
     import AddJobReference from "../components/JobReferences/AddJobReference.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
+    import TabletSideNav from "../components/TabletSideNav.vue";
 
     export default {
         name: "Job-References",
@@ -31,7 +33,8 @@
             SearchJobReference,
             AddJobReference,
             JobReferenceCard,
-            MobileBottomNav
+            MobileBottomNav,
+            TabletSideNav
         },
 
         data() {

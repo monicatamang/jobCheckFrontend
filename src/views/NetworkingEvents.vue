@@ -2,6 +2,7 @@
     <section>
         <status-alert :showStatus="showNetworkingEventStatus"></status-alert>
         <mobile-header></mobile-header>
+        <tablet-side-nav></tablet-side-nav>
         <div id="searchBarContainer">
             <h1>Networking Events</h1>
             <search-networking-event></search-networking-event>
@@ -26,6 +27,7 @@
     import SearchNetworkingEvent from "../components/NetworkingEvents/SearchNetworkingEvent.vue";
     import NetworkingEventCard from "../components/NetworkingEvents/NetworkingEventCard.vue";
     import MobileBottomNav from "../components/MobileBottomNav.vue";
+    import TabletSideNav from "../components/TabletSideNav.vue";
 
     export default {
         name: "Networking-Events",
@@ -36,7 +38,8 @@
             AddNetworkingEvent,
             SearchNetworkingEvent,
             NetworkingEventCard,
-            MobileBottomNav
+            MobileBottomNav,
+            TabletSideNav
         },
 
         data() {
