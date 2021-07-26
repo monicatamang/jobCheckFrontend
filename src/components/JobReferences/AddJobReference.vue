@@ -18,16 +18,16 @@
                         <v-col cols="12">
                             <v-text-field v-model="newJobReference.companyName" label="Company" :color="primaryColor"></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="9">
                             <v-text-field v-model="newJobReference.companyAddress" label="Address" :color="primaryColor"></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="3">
                             <v-text-field v-model="newJobReference.postalCode" label="Postal Code" :color="primaryColor"></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="newJobReference.city" label="City*" :color="primaryColor" required></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="newJobReference.province" label="Province*" :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
@@ -93,30 +93,27 @@
         methods: {
             // Creating a POST request to create a new job reference
             createJobReference() {
-                // Send the request only if the user typed content into the input fields
-                if(this.newJobReference.name !== '' && this.newJobReference.position !== '' && this.newJobReference.companyName !== '' && this.newJobReference.companyAddress !== '' && this.newJobReference.postalCode !== '' && this.newJobReference.city !== '' && this.newJobReference.province !== '' && this.newJobReference.email !== '' && this.newJobReference.phoneNumber !== '' && this.newJobReference.notes !== '') {
-                    // Configuring the request with the url, type and data
-                    axios.request({
-                    url: `${process.env.VUE_APP_API_URL}/job-references`,
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    data: this.newJobReference
-                    }).then((res) => {
-                        // If the network is done and there are no errors, add the new job reference to the store
-                        console.log(res);
-                        this.$store.commit('addNewJobReference', res.data);
-                        // Update the store with a success message and display it on the Job References page
-                        this.successStatus.message = "You have successfully added a job reference";
-                        this.$store.commit('updateJobReferenceStatus', this.successStatus);
-                    }).catch((err) => {
-                        // If the network is done and the page errors, update the store wtih an error message and display it on the Job References page
-                        console.log(err);
-                        this.errorStatus.message = "Failed to add job reference. Please refresh the page and try again.";
-                        this.$store.commit('updateJobReferenceStatus', this.errorStatus);
-                    });
-                }
+                // Configuring the request with the url, type and data
+                axios.request({
+                url: `${process.env.VUE_APP_API_URL}/job-references`,
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: this.newJobReference
+                }).then((res) => {
+                    // If the network is done and there are no errors, add the new job reference to the store
+                    console.log(res);
+                    this.$store.commit('addNewJobReference', res.data);
+                    // Update the store with a success message and display it on the Job References page
+                    this.successStatus.message = "You have successfully added a job reference";
+                    this.$store.commit('updateJobReferenceStatus', this.successStatus);
+                }).catch((err) => {
+                    // If the network is done and the page errors, update the store wtih an error message and display it on the Job References page
+                    console.log(err);
+                    this.errorStatus.message = "Failed to add job reference. Please refresh the page and try again.";
+                    this.$store.commit('updateJobReferenceStatus', this.errorStatus);
+                });
             }
         }
     }

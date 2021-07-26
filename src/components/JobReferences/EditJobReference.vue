@@ -17,16 +17,16 @@
                         <v-col cols="12">
                             <v-text-field v-model="replaceJobReference.companyName" label="Company" :color="primaryColor"></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="9">
                             <v-text-field v-model="replaceJobReference.companyAddress" label="Address" :color="primaryColor"></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="3">
                             <v-text-field v-model="replaceJobReference.postalCode" label="Postal Code" :color="primaryColor"></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="replaceJobReference.city" label="City" :color="primaryColor"></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="replaceJobReference.province" label="Province" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">

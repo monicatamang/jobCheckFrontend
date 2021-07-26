@@ -113,30 +113,27 @@
         methods: {
             // Creating a POST request to create a new networking event
             createNetworkingEvent() {
-                // Send the request only if the user has typed content into the input fields
-                if(this.eventName !== '' && this.newNetworkingEvent.eventDate !== undefined && this.newNetworkingEvent.startTime !== undefined && this.newNetworkingEvent.startTimePeriod !== '' && this.newNetworkingEvent.endTime !== undefined && this.newNetworkingEvent.endTimePeriod !== '' && this.newNetworkingEvent.timeZone !== '' && this.newNetworkingEvent.eventLocation !== '' && this.newNetworkingEvent.eventType !== '' && this.newNetworkingEvent.eventStatus !== '' && this.newNetworkingEvent.notes !== '') {
-                    // Configuring the request with the url, type and data
-                    axios.request({
-                    url: `${process.env.VUE_APP_API_URL}/networking-events`,
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    data: this.newNetworkingEvent
-                    }).then((res) => {
-                        // If the network is done and there are no errors, add the new networking event to the store
-                        console.log(res);
-                        this.$store.commit('addNewNetworkingEvent', res.data);
-                        // Updating the store with a success message and displaying it on the Networking Events page
-                        this.successStatus.message = "You have successfully added a networking event";
-                        this.$store.commit('updateNetworkingEventStatus', this.successStatus);
-                    }).catch((err) => {
-                        // If the network is done and the page errors, update the store with an error message and display it on the Networking Events page
-                        console.log(err);
-                        this.errorStatus.message = "Failed to add networking event. Please refresh the page and try again.";
-                        this.$store.commit('updateNetworkingEventStatus', this.errorStatus);
-                    });
-                }
+                // Configuring the request with the url, type and data
+                axios.request({
+                url: `${process.env.VUE_APP_API_URL}/networking-events`,
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: this.newNetworkingEvent
+                }).then((res) => {
+                    // If the network is done and there are no errors, add the new networking event to the store
+                    console.log(res);
+                    this.$store.commit('addNewNetworkingEvent', res.data);
+                    // Updating the store with a success message and displaying it on the Networking Events page
+                    this.successStatus.message = "You have successfully added a networking event";
+                    this.$store.commit('updateNetworkingEventStatus', this.successStatus);
+                }).catch((err) => {
+                    // If the network is done and the page errors, update the store with an error message and display it on the Networking Events page
+                    console.log(err);
+                    this.errorStatus.message = "Failed to add networking event. Please refresh the page and try again.";
+                    this.$store.commit('updateNetworkingEventStatus', this.errorStatus);
+                });
             }
         }
     }

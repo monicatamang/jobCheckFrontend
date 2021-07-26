@@ -33,7 +33,7 @@
                                 </v-col>
                             </v-row>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-menu ref="menu" v-model="startDateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-text-field v-model="editJobApp.jobStartDate" :color="primaryColor" label="Start Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
@@ -41,7 +41,7 @@
                                 <v-date-picker v-model="editJobApp.jobStartDate" :color="primaryColor" no-title scrollable @input="startDateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-menu ref="menu" v-model="dueDateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-text-field v-model="editJobApp.dueDate" :color="primaryColor" label="Due Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
@@ -49,10 +49,10 @@
                                 <v-date-picker v-model="editJobApp.dueDate" :color="primaryColor" no-title scrollable @input="dueDateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-select v-model="editJobApp.status" label="Application Status" :items="statusOptions" :color="primaryColor"></v-select>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-menu ref="menu" v-model="appliedDateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-text-field v-model="editJobApp.appliedDate" :color="primaryColor" label="Applied Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>

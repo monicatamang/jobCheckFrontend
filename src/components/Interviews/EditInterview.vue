@@ -8,7 +8,7 @@
             <v-card-text>
                 <v-container>
                     <v-row>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="3">
                             <v-menu ref="menu" v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-text-field v-model="replaceInterview.interviewDate" :color="primaryColor" label="Date" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle"></v-text-field>
@@ -16,7 +16,7 @@
                                 <v-date-picker v-model="replaceInterview.interviewDate" :color="primaryColor" no-title scrollable @input="dateMenu = false"></v-date-picker>
                             </v-menu>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="6">
                             <v-row>
                                 <v-col cols="6">
                                     <v-text-field v-model="replaceInterview.interviewTime" label="Start Time" hint="HH:MM" :color="primaryColor"></v-text-field>
@@ -26,7 +26,7 @@
                                 </v-col>
                             </v-row>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" sm="3">
                             <v-text-field v-model="replaceInterview.interviewTimeZone" label="Time Zone" hint="MST, EST, PST, etc." :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
@@ -57,6 +57,7 @@
     export default {
         name: "edit-job-application",
 
+        // Receiving the interview id from the Interview Card component
         props: {
             interviewId: Number
         },

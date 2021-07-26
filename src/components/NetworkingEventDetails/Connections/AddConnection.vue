@@ -126,6 +126,7 @@
     #addButton {
         font-family: var(--titleFont);
         bottom: 0;
+        width: 100%;
     }
 
     .v-card__title {
@@ -140,5 +141,5 @@
         text-transform: capitalize;
         font-family: var(--titleFont);
         font-size: 1rem;
-    }    
+    }
 </style>

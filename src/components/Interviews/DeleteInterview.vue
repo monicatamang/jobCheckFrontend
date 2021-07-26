@@ -21,6 +21,7 @@
     export default {
         name: "delete-interview",
 
+        // Receiving the interview id from the Interview Card component
         props: {
             interviewId: Number
         },
