@@ -195,9 +195,6 @@
             width: 15%;
             bottom: 63.5vh;
             left: 81vw;
-        }
-
-        .v-btn.v-size--large {
             font-size: 0.7rem;
             border-radius: 40px;
         }

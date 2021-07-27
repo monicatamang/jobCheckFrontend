@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn depressed dark @click="deleteLogin" :color="primaryColor" class="mb-n2 hidden-md-and-up" id="mobileTabletLogoutButton">
+        <v-btn depressed dark @click="deleteLogin" :color="primaryColor" class="mb-n2 d-flex d-none d-sm-flex d-md-none d-sm-none" id="mobileTabletLogoutButton">
             <span :class="{ hideText: isLoading }">Logout</span>
             <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
         </v-btn>
@@ -83,14 +83,14 @@
     @media only screen and (min-width: 768px) {
 
         #mobileTabletLogoutButton {
-            width: 70%;
-            margin-left: 20%;
-            font-size: 1.1rem;
+            width: 70.5vw;
+            margin-left: 14%;
             height: 5vh;
+            font-size: 1rem;
         }
     }
 
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 1024px) {
 
         #mobileTabletLogoutButton {
             display: none;

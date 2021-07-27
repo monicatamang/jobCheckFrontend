@@ -165,11 +165,12 @@
             width: 15%;
             bottom: 8vh;
             left: 80vw;
-        }
-
-        .v-btn.v-size--large {
             font-size: 0.7rem;
             border-radius: 40px;
+        }
+
+        .formButtons {
+            font-size: 1.1rem;
         }
     }
 </style>

@@ -194,5 +194,9 @@
         .v-btn {
             font-size: 0.9rem;
         }
+
+        .formButtons {
+            font-size: 1.1rem;
+        }
     }
 </style>

@@ -127,7 +127,7 @@
         width: 100%;
         background: white;
         position: fixed;
-        top: 7%;
+        top: 6%;
         z-index: 1;
         border-bottom: 1px solid rgba(211, 211, 211, 0.3);
     }
@@ -170,7 +170,7 @@
 
         .v-chip-group {
             top: 20vh;
-            left: 22%;
+            left: 11%;
         }
 
         .v-chip {
