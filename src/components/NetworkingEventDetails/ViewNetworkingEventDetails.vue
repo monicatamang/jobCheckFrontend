@@ -1,5 +1,8 @@
 <template>
     <article>
+        <div id="showSideNavOnDesktop">
+            <tablet-side-nav></tablet-side-nav>
+        </div>
         <div v-for="detail in details" :key="detail.networkingEventId">
             <v-container>
                 <v-row>
@@ -10,7 +13,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16 mt-sm-5">
-                                    <v-icon class="mr-n5 ml-sm-n16">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n5 ml-sm-n16 mr-md-n16">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -34,7 +37,7 @@
                 <v-tab>Details</v-tab>
                 <v-tab>Connections</v-tab>
                 <v-tab-item>
-                    <div class="detailsContainer px-8 pt-5 pt-sm-10">
+                    <div class="detailsContainer px-8 pt-5 pt-sm-10 px-md-16">
                         <div>
                             <h4 class="heading">Type of Networking Event</h4>
                             <h4 v-if="detail.eventType !== ''">{{ detail.eventType }}</h4>
@@ -66,6 +69,7 @@
     import DeleteNetworkingEvent from "../NetworkingEvents/DeleteNetworkingEvent.vue";
     import AddConnection from "../NetworkingEventDetails/Connections/AddConnection.vue";
     import ConnectionCard from "../NetworkingEventDetails/Connections/ConnectionCard.vue";
+    import TabletSideNav from "../TabletSideNav.vue";
 
     export default {
         name: "view-networking-event-details",
@@ -74,7 +78,8 @@
             EditNetworkingEvent,
             DeleteNetworkingEvent,
             AddConnection,
-            ConnectionCard
+            ConnectionCard,
+            TabletSideNav
         },
 
         // Receiving the user's networking event details and connections from the Networking Event page
@@ -163,6 +168,10 @@
         font-size: 1.1rem;
     }
 
+    #showSideNavOnDesktop {
+        display: none;
+    }
+
     @media only screen and (min-width: 768px) {
 
         article > div {
@@ -207,6 +216,49 @@
 
         .v-alert {
             width: 100%;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        
+        #showSideNavOnDesktop {
+            display: grid;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            height: 100%;
+        }
+
+        article > div {
+            width: 80%;
+            margin-top: 0vh;
+            margin-left: 15%;
+        }
+
+        .event {
+            font-size: 1.4rem;
+            margin-top: 0vh;
+            margin-bottom: 2vh;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+        }
+
+        h4 {
+            font-size: 0.9rem;
+        }
+
+        .v-tab {
+            font-size: 0.9rem;
+        }
+
+        .v-btn, .v-chip {
+            font-size: 0.9rem;
+        }
+
+        .v-btn .v-icon {
+            font-size: 1.9rem;
         }
     }
 </style>

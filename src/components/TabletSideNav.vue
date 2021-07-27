@@ -5,31 +5,31 @@
             <img src="../assets/jobCheckLogoWhiteBackground.jpg" alt="Job Check's official logo which has the words 'Job Check' in a bold, blue grey colour with a cornflower blue-coloured check mark on the left side of the letter 'J' in 'Job Check'.">
         </div>
         <div id="tabletNav">
-            <v-btn plain depressed @click="goTojobApplicationsPage">
+            <v-btn plain depressed :color="tabColor" @click="goTojobApplicationsPage">
                 <div class="tabs">
                     <v-icon>mdi-file</v-icon>
                     <span>Applications</span>
                 </div>
             </v-btn>
-            <v-btn plain depressed @click="goToInterviewsPage">
+            <v-btn plain depressed :color="tabColor" @click="goToInterviewsPage">
                 <div class="tabs">
                     <v-icon>mdi-briefcase-variant</v-icon>
                     <span>Interviews</span>
                 </div>
             </v-btn>
-            <v-btn plain depressed @click="goToNetworkingEventsPage">
+            <v-btn plain depressed :color="tabColor" @click="goToNetworkingEventsPage">
                 <div class="tabs">
                     <v-icon>mdi-account-group</v-icon>
                     <span>Networking</span>
                 </div>
             </v-btn>
-            <v-btn plain depressed @click="goToJobReferencesPage">
+            <v-btn plain depressed :color="tabColor" @click="goToJobReferencesPage">
                 <div class="tabs">
                     <v-icon>mdi-account-supervisor</v-icon>
                     <span>References</span>
                 </div>
             </v-btn>
-            <v-btn plain depressed @click="goToProfilePage" id="desktopProfileTab">
+            <v-btn plain depressed :color="tabColor" @click="goToProfilePage" id="desktopProfileTab">
                 <div class="tabs">
                     <v-icon>mdi-account</v-icon>
                     <span>Profile</span>
@@ -62,7 +62,8 @@
         data() {
             return {
                 userData: cookies.get("userData"),
-                avatarColor: "#7391C8"
+                avatarColor: "#7391C8",
+                tabColor: "#52688F"
             }
         },
 

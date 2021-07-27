@@ -1,6 +1,6 @@
 <template>
     <div class="connectionsContainer" v-if="networkingEventId">
-        <div v-for="connection in connections" :key="connection.connectionId" class="connectionCard">
+        <div v-for="connection in connections" :key="connection.connectionId" class="connectionCard px-md-3 pb-md-5 pt-md-8">
             <div v-if="networkingEventId === connection.networkingEventId">
                 <v-container>
                     <v-row>
@@ -11,7 +11,7 @@
                             <v-menu offset-y>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                        <v-icon class="ml-n6 mr-sm-n10">mdi-dots-horizontal</v-icon>
+                                        <v-icon class="ml-n6 mr-sm-n10 mr-md-n3">mdi-dots-horizontal</v-icon>
                                     </v-btn>
                                 </template>
                                 <v-list>
@@ -135,6 +135,24 @@
 
         .name {
             margin-left: 5px;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        .connectionsContainer {
+            grid-template-columns: repeat(2, 1fr);
+            padding-bottom: 0%;
+            row-gap: 0px;
+        }
+
+        .connectionCard {
+            row-gap: 10px;
+            width: 100%;
+        }
+
+        h4, a {
+            font-size: 0.8rem;
         }
     }
 </style>

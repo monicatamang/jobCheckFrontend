@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed block dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Connection</v-btn>
+            <v-btn depressed dark large fixed tile :color="primaryColor" id="addButton" v-bind="attrs" v-on="on"><v-icon>mdi-plus</v-icon>Add Connection</v-btn>
         </template>
         <v-card>
             <v-card-title>Create a Connection</v-card-title>
@@ -22,7 +22,7 @@
                             <v-text-field v-model="newConnection.email" label="Email" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="newConnection.phoneNumber" label="Phone Number" :color="primaryColor"></v-text-field>
+                            <v-text-field v-model="newConnection.phoneNumber" label="Phone Number" hint="###-###-####" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="newConnection.linkedIn" label="LinkedIn" :color="primaryColor"></v-text-field>
@@ -154,6 +154,22 @@
             font-size: 1.2rem;
             letter-spacing: 1px;
             height: 5%;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        #addButton {
+            position: fixed;
+            height: 6vh;
+            width: 15%;
+            bottom: 8vh;
+            left: 80vw;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 0.7rem;
+            border-radius: 40px;
         }
     }
 </style>
