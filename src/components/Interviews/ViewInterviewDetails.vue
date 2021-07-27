@@ -1,5 +1,8 @@
 <template>
     <article>
+        <div id="showSideNavOnDesktop">
+            <tablet-side-nav></tablet-side-nav>
+        </div>
         <div v-for="detail in details" :key="detail.interviewId">
             <v-container>
                 <v-row>
@@ -10,7 +13,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16 mt-sm-5">
-                                    <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n5 mr-md-n16">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -38,7 +41,7 @@
                     <h4>{{ detail.interviewTime }} {{ detail.interviewTimePeriod }} ({{ detail.interviewTimeZone }})</h4>
                 </div>
             </div>
-            <div class="otherDetails">
+            <div class="otherDetails px-md-8 pt-md-10">
                 <div>
                     <h4 class="heading">Type of Interview</h4>
                     <h4 v-if="detail.interviewType !== '' && detail.interviewType !== null">{{ detail.interviewType }}</h4>
@@ -62,13 +65,15 @@
 <script>
     import EditInterview from "./EditInterview.vue";
     import DeleteInterview from "./DeleteInterview.vue";
+    import TabletSideNav from "../TabletSideNav.vue";
 
     export default {
         name: "view-interview-details",
 
         components: {
             EditInterview,
-            DeleteInterview
+            DeleteInterview,
+            TabletSideNav
         },
 
         // Receiving an array of one user's interview
@@ -202,6 +207,60 @@
 
         .otherDetails {
             row-gap: 30px;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        
+        #showSideNavOnDesktop {
+            display: grid;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            height: 100%;
+        }
+
+        article > div {
+            width: 80%;
+            margin-top: 0vh;
+            margin-left: 15%;
+        }
+
+        .company {
+            font-size: 1.4rem;
+            margin-top: 0vh;
+            margin-bottom: 2vh;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+        }
+
+        h4, .v-application a {
+            font-size: 0.9rem;
+        }
+
+        .v-tab {
+            font-size: 0.9rem;
+        }
+
+        .importantDetailsContainer {
+            box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.25);
+            width: 40%;
+            padding: 3% 1%;
+        }
+
+        .v-btn {
+            font-size: 0.9rem;
+        }
+
+        .v-btn .v-icon {
+            font-size: 1.9rem;
+        }
+
+        .v-application a {
+            margin-top: 3vh;
+            z-index: 5;
         }
     }
 </style>
