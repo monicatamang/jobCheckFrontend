@@ -111,6 +111,8 @@
             width: 20%;
             z-index: 10;
             position: fixed;
+            top: 0%;
+            left: 0%;
         }
 
         #tabletNav {

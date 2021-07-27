@@ -91,4 +91,14 @@
             margin-left: -10vw;
         }
     }
+
+    @media only screen and (min-width: 1024px) {
+
+        .v-btn.v-size--default {
+            width: 50%;
+            font-size: 0.8rem;
+            padding: 4%;
+            margin-left: -14vw;
+        }
+    }
 </style>

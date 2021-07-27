@@ -1,6 +1,6 @@
 <template>
-    <div class="px-6 py-5">
-        <h4 class="heading pb-3 pb-sm-5">Resume</h4>
+    <div class="px-6 py-5 px-md-16">
+        <h4 class="heading pb-3 pb-sm-5 pt-md-10">Resume</h4>
         <!-- Show statement if the user has an existing resume -->
         <h4 class="mb-5" v-if="resumeId !== undefined && (isResumeDeleted === false || resumeIsUploaded === true)">Please delete your current resume before uploading a new resume.</h4>
         <!-- Show file and upload buttons if the user did not upload a resume -->
@@ -200,4 +200,24 @@
             font-size: 1.2rem;
         }
     }
+
+    @media only screen and (min-width: 1024px) {
+
+        .heading {
+            font-size: 1rem;
+        }
+
+        h4, input {
+            font-size: 0.9rem;
+        }
+
+        .uploadButton {
+            width: 13%;
+            padding: 0%;
+        }
+
+        .uploadButton {
+            font-size: 0.8rem;
+        }
+    }   
 </style>

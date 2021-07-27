@@ -1,6 +1,6 @@
 <template>
-    <div class="px-6 pt-2">
-        <h4 class="heading pb-3 pb-sm-5">Cover Letter</h4>
+    <div class="px-6 pt-2 px-md-16">
+        <h4 class="heading pb-3 pb-sm-5 pb-md-5">Cover Letter</h4>
         <!-- Show statement if the user has an existing cover letter -->
         <h4 class="mb-4" v-if="coverLetterId !== undefined && (isCoverLetterDeleted === false || coverLetterIsUploaded === true)">Please delete your current cover letter before uploading a new cover letter.</h4>
         <!-- Show file and upload buttons if the user did not upload a cover letter -->
@@ -200,4 +200,28 @@
             font-size: 1.2rem;
         }
     }
+
+    @media only screen and (min-width: 1024px) {
+
+        .heading {
+            font-size: 1rem;
+        }
+
+        h4 {
+            font-size: 0.9rem;
+        }
+
+        .uploadButton {
+            width: 13%;
+            padding: 0%;
+        }
+
+        .uploadButton {
+            font-size: 0.8rem;
+        }
+
+        input {
+            font-size: 0.9rem;
+        }
+    }   
 </style>

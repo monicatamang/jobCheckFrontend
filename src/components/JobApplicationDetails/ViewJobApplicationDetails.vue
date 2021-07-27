@@ -1,5 +1,8 @@
 <template>
     <article>
+        <div id="showSideNavOnDesktop">
+            <tablet-side-nav></tablet-side-nav>
+        </div>
         <div v-for="detail in details" :key="detail.jobAppId">
             <v-container>
                 <v-row>
@@ -10,7 +13,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on" class="mt-16 mt-sm-5">
-                                    <v-icon class="mr-n5">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n5 mr-md-n16">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -52,7 +55,7 @@
                 <v-tab>Documents</v-tab>
                 <v-tab>Interviews</v-tab>
                 <v-tab-item>
-                    <div class="otherDetails px-8 pt-5 px-sm-0 pt-sm-10">
+                    <div class="otherDetails px-8 pt-5 px-sm-0 pt-sm-10 px-md-8">
                         <div>
                             <h4 class="heading">Job Posting</h4>
                             <a v-if="detail.jobPostingUrl !== '' && detail.jobPostingUrl !== null" target="_blank" :href="detail.jobPostingUrl">View Original Job Post</a>
@@ -97,6 +100,7 @@
     import UploadCoverLetter from "../JobApplicationDetails/CoverLetters/UploadCoverLetter.vue";
     import AddInterview from "../Interviews/AddInterview.vue";
     import InterviewCard from "../Interviews/InterviewCard.vue";
+    import TabletSideNav from "../TabletSideNav.vue";
 
     export default {
         name: "view-job-application-details",
@@ -107,7 +111,8 @@
             UploadResume,
             UploadCoverLetter,
             AddInterview,
-            InterviewCard
+            InterviewCard,
+            TabletSideNav
         },
 
         props: {
@@ -222,6 +227,10 @@
         color: var(--primaryColor);
     }
 
+    #showSideNavOnDesktop {
+        display: none;
+    }
+
     @media only screen and (min-width: 768px) {
         
         article > div {
@@ -271,6 +280,55 @@
 
         .v-chip {
             padding: 20px;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        
+        #showSideNavOnDesktop {
+            display: grid;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            height: 100%;
+        }
+
+        article > div {
+            width: 80%;
+            margin-top: 0vh;
+            margin-left: 15%;
+        }
+
+        .company {
+            font-size: 1.4rem;
+            margin-top: 0vh;
+            margin-bottom: 2vh;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+        }
+
+        h4, .v-application a {
+            font-size: 0.9rem;
+        }
+
+        .v-tab {
+            font-size: 0.9rem;
+        }
+
+        .importantDetailsContainer {
+            box-shadow: 0px 0px 5px rgba(82, 104, 143, 0.25);
+            width: 50%;
+            padding: 3% 1%;
+        }
+
+        .v-btn, .v-chip {
+            font-size: 0.9rem;
+        }
+
+        .v-btn .v-icon {
+            font-size: 1.9rem;
         }
     }
 </style>

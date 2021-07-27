@@ -9,7 +9,7 @@
             <v-card-text>
                 <v-container>
                     <v-row>
-                        <v-col cols="12" sm="3">
+                        <v-col cols="12">
                             <v-menu ref="menu" v-model="dateMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-text-field v-model="newInterview.interviewDate" :color="primaryColor" label="Date*" prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" clearable clear-icon="mdi-close-circle" required></v-text-field>
@@ -27,7 +27,7 @@
                                 </v-col>
                             </v-row>
                         </v-col>
-                        <v-col cols="12" sm="3">
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="newInterview.interviewTimeZone" label="Time Zone*" hint="MST, EST, PST, etc." :color="primaryColor" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
@@ -129,7 +129,7 @@
 <style scoped>
     #addButton {
         font-family: var(--titleFont);
-        bottom: 0;
+        bottom: 0%;
         width: 100%;
     }
 
@@ -150,14 +150,30 @@
     @media only screen and (min-width: 768px) {
 
         #addButton {
-            right: 0;
-            bottom: 0;
+            right: 0%;
+            bottom: 0%;
         }
 
         .v-btn.v-size--large {
             font-size: 1.2rem;
             letter-spacing: 1px;
             height: 5%;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        #addButton {
+            position: fixed;
+            height: 6vh;
+            width: 15%;
+            bottom: 8vh;
+            left: 80vw;
+        }
+
+        .v-btn.v-size--large {
+            font-size: 0.7rem;
+            border-radius: 40px;
         }
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <article id="interviewCardsContainer">
-        <div v-for="interview in interviews" :key="interview.interviewId" class="interviewCard px-sm-6 pb-sm-9 pt-sm-7">
+        <div v-for="interview in interviews" :key="interview.interviewId" class="interviewCard px-sm-6 pb-sm-9 pt-sm-7 px-md-3 pb-md-5 pt-md-3">
             <v-container>
                 <v-row>
                     <v-col cols="9" class="align-self-center">
@@ -10,7 +10,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                    <v-icon class="mr-n5 mr-sm-n12">mdi-dots-horizontal</v-icon>
+                                    <v-icon class="mr-n5 mr-sm-n12 mr-md-n3">mdi-dots-horizontal</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -25,7 +25,7 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <h4 class="ml-3">{{ interview.jobPosition }}</h4>
+            <h4 class="ml-3 mt-md-n2">{{ interview.jobPosition }}</h4>
             <h4 class="ml-3">Date: {{ interview.interviewDate }}</h4>
             <h4 class="ml-3">Time: {{ interview.interviewTime }} {{ interview.interviewTimePeriod }} ({{ interview.interviewTimeZone }})</h4>
             <h4 class="ml-3">{{ interview.interviewLocation }}</h4>
@@ -148,6 +148,23 @@
 
         h4, a {
             font-size: 1.2rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        #interviewCardsContainer {
+            grid-template-columns: repeat(3, 1fr);
+            padding-bottom: 2%;
+        }
+
+        .interviewCard {
+            row-gap: 10px;
+            width: 90%;
+        }
+
+        h4, a {
+            font-size: 0.8rem;
         }
     }
 </style>

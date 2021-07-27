@@ -101,4 +101,13 @@
             padding: 10%;
         }
     }
+
+    @media only screen and (min-width: 1024px) {
+
+        .v-btn.v-size--default {
+            width: 40%;
+            font-size: 0.8rem;
+            padding: 4%;
+        }
+    }
 </style>
