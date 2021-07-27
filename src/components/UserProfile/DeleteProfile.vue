@@ -108,4 +108,13 @@
             height: 5vh;
         }
     }
+
+    @media only screen and (min-width: 1024px) {
+
+        #deleteProfileButton {
+            margin-left: 15%;
+            font-size: 1.1rem;
+            height: 8vh;
+        }
+    }
 </style>

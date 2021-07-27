@@ -5,7 +5,7 @@
                 <v-col cols="10" sm="11">
                     <h3>Account Information</h3>
                 </v-col>
-                <v-col cols="2" sm="1">
+                <v-col cols="2" sm="1" class="mt-md-5">
                     <edit-profile @userProfileUpdated="handleUpdatedProfile"></edit-profile>
                 </v-col>
             </v-row>
@@ -104,6 +104,22 @@
 
         h4 {
             font-size: 1.2rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        article {
+            margin-left: 15%;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 5vh;
+        }
+
+        h4 {
+            font-size: 1rem;
         }
     }
 </style>

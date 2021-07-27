@@ -1,6 +1,6 @@
 <template>
     <article>
-            <h3 class="mb-5 mx-3">Overview</h3>
+            <h3 class="mb-5 mx-3 mb-md-3">Overview</h3>
             <v-divider></v-divider>
             <v-container>
                 <v-row>
@@ -20,7 +20,7 @@
                                 <h4>Interviews</h4>
                             </v-col>
                             <v-col cols="2" sm="1">
-                                <h4>{{ userInterviews }}</h4>
+                                <h4 class="stats">{{ userInterviews }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -30,7 +30,7 @@
                                 <h4>Networking Events</h4>
                             </v-col>
                             <v-col cols="2" sm="1">
-                                <h4>{{ userNetworkingEvents }}</h4>
+                                <h4 class="stats">{{ userNetworkingEvents }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -40,7 +40,7 @@
                                 <h4>Networking Connections</h4>
                             </v-col>
                             <v-col cols="2" sm="1">
-                                <h4>{{ userConnections }}</h4>
+                                <h4 class="stats">{{ userConnections }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -50,7 +50,7 @@
                                 <h4>Job References</h4>
                             </v-col>
                             <v-col cols="2" sm="1">
-                                <h4>{{ userJobRefs }}</h4>
+                                <h4 class="stats">{{ userJobRefs }}</h4>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -140,10 +140,6 @@
         font-weight: 400;
     }
 
-    .heading {
-        font-weight: 600;
-    }
-
     @media only screen and (min-width: 768px) {
 
         article {
@@ -157,6 +153,22 @@
 
         h4 {
             font-size: 1.2rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        article {
+            margin-left: 15%;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 5vh;
+        }
+
+        h4 {
+            font-size: 1rem;
         }
     }
 </style>

@@ -3,9 +3,9 @@
         <status-alert :showStatus="showUserProfileStatus"></status-alert>
         <status-alert :showStatus="showLogoutStatus"></status-alert>
         <tablet-side-nav></tablet-side-nav>
-        <v-app-bar color="white" flat fixed class="pt-sm-5">
+        <v-app-bar color="white" flat fixed class="pt-sm-5 pt-md-7" id="profileHeaderBar">
             <v-spacer></v-spacer>
-                <h1 class="pb-sm-7">Profile</h1>
+                <h1 class="pb-sm-7 pb-md-10">Profile</h1>
             <v-spacer></v-spacer>
         </v-app-bar>
         <v-container>
@@ -140,6 +140,11 @@
         
         #hideOnDesktop {
             display: none
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-left: 10%;
         }
     }
 </style>
