@@ -1,6 +1,6 @@
 <template>
     <article id="jobAppCardsContainer">
-        <div v-for="jobApp in jobApps" :key="jobApp.jobAppId" class="jobAppCard px-sm-6 pb-sm-9 pt-sm-7 px-md-3 pb-md-4 pt-md-2">
+        <div v-for="jobApp in jobApps" :key="jobApp.jobAppId" class="jobAppCard px-sm-6 pb-sm-9 pt-sm-7 px-md-3 pb-md-5 pt-md-3">
             <v-container>
                 <v-row>
                     <v-col cols="9" v-if="jobApp.status === 'Not Applied'">

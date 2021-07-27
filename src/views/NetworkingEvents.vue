@@ -122,7 +122,7 @@
         position: fixed;
         top: 6%;
         z-index: 1;
-        border-bottom: 1px solid whitesmoke;
+        border-bottom: 1px solid rgba(211, 211, 211, 0.3);
     }
 
     h1 {
@@ -187,6 +187,23 @@
     }
 
     @media only screen and (min-width: 1024px) {
-        
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .v-chip-group {
+            top: 30vh;
+            left: -23%;
+        }
+
+        .v-chip {
+            font-size: 0.8rem;
+        }
+
+        #searchBarContainer {
+            padding-bottom: 1%;
+            left: 6%;
+        }
     }
 </style>

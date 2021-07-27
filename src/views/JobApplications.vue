@@ -206,6 +206,7 @@
 
         #searchBarContainer {
             padding-bottom: 1%;
+            left: 6%;
         }
     }
 </style>
