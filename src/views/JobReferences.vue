@@ -149,6 +149,19 @@
     }
 
     @media only screen and (min-width: 1024px) {
-        
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        #searchBarContainer {
+            padding-bottom: 1%;
+            left: 6%;
+        }
+
+        h4 {
+            left: 5%;
+            top: 40vh;
+        }
     }
 </style>

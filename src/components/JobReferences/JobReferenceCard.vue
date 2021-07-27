@@ -1,6 +1,6 @@
 <template>
     <article id="jobRefsCardsContainer">
-        <div v-for="jobRef in jobRefs" :key="jobRef.jobRefId" class="jobRefCard px-sm-6 pb-sm-9 pt-sm-7">
+        <div v-for="jobRef in jobRefs" :key="jobRef.jobRefId" class="jobRefCard px-sm-6 pb-sm-9 pt-sm-7 px-md-3 pb-md-5 pt-md-1">
             <v-container>
                     <v-row>
                         <v-col cols="10" class="align-self-center">
@@ -10,7 +10,7 @@
                             <v-menu offset-y>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn dark text color="black" v-bind="attrs" v-on="on">
-                                        <v-icon class="ml-n7 mr-sm-n6">mdi-dots-horizontal</v-icon>
+                                        <v-icon class="ml-n7 mr-sm-n6 mr-md-1">mdi-dots-horizontal</v-icon>
                                     </v-btn>
                                 </template>
                                 <v-list>
@@ -133,6 +133,27 @@
 
         h4, a {
             font-size: 1.15rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        #jobRefsCardsContainer {
+            grid-template-columns: repeat(3, 1fr);
+            width: 80%;
+            margin-left: 15%;
+            column-gap: 12px;
+            margin-top: 40vh;
+            margin-bottom: 5vh;
+            z-index: 10;
+        }
+
+        .jobRefCard {
+            row-gap: 5px;
+        }
+
+        h4, a {
+            font-size: 0.8rem;
         }
     }
 </style>
