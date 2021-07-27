@@ -4,7 +4,7 @@
         <mobile-header></mobile-header>
         <tablet-side-nav></tablet-side-nav>
         <div id="searchBarContainer">
-            <h1>Job Applications</h1>
+            <h1>Applications</h1>
             <search-job-application></search-job-application>
         </div>
         <v-chip-group mandatory active-class="black--text">
@@ -46,6 +46,7 @@
         data() {
             return {
                 loginToken: cookies.get("loginToken"),
+                userData: cookies.get("userData"),
                 primaryColor: "#52688F",
                 tertiaryColor: "#BDC6D9",
                 all: false,
@@ -128,7 +129,7 @@
         position: fixed;
         top: 7%;
         z-index: 1;
-        border-bottom: 1px solid whitesmoke;
+        border-bottom: 1px solid rgba(211, 211, 211, 0.3);
     }
 
     h1 {
@@ -169,7 +170,7 @@
 
         .v-chip-group {
             top: 20vh;
-            margin-left: 22%;
+            left: 22%;
         }
 
         .v-chip {
@@ -185,6 +186,26 @@
             width: 80%;
             left: 20%;
             font-size: 1.2rem;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .v-chip-group {
+            top: 30vh;
+            left: -20%;
+        }
+
+        .v-chip {
+            font-size: 0.8rem;
+        }
+
+        #searchBarContainer {
+            padding-bottom: 1%;
         }
     }
 </style>

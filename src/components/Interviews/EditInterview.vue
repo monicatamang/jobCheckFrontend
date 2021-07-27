@@ -168,4 +168,11 @@
             font-size: 1.3rem;
         }
     }
+
+    @media only screen and (min-width: 1024px) {
+
+        #editButton {
+            font-size: 0.9rem;
+        }
+    }
 </style>

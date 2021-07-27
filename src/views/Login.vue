@@ -183,16 +183,6 @@
             font-size: 1.3rem;
         }
 
-        #inputFields {
-            width: 30%;
-        }
-
-        .v-btn.v-size--large {
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-            padding: 2%;
-        }
-
         #background {
             display: grid;
             place-items: center;
@@ -204,6 +194,7 @@
         .v-btn.v-size--large {
             font-size: 0.8rem;
             letter-spacing: 1px;
+            width: 20%;
         }
 
         #linkToCreateAccountPage {

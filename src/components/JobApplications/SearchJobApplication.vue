@@ -84,4 +84,11 @@
             width: 55vw;
         }
     }
+
+    @media only screen and (min-width: 1024px) {
+
+        .v-input {
+            width: 60vw;
+        }
+    }
 </style>

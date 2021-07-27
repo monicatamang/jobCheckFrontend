@@ -4,7 +4,7 @@
         <mobile-header></mobile-header>
         <tablet-side-nav></tablet-side-nav>
         <div id="searchBarContainer">
-            <h1>Job References</h1>
+            <h1>References</h1>
             <search-job-reference></search-job-reference>
         </div>
         <h4>{{ showSearchJobReferenceStatus }}</h4>

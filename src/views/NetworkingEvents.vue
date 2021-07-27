@@ -4,7 +4,7 @@
         <mobile-header></mobile-header>
         <tablet-side-nav></tablet-side-nav>
         <div id="searchBarContainer">
-            <h1>Networking Events</h1>
+            <h1>Networking</h1>
             <search-networking-event></search-networking-event>
         </div>
         <v-chip-group mandatory active-class="black--text">
