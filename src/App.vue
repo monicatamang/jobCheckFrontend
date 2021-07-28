@@ -20,9 +20,9 @@ export default {
   },
 
   mounted() {
-    // If the user does not have a login token, take the user to the Home page
+    // If the user has a login token, take the user to the Home page
     if(this.loginToken !== '' && this.loginToken !== null) {
-      this.$router.push("/JobApplications");
+      this.$router.go(1);
     }
 
     // If the user is logged in, get the user's exisiting job applications, interviews, networking events, connections and job references  
