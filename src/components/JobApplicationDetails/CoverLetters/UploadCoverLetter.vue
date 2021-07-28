@@ -2,7 +2,7 @@
     <div class="px-6 pt-2 px-md-16">
         <h4 class="heading pb-3 pb-sm-5 pb-md-5">Cover Letter</h4>
         <!-- Show statement if the user has an existing cover letter -->
-        <h4 class="mb-4" v-if="coverLetterId !== undefined && (isCoverLetterDeleted === false || coverLetterIsUploaded === true)">Please delete your current cover letter before uploading a new cover letter.</h4>
+        <h4 class="mb-4" v-if="(coverLetterId !== undefined || coverLetterIsUploaded === true) && isCoverLetterDeleted === false">Please delete your current cover letter before uploading a new cover letter.</h4>
         <!-- Show file and upload buttons if the user did not upload a cover letter -->
         <v-form v-if="coverLetterId === undefined || isCoverLetterDeleted === true" class="uploadCoverLetterForm">
             <input type="file" name="coverLetterFile" id="coverLetterFile">
@@ -11,17 +11,17 @@
         <!-- Show the download and delete buttons if the user has an existing cover letter -->
         <v-container>
             <v-row>
-                <v-col cols="4" class="ml-n3" v-if="isCoverLetterDeleted === false || coverLetterIsUploaded">
+                <v-col cols="4" class="ml-n3" v-if="(coverLetterId !== undefined || coverLetterIsUploaded === true) && isCoverLetterDeleted === false">
                     <download-cover-letter :coverLetterId="coverLetterId"></download-cover-letter>
                 </v-col>
-                <v-col cols="3" class="ml-3" v-if="isCoverLetterDeleted === false || coverLetterIsUploaded">
+                <v-col cols="3" class="ml-3" v-if="(coverLetterId !== undefined || coverLetterIsUploaded === true) && isCoverLetterDeleted === false">
                     <delete-cover-letter :coverLetterId="coverLetterId" @coverLetterIsDeleted="hideDownloadAndDeleteCoverLetterButton"></delete-cover-letter>
                 </v-col>
                 <v-spacer></v-spacer>
             </v-row>
         </v-container>
         <!-- Show the user's last upload date if the user has uploaded a cover letter -->
-        <h4 v-if="coverLetterId !== undefined && (isCoverLetterDeleted === false || coverLetterIsUploaded === true)">Last upload on {{ coverLetterCreatedDate }}</h4>
+        <h4 v-if="(coverLetterId !== undefined || coverLetterIsUploaded === true) && isCoverLetterDeleted === false">Last upload on {{ coverLetterCreatedDate }}</h4>
     </div>
 </template>
 
@@ -143,6 +143,7 @@
             hideDownloadAndDeleteCoverLetterButton(data) {
                 // When the user's cover letter is deleted, hide the download and delete buttons
                 this.isCoverLetterDeleted = data;
+                this.getSingleCoverLetter();
             }
         },
 

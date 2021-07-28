@@ -210,5 +210,11 @@
             left: 5%;
             top: 40vh;
         }
+
+        .v-alert {
+            width: 85%;
+            left: 15%;
+            font-size: 1rem;
+        }
     }
 </style>

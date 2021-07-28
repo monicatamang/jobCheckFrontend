@@ -1,6 +1,6 @@
 <template>
     <article id="interviewCardsContainer">
-        <div v-for="interview in interviews" :key="interview.interviewId" class="interviewCard px-sm-6 pb-sm-9 pt-sm-7 px-md-3 pb-md-5 pt-md-3">
+        <div v-for="interview in interviews" :key="interview.interviewId" class="interviewCard px-sm-6 pb-sm-9 pt-sm-7 px-md-3 pb-md-5 pt-md-1">
             <v-container>
                 <v-row>
                     <v-col cols="9" class="align-self-center">
@@ -27,8 +27,8 @@
             </v-container>
             <h4 class="ml-3 mt-md-n2">{{ interview.jobPosition }}</h4>
             <h4 class="ml-3">Date: {{ interview.interviewDate }}</h4>
-            <h4 class="ml-3">Time: {{ interview.interviewTime }} {{ interview.interviewTimePeriod }} ({{ interview.interviewTimeZone }})</h4>
-            <h4 class="ml-3">{{ interview.interviewLocation }}</h4>
+            <h4 class="ml-3 mb-md-3">Time: {{ interview.interviewTime }} {{ interview.interviewTimePeriod }} ({{ interview.interviewTimeZone }})</h4>
+            <!-- <h4 class="ml-3 mb-md-2">{{ interview.interviewLocation }}</h4> -->
             <router-link :to="{ 
                 name: 'InterviewDetails',
                 params: {

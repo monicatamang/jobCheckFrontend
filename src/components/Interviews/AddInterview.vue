@@ -37,7 +37,7 @@
                             <v-text-field v-model="newInterview.interviewLocation" label="Location" :color="primaryColor"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea v-model="createInterview.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
+                            <v-textarea v-model="newInterview.notes" label="Notes" auto-grow clearable clear-icon="mdi-close-circle" :color="primaryColor"></v-textarea>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -167,7 +167,7 @@
             position: fixed;
             height: 6vh;
             width: 15%;
-            bottom: 8vh;
+            bottom: 2vh;
             left: 80vw;
             font-size: 0.7rem;
             border-radius: 40px;

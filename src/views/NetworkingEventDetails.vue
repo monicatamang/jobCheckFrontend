@@ -141,4 +141,13 @@
             width: 100%;
         }
     }
+
+    @media only screen and (min-width: 768px) {
+
+        .v-alert {
+            width: 85%;
+            left: 15%;
+            font-size: 1rem;
+        }
+    }
 </style>

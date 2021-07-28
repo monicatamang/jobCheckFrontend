@@ -1,6 +1,6 @@
 <template>
     <!-- Show the download button only if the user has an exist resume file -->
-    <v-btn outlined :color="primaryColor" v-if="resumeId !== undefined" @click="getResumeName">Download</v-btn>
+    <v-btn outlined :color="primaryColor" v-if="resumeId !== undefined" @click="getResumeName" class="downloadButton">Download</v-btn>
 </template>
 
 <script>
@@ -95,7 +95,7 @@
 <style scoped>
     @media only screen and (min-width: 768px) {
 
-        .v-btn.v-size--default {
+        .downloadButton {
             width: 70%;
             font-size: 1rem;
             padding: 10%;
@@ -104,7 +104,7 @@
 
     @media only screen and (min-width: 1024px) {
 
-        .v-btn.v-size--default {
+        .downloadButton {
             width: 40%;
             font-size: 0.8rem;
             padding: 4%;

@@ -163,7 +163,7 @@
             position: fixed;
             height: 6vh;
             width: 15%;
-            bottom: 8vh;
+            bottom: 2vh;
             left: 80vw;
             font-size: 0.7rem;
             border-radius: 40px;

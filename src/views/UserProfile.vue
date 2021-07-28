@@ -146,5 +146,11 @@
             font-size: 2rem;
             margin-left: 10%;
         }
+
+        .v-alert {
+            width: 85%;
+            left: 15%;
+            font-size: 1rem;
+        }
     }
 </style>

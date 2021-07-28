@@ -27,7 +27,7 @@
                         <v-col cols="12">
                             <v-row>
                                 <v-col cols="6">
-                                    <v-text-field v-model="createJobApp.salaryAmount" label="Salary" prepend-inner-icon="mdi-currency-usd" :color="primaryColor"></v-text-field>
+                                    <v-text-field v-model="createJobApp.salaryAmount" label="Salary" hint="*Numerical value only - no commas" prepend-inner-icon="mdi-currency-usd" :color="primaryColor"></v-text-field>
                                 </v-col>
                                 <v-col cols="6">
                                     <v-select v-model="createJobApp.salaryType" label="Salary Rate" :items="salaryRates" :color="primaryColor"></v-select>

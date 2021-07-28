@@ -163,14 +163,6 @@
 
     @media only screen and (min-width: 1024px) {
 
-        #interviewCardsComp {
-            margin-left: 15%;
-            margin-top: 25vh;
-        }
-    }
-
-    @media only screen and (min-width: 1024px) {
-
         h1 {
             font-size: 2rem;
         }
@@ -183,6 +175,17 @@
         h4 {
             left: 5%;
             top: 40vh;
+        }
+
+        #interviewCardsComp {
+            margin-left: 15%;
+            margin-top: 25vh;
+        }
+
+        .v-alert {
+            width: 85%;
+            left: 15%;
+            font-size: 1rem;
         }
     }
 </style>

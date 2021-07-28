@@ -2,7 +2,7 @@
     <div class="px-6 py-5 px-md-16">
         <h4 class="heading pb-3 pb-sm-5 pt-md-10">Resume</h4>
         <!-- Show statement if the user has an existing resume -->
-        <h4 class="mb-5" v-if="resumeId !== undefined && (isResumeDeleted === false || resumeIsUploaded === true)">Please delete your current resume before uploading a new resume.</h4>
+        <h4 class="mb-5" v-if="(resumeId !== undefined || resumeIsUploaded === true) && isResumeDeleted === false">Please delete your current resume before uploading a new resume.</h4>
         <!-- Show file and upload buttons if the user did not upload a resume -->
         <v-form v-if="resumeId === undefined || isResumeDeleted === true" class="uploadResumeForm">
             <input type="file" name="resumeFile" id="resumeFile">
@@ -11,17 +11,17 @@
         <!-- Show the download and delete buttons if the user has an existing resume -->
         <v-container>
             <v-row>
-                <v-col cols="4" class="ml-n3" v-if="isResumeDeleted === false || resumeIsUploaded === true">
+                <v-col cols="4" class="ml-n3" v-if="(resumeId !== undefined || resumeIsUploaded === true) && isResumeDeleted === false">
                     <download-resume :resumeId="resumeId"></download-resume>
                 </v-col>
-                <v-col cols="3" class="ml-3" v-if="isResumeDeleted === false || resumeIsUploaded === true">
-                    <delete-resume :resumeId="resumeId" @resumeIsDeleted="hideDownloadAndDeleteResumeButton"></delete-resume>
+                <v-col cols="3" class="ml-3" v-if="(resumeId !== undefined || resumeIsUploaded === true) && isResumeDeleted === false">
+                    <delete-resume :getResumeFromAPI="getSingleResume()" :resumeId="resumeId" @resumeIsDeleted="hideDownloadAndDeleteResumeButton"></delete-resume>
                 </v-col>
                 <v-spacer></v-spacer>
             </v-row>
         </v-container>
         <!-- Show the user's last upload date if the user has uploaded a cover letter -->
-        <h4 v-if="resumeId !== undefined && (isResumeDeleted === false || resumeIsUploaded === true)" class="mt-3">Last upload on {{ resumeCreatedDate }}</h4>
+        <h4 v-if="(resumeId !== undefined || resumeIsUploaded === true) && isResumeDeleted === false" class="mt-3">Last upload on {{ resumeCreatedDate }}</h4>
     </div>
 </template>
 
@@ -143,6 +143,7 @@
             hideDownloadAndDeleteResumeButton(data) {
                 // When the user deletes their resume, hide the download and delete buttons
                 this.isResumeDeleted = data;
+                this.getSingleResume();
             }
         },
 
@@ -214,9 +215,6 @@
         .uploadButton {
             width: 13%;
             padding: 0%;
-        }
-
-        .uploadButton {
             font-size: 0.8rem;
         }
     }   

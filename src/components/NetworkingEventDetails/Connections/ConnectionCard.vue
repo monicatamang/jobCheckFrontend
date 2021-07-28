@@ -28,10 +28,10 @@
                 </v-container>
                 <h4 v-if="connection.company !== '' && connection.company !== null">{{ connection.company }}</h4>
                 <h4 v-if="connection.role !== '' && connection.role !== null">{{ connection.role }}</h4>
-                <a :href="`mailto:${connection.email}`" v-if="connection.email !== '' && connection.email !== null">{{ connection.email }}</a>
+                <a :href="`mailto:${connection.email}`" v-if="connection.email !== '' && connection.email !== null" target="_blank">{{ connection.email }}</a>
                 <h4 v-if="connection.phoneNumber !== '' && connection.phoneNumber !== null">{{ connection.phoneNumber }}</h4>
-                <a v-if="connection.linkedIn !== '' && connection.linkedIn !== null" :href="connection.LinkedIn">{{ connection.linkedIn }}</a>
-                <a :href="connection.website" v-if="connection.website !== '' || connection.website !== null">{{ connection.website }}</a>
+                <a v-if="connection.linkedIn !== '' && connection.linkedIn !== null" :href="connection.LinkedIn" target="_blank">{{ connection.linkedIn }}</a>
+                <a :href="connection.website" v-if="connection.website !== '' || connection.website !== null" target="_blank">{{ connection.website }}</a>
                 <h4 v-if="connection.other !== '' && connection.other !== null">{{ connection.other }}</h4>
                 <h4 v-if="connection.notes !== '' && connection.notes !== null" class="heading mt-5">Notes:</h4>
                 <h4 v-if="connection.notes !== '' && connection.notes !== null">{{ connection.notes }}</h4>

@@ -2,7 +2,7 @@
     <!-- Show delete button only if the user has existing resume file -->
     <v-dialog v-model="dialog" width="500px" v-if="resumeId !== undefined">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn text outlined v-bind="attrs" v-on="on">Delete</v-btn>
+            <v-btn text outlined v-bind="attrs" v-on="on" class="deleteButton">Delete</v-btn>
         </template>
         <v-card>
             <v-card-title>Confirm Deletion</v-card-title>
@@ -24,7 +24,8 @@
 
         // Receiving the resume id from the Upload Resume component
         props: {
-            resumeId: Number
+            resumeId: Number,
+            getResumeFromAPI: Function
         },
 
         data() {
@@ -74,6 +75,10 @@
                 });
             },
         },
+
+        mounted() {
+            this.getResumeFromAPI();
+        },
     }
 </script>
 
@@ -84,7 +89,7 @@
 
     @media only screen and (min-width: 768px) {
 
-        .v-btn.v-size--default {
+        .deleteButton {
             width: 80%;
             font-size: 1rem;
             padding: 14.5%;
@@ -94,7 +99,7 @@
 
     @media only screen and (min-width: 1024px) {
 
-        .v-btn.v-size--default {
+        .deleteButton {
             width: 50%;
             font-size: 0.8rem;
             padding: 4%;
