@@ -16,7 +16,7 @@
                         </v-col>
                     </v-row>
                 </v-container>
-                <v-btn width="20vw" height="6vh" large depressed dark :color="inputColor" class="mt-8" @click="loginUser">Continue</v-btn>
+                <v-btn height="6vh" large depressed dark :color="inputColor" class="mt-8" @click="loginUser">Continue</v-btn>
             </v-form>
             <p id="linkToCreateAccountPage">Don't have an account? <router-link to="/">Create Account</router-link></p>
             <copyright-statement></copyright-statement>

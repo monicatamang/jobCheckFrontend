@@ -80,6 +80,12 @@
         display: none;
     }
 
+    #mobileTabletLogoutButton {
+        width: 90vw;
+        height: 5vh;
+        font-size: 1rem;
+    }
+
     @media only screen and (min-width: 768px) {
 
         #mobileTabletLogoutButton {

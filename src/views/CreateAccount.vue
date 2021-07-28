@@ -22,7 +22,7 @@
                         </v-col>
                     </v-row>
                 </v-container>
-                <v-btn width="20vw" height="6vh" large depressed dark :color="inputColor" class="mt-8" @click="createUser">Signup</v-btn>
+                <v-btn height="6vh" large depressed dark :color="inputColor" class="mt-8" @click="createUser">Signup</v-btn>
             </v-form>
             <p id="linkToLoginPage">Already have an account? <router-link to="/Login">Login</router-link></p>
             <copyright-statement></copyright-statement>

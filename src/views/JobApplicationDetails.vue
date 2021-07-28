@@ -205,7 +205,7 @@
         }
     }
 
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 1024px) {
 
         .v-alert {
             width: 85%;
