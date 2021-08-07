@@ -1,9 +1,21 @@
 <template>
     <section>
         <article>
-            <job-check-logo></job-check-logo>
+            <div class="hideOnDesktop">
+                <job-check-logo></job-check-logo>
+            </div>
+            <desktop-home-nav></desktop-home-nav>
+            <div id="jobCheckScreenshotOne" class="screenshots">
+                <img src="../assets/jobCheckApplicationsPage.jpg" alt="">
+            </div>
+            <div id="jobCheckScreenshotTwo" class="screenshots">
+                <img src="../assets/jobCheckProfilePage.jpg" alt="">
+            </div>
+            <div id="jobCheckScreenshotThree" class="screenshots">
+                <img src="../assets/jobCheckDetailsPage.jpg" alt="">
+            </div>
             <img id="laptop" src="../assets/laptopImage.jpg" alt="A vector image of a sliver grey laptop with a thick black border around the screen which has Job Check's logo on the screen.">
-            <div>
+            <div class="hideOnDesktop">
                 <v-btn class="d-flex d-sm-none" large block depressed dark :color="buttonColor" @click="goToCreateAccountPage">Create Account</v-btn>
                 <v-btn class="d-none d-sm-flex d-md-none hidden-md-and-up" width="35vw" height="6vh" large block depressed dark :color="buttonColor" @click="goToCreateAccountPage">Create Account</v-btn>
                 <v-btn class="hidden-sm-and-down" width="12vw" height="7vh" large block depressed dark :color="buttonColor" @click="goToCreateAccountPage">Create Account</v-btn>
@@ -14,12 +26,12 @@
             </div>
             <copyright-statement></copyright-statement>
         </article>
-        <div id="background"></div>
     </section>
 </template>
 
 <script>
     import JobCheckLogo from "../components/JobCheckLogo.vue";
+    import DesktopHomeNav from "../components/DesktopHomeNav.vue";
     import CopyrightStatement from "../components/CopyrightStatement.vue";
 
     export default {
@@ -27,6 +39,7 @@
 
         components: {
             JobCheckLogo,
+            DesktopHomeNav,
             CopyrightStatement
         },
 
@@ -81,7 +94,11 @@
         font-weight: 400;
     }
 
-    #background {
+    img {
+        width: 100%;
+    }
+
+    .screenshots {
         display: none;
     }
 
@@ -99,8 +116,8 @@
 
     @media only screen and (min-width: 1024px) {
 
-        section {
-            grid-template-columns: 3fr 1fr;
+        .hideOnDesktop {
+            display: none;
         }
 
         article {
@@ -109,15 +126,7 @@
         }
 
         #laptop {
-            width: 18vw;
-        }
-
-        #background {
-            display: grid;
-            place-items: center;
-            width: 100%;
-            height: 100vh;
-            background: var(--primaryColor);
+            display: none;
         }
 
         .v-btn.v-size--large {
@@ -131,6 +140,31 @@
             font-size: 1rem;
             font-weight: 400;
             justify-self: start;
+        }
+
+        .screenshots {
+            display: block;
+            box-shadow: 0px 0px 5px lightgrey;
+            width: 40%;
+        }
+
+        #jobCheckScreenshotOne {
+            position: relative;
+            top: 40vh;
+            z-index: 1;
+        }
+
+        #jobCheckScreenshotTwo, #jobCheckScreenshotThree {
+            position: absolute;
+            top: 20vh;
+        }
+
+        #jobCheckScreenshotTwo {
+            left: 9vw;
+        }
+
+        #jobCheckScreenshotThree {
+            right: 9vw;
         }
     }
 </style>

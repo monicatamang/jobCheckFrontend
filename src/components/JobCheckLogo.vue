@@ -23,7 +23,7 @@
     @media only screen and (min-width: 1024px) {
 
         #logo {
-            width: 20vw;
+            width: 10vw;
         }
     }
 </style>
