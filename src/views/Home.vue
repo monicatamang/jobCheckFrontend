@@ -9,19 +9,19 @@
             <div id="screenshotsContainer">
                 <div>
                     <div class="screenshots">
-                        <img src="../assets/jobCheckApplicationsPage.jpg" alt="">
+                        <img src="../assets/jobCheckApplicationsPage.jpg" alt="Screenshot of Job Check's 'Applications' page.">
                     </div>
                     <h3>Organize your applications, interviews, networking events, and more</h3>
                 </div>
                 <div>
                     <div class="screenshots">
-                        <img src="../assets/jobCheckDetailsPage.jpg" alt="">
+                        <img src="../assets/jobCheckDetailsPage.jpg" alt="Screenshot of Job Check's 'Application page' showing the application details.">
                     </div>
                     <h3>Upload and manage your resumes and cover letters for each application</h3>
                 </div>
                 <div>
                     <div class="screenshots">
-                        <img src="../assets/jobCheckProfilePage.jpg" alt="">
+                        <img src="../assets/jobCheckProfilePage.jpg" alt="Screenshot of Job Check's 'Profile' page.">
                     </div>
                     <h3>Manage your profile and keep track of your job opportunities</h3>
                 </div>
