@@ -22,7 +22,10 @@
                         </v-col>
                     </v-row>
                 </v-container>
-                <v-btn height="6vh" large depressed dark :color="inputColor" class="mt-8" @click="createUser">Signup</v-btn>
+                <v-btn height="6vh" large depressed dark :color="inputColor" class="mt-8" @click="createUser">
+                    <span :class="{ hideText: isLoading }">Signup</span>
+                    <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
+                </v-btn>
             </v-form>
             <p id="linkToLoginPage">Already have an account? <router-link to="/Login">Login</router-link></p>
             <copyright-statement></copyright-statement>
@@ -53,6 +56,7 @@
                 userPassword: "",
                 isError: false,
                 isSuccess: false,
+                isLoading: false,
                 errorColor: "#B34C59",
                 successColor: "#53AC84"
             }
@@ -63,6 +67,8 @@
             createUser() {
                 // Send the request only if the user has typed content into the input fields
                 if(this.userFirstName !== '' && this.userLastName !== '' && this.userEmail !== '' && this.userPassword !== '') {
+                    // Show a loading message to the user
+                    this.isLoading = true;
                     // Configuring the request with the url, type, and data
                     axios.request({
                     url: `${process.env.VUE_APP_API_URL}/users`,
@@ -140,6 +146,10 @@
 
     .showErrorMessage, .showSuccessMessage {
         display: block;
+    }
+
+    .hideText {
+        display: none;
     }
 
     @media only screen and (min-width: 768px) {
