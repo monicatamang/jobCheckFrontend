@@ -27,7 +27,6 @@
             <p id="linkToLoginPage">Already have an account? <router-link to="/Login">Login</router-link></p>
             <copyright-statement></copyright-statement>
         </article>
-        <div id="background"></div>
     </section>
 </template>
 
@@ -143,10 +142,6 @@
         display: block;
     }
 
-    #background {
-        display: none;
-    }
-
     @media only screen and (min-width: 768px) {
 
         section {
@@ -175,26 +170,19 @@
 
     @media only screen and (min-width: 1024px) {
 
-        section {
-            grid-template-columns: 3fr 1fr;
-            margin-top: 0vh;
-        }
-
         article {
             display: grid;
             place-items: center;
             row-gap: 5vh;
-            padding: 10vh 0vw 5vh 0vw;
+            padding: 3% 0%;
             height: 100%;
-            margin-top: 0vh;
+            margin: 0vh 0vw 5vh 0vw;
+            box-shadow: 0px 0px 5px lightgrey;
+            width: 45%;
         }
 
         h1 {
             font-size: 1.3rem;
-        }
-
-        #inputFields {
-            width: 35%;
         }
 
         .v-btn.v-size--large {
@@ -203,21 +191,21 @@
             padding: 2%;
         }
 
-        #background {
-            display: grid;
-            place-items: center;
-            width: 100%;
-            height: 100%;
-            background: var(--primaryColor);
-        }
-
         .v-btn.v-size--large {
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
 
+        .v-btn:not(.v-btn--round).v-size--large {
+            padding: 0% 5%;
+        }
+
         #linkToLoginPage {
             font-size: 0.9rem;
+        }
+
+        #inputFields {
+            width: 70%;
         }
     }
 </style>

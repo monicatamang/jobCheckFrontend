@@ -32,6 +32,7 @@
             left: 0%;
             width: 100%;
             padding: 2% 0%;
+            background: var(--backgroundColorTwo);
 
             display: grid;
             place-items: center;
@@ -45,14 +46,14 @@
             border-radius: 5px;
         }
 
-        a {
+        .v-application a {
             text-decoration: none;
             color: var(--primaryColor);
-            font-family: var(--primaryFont);
+            font-family: var(--titleFont);
         }
 
         #loginLink {
-            margin-right: -50%;
+            margin-right: -60%;
         }
     }
 </style>
