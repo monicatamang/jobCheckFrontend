@@ -104,18 +104,16 @@
                 },
                 data: this.newConnection
                 }).then((res) => {
-                    // If the network is done and there are no errors, add the new connection to the store
-                    console.log(res);
+                    // If the network is done and there are no errors, notify the View Networking Events Details component that a connection has been added
+                    this.$emit('connectionAdded', res.data);
                     // Updating the store with a success message and displaying it on the Networking Event Details page
                     this.successStatus.message = "You have successfully added a connection";
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
-                    // Notifying the View Networking Events Details component that a connection has been added
-                    this.$emit('connectionAdded', res.data);
                 }).catch((err) => {
                     // If the network is done and the page errors, update the store with an error message and display it on the Networking Event Details page
-                    console.log(err);
                     this.errorStatus.message = "Failed to add a connection. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);
+                    err;
                 });
             }
         }

@@ -45,13 +45,13 @@
                     }
                 }).then((res) => {
                     // If the network is done and there are no errors, store the cover letter's filename as a variable
-                    console.log(res);
+                    res;
                     this.coverLetterFilename = res.data;
                     // Calling the function and passing it the user's cover letter filename
                     this.downloadCoverLetter(this.coverLetterFilename)
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the Job Application Details page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Sorry, something went wrong. Please refresh the page and try again.";
                     this.$store.commit('updateCoverLetterStatus', this.errorStatus);
                 });
@@ -74,7 +74,7 @@
                     responseType: 'blob'
                 }).then((res) => {
                     // If the network is done and there are no errors, create a new link that will allow the user to download their existing cover letter
-                    console.log(res);
+                    res;
                     const url = window.URL.createObjectURL(new Blob([res.data]));
                     const link = document.createElement('a');
                     link.href = url;
@@ -83,7 +83,7 @@
                     link.click();
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the Job Application Details page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to download cover letter. Please refresh page and try again.";
                     this.$store.commit('updateCoverLetterStatus', this.errorStatus);
                 });

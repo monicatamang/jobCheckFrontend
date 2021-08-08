@@ -60,7 +60,7 @@
                 }
                 }).then((res) => {
                     // If the network is done and there are not errors, find the index of the deleted interview and send it to the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentInterviews.length; i++) {
                         if(this.currentInterviews[i].interviewId === this.interviewId) {
                             let index = i;
@@ -76,7 +76,7 @@
                     this.$router.go(-1);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it to the user on the Interviews page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to delete interview. Please refresh the page and try again.";
                     this.$store.commit('updateInterviewStatus', this.errorStatus);
                 });

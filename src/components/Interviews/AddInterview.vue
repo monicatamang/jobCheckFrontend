@@ -108,7 +108,7 @@
                 data: this.newInterview
                 }).then((res) => {
                     // If the network is done and there are no errors, add the new interview to the store
-                    console.log(res);
+                    res;
                     this.$store.commit('addNewInterview', res.data);
                     // Notifying the View Job Application Details page that a new interview has been created
                     this.$emit("newInterviewCreated", res.data);
@@ -117,7 +117,7 @@
                     this.$store.commit('updateInterviewStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done and the page errors, update the store with an error message and display it on the Job Application Details page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to add interview. Please refresh the page and try again.";
                     this.$store.commit('updateInterviewStatus', this.errorStatus);
                 });

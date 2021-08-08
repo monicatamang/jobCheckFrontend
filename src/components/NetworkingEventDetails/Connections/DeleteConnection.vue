@@ -60,7 +60,7 @@
                 }
                 }).then((res) => {
                     // If the network is done and there are not errors, find the index of the deleted connection and send it to the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentConnections.length; i++) {
                         if(this.currentConnections[i].connectionId === this.connectionId) {
                             let index = i;
@@ -72,7 +72,7 @@
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the Networking Event Details page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to delete connection. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);
                 });

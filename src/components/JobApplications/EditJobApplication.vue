@@ -140,7 +140,7 @@
                 data: this.editJobApp
                 }).then((res) => {
                     // If the network is done and there are no errors, delete the old job application and insert the updated job application in the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentJobApps.length; i++) {
                         if(this.currentJobApps[i].jobAppId === this.jobAppId) {
                             let editedJobApp = {
@@ -158,7 +158,7 @@
                     this.$store.commit('updateJobAppStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and displaying it on the Job Application page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to update job application. Please refresh the page and try again.";
                     this.$store.commit('updateJobAppStatus', this.errorStatus);
                 });

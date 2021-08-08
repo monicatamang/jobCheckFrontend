@@ -104,7 +104,7 @@
                 data: this.replaceConnection
                 }).then((res) => {
                     // If the network is done and there are no errors, delete the old connection and insert the updated connection in the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentConnections.length; i++) {
                         if(this.currentConnections[i].connectionId === this.connectionId) {
                             let editedConnection = {
@@ -120,7 +120,7 @@
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, updating the store with an error message and display it on the Networking Event Details page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to update connection. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);
                 });

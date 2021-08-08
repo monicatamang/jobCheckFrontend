@@ -127,7 +127,7 @@
                 data: this.replaceNetworkingEvent
                 }).then((res) => {
                     // If the network is done and there are no errors, delete the old networking event and insert the updated networking event in the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentNetworkingEvents.length; i++) {
                         if(this.currentNetworkingEvents[i].networkingEventId === this.networkingEventId) {
                             let editedNetworkingEvent = {
@@ -145,7 +145,7 @@
                     this.$store.commit('updateNetworkingEventStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, updating the store with an error message and display it on the Networking Events page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to update networking event. Please refresh the page and try again.";
                     this.$store.commit('updateNetworkingEventStatus', this.errorStatus);
                 });

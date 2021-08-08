@@ -60,7 +60,7 @@
                 }
                 }).then((res) => {
                     // If the network is done and there are not errors, find the index of the deleted job application and send it to the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentJobApps.length; i++) {
                         if(this.currentJobApps[i].jobAppId === this.jobAppId) {
                             let index = i;
@@ -74,7 +74,7 @@
                     this.$router.push('/JobApplications');
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store an error message and display it on the Job Application page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to delete job application. Please refresh the page and try again.";
                     this.$store.commit('updateJobAppStatus', this.errorStatus);
                 });

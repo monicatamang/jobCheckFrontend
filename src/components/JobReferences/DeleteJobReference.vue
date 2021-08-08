@@ -60,7 +60,7 @@
                 }
                 }).then((res) => {
                     // If the network is done and there are not errors, find the index of the deleted networking event and send it to the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentJobReferences.length; i++) {
                         if(this.currentJobReferences[i].jobRefId === this.jobRefId) {
                             let index = i;
@@ -72,7 +72,7 @@
                     this.$store.commit('updateJobReferenceStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the Job References page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to delete job reference. Please refresh the page and try again.";
                     this.$store.commit('updateJobReferenceStatus', this.errorStatus);
                 });

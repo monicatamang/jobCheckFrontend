@@ -92,7 +92,7 @@
                     data: formData
                 }).then((res) => {
                     // If the network is done and there are no errors, store the resume id and creation date as variables
-                    console.log(res);
+                    res;
                     this.resumeId = res.data.resumeId;
                     this.resumeCreatedDate = res.data.createdAt;
                     // Stating the that resume has been uploaded to hide the file and upload buttons
@@ -102,7 +102,7 @@
                     this.$store.commit('updateResumeStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the Job Application Details page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to upload resume. Please refresh the page and try again.";
                     this.$store.commit('updateResumeStatus', this.errorStatus);
                 });
@@ -124,7 +124,7 @@
             }).then((res) => {
                 // If the network is done but a resume file doesn't exist, don't display a message to the user
                 if(res.status === 204) {
-                    console.log(res);
+                    res;
                 } 
                 // If the network is done and a resume file exist, store the resume id and creation date as variables
                 else {
@@ -133,7 +133,7 @@
                 }
             }).catch((err) => {
                 // If the network is done but the page errors, update the store with an error message and display it on the Job Application Details page
-                console.log(err);
+                err;
                 this.errorStatus.message = "Failed to download resume. Please refresh page and try again.";
                 this.$store.commit('updateResumeStatus', this.errorStatus);
             });

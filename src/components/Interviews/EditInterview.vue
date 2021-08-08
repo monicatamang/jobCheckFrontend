@@ -107,7 +107,7 @@
                 data: this.replaceInterview
                 }).then((res) => {
                     // If the network is done and there are no errors, delete the old interview and insert the updated interview in the store
-                    console.log(res);
+                    res;
                     for(let i = 0; i < this.currentInterviews.length; i++) {
                         if(this.currentInterviews[i].interviewId === this.interviewId) {
                             let editedInterview = {
@@ -125,7 +125,7 @@
                     this.$store.commit('updateInterviewStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it to the user on the Interviews page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to update interview. Please refresh the page and try again.";
                     this.$store.commit('updateInterviewStatus', this.errorStatus);
                 });

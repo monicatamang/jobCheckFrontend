@@ -80,7 +80,7 @@
                 data: this.editedProfile
                 }).then((res) => {
                     // If the network is done and there are no errors, update the user's cookie
-                    console.log(res);
+                    res;
                     let updatedUserProfile = JSON.stringify(res.data);
                     cookies.set("userData", updatedUserProfile);
                     // Notify the User Profile page that the user has been updated
@@ -90,7 +90,7 @@
                     this.$store.commit('updateUserProfileStatus', this.successStatus);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the User's Profile page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to update profile. Please refresh the page and try again.";
                     this.$store.commit('updateUserProfileStatus', this.errorStatus);
                 });

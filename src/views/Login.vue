@@ -68,7 +68,7 @@
                     }
                     }).then((res) => {
                         // If the network is done and there are no errors, store the user's data and login token as cookies
-                        console.log(res);
+                        res;
                         let userDataJSON = JSON.stringify(res.data);
                         cookies.set("userData", userDataJSON);
                         cookies.set("loginToken", res.data.loginToken);
@@ -77,7 +77,7 @@
                         // Taking the user to the Job Applications page
                         this.$router.push('/JobApplications');
                     }).catch((err) => {
-                        console.log(err);
+                        err;
                         // If the network is done but the page errors, show an error message to the user
                         this.isError = true;
                     });

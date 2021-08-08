@@ -42,7 +42,7 @@
                 }
                 }).then((res) => {
                     // If the network is done and there are no errors, send the search results to the store
-                    console.log(res);
+                    res;
                     this.$store.commit('updateAllJobApps', res.data);
                     // If there are no results returned, print a message to the user on the Job Application page
                     if(res.data.length === 0) {
@@ -50,7 +50,7 @@
                     }
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the Job Application page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Sorry, something went wrong. Please refresh the page and try again.";
                     this.$store.commit('updateJobAppStatus', this.errorStatus);
                 });

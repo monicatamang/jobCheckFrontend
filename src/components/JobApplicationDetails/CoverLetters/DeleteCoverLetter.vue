@@ -61,14 +61,14 @@
                     }
                 }).then((res) => {
                     // If the network is done and there are no errors, update the store with a success message and display it on the Job Application Details page
-                    console.log(res);
+                    res;
                     this.successStatus.message = "Your cover letter was succesfully deleted.";
                     this.$store.commit('updateCoverLetterStatus', this.successStatus);
                     // Notifying the Upload Cover Letter component that the user's cover letter has been deleted
                     this.$emit('coverLetterIsDeleted', true);
                 }).catch((err) => {
                     // If the network is done but the page errors, update the store with an error message and display it on the Job Application Details page
-                    console.log(err);
+                    err;
                     this.errorStatus.message = "Failed to delete cover letter. Please refresh the page and try again.";
                     this.$store.commit('updateCoverLetterStatus', this.errorStatus);
                 });
