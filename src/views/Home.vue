@@ -26,12 +26,11 @@
                     <h3>Manage your profile and keep track of your job opportunities</h3>
                 </div>
             </div>
-            <img id="laptop" src="../assets/laptopImage.jpg" alt="A vector image of a sliver grey laptop with a thick black border around the screen which has Job Check's logo on the screen.">
+            <img id="laptop" src="../assets/laptopImage.jpg" alt="A vector image of a sliver grey laptop with a thick black border around the screen which has Job Check's 'Applications' page on the screen.">
             <div class="hideOnDesktop">
                 <v-btn class="d-flex d-sm-none" large block depressed dark :color="buttonColor" @click="goToCreateAccountPage">Create Account</v-btn>
                 <v-btn class="d-none d-sm-flex d-md-none hidden-md-and-up" width="35vw" height="6vh" large block depressed dark :color="buttonColor" @click="goToCreateAccountPage">Create Account</v-btn>
                 <v-btn class="hidden-sm-and-down" width="12vw" height="7vh" large block depressed dark :color="buttonColor" @click="goToCreateAccountPage">Create Account</v-btn>
-
                 <v-btn class="d-flex d-sm-none" large block depressed outlined :color="buttonColor" @click="goToLoginPage">Login</v-btn>
                 <v-btn class="d-none d-sm-flex d-md-none hidden-md-and-up" width="35vw" height="6vh" large block depressed outlined :color="buttonColor" @click="goToLoginPage">Login</v-btn>
                 <v-btn class="hidden-sm-and-down" width="12vw" height="7vh" large block depressed outlined :color="buttonColor" @click="goToLoginPage">Login</v-btn>
