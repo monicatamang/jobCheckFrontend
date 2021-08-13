@@ -154,7 +154,7 @@
 <style scoped>
     #addButton {
         font-family: var(--titleFont);
-        bottom: 7%;
+        bottom: 6.9%;
         width: 100%;
     }
 
